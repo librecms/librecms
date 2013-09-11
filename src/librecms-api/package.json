@@ -1,0 +1,29 @@
+{
+  "contributors": [
+    "Zachary Wolfe",
+    "Jessie Smith",
+    "Nick Buhay",
+    "Mike Clarke",
+    "Tiffany Lum",
+    "Marius Espejo",
+    "Shawn Berger"
+  ],
+  "description": "librecms is a free/libre Course Management System written For Students By Students.",
+  "dependencies": {
+    "grunt": "0.4.1",
+    "optimist": "0.3.4",
+    "sails": "0.9.4",
+    "sails-mongo": "~0.9.5",
+    "passport": "~0.1.17"
+  },
+  "license": "MIT",
+  "main": "librecms.js",
+  "name": "librecms-api",
+  "private": true,
+  "url": "https://github.com/librecms/librecms",
+  "scripts": {
+    "start": "node librecms.js",
+    "debug": "node debug librecms.js"
+  },
+  "version": "0.0.1"
+}
