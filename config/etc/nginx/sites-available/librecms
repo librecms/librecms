@@ -1,12 +1,12 @@
 server {
-    # Static server
-    listen 0.0.0.0:80;
-    server_name librecms.zdwolfe.net;
-    access_log /var/log/nginx/librecms.access.log;
+  # Static server
+  listen 0.0.0.0:80;
+  server_name librecms.zdwolfe.net;
+  access_log /var/log/nginx/librecms.access.log;
 
-    location / {
-        index index.html;
-        root /var/www/librecms/web;
-        try_files $uri $uri/ /index.html =404;
-    }
+  location / {
+    index index.html;
+    root /var/www/librecms/web;
+    try_files $uri $uri/ /index.html =404;
+  }
 }
