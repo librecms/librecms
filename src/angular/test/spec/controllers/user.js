@@ -7,12 +7,13 @@ describe('Controller: UserCtrl', function () {
 
   var UserCtrl;
   var scope;
+  var rootScope;
   var httpBackend;
-  var createController;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $httpBackend) {
     httpBackend = $httpBackend;
+    rootScope = $rootScope;
 
     var fauxUsersList = [
       {
@@ -24,16 +25,10 @@ describe('Controller: UserCtrl', function () {
     ];
 
     // Create a faux HTTP response on HTTP-GET /api/user
-    httpBackend.when('GET', '/api/user')
-      .respond(fauxUsersList);
-
+    httpBackend.when('GET', '/api/user').respond(fauxUsersList);
 
     scope = $rootScope.$new();
-    createController = function() {
-      return $controller('UserCtrl', {
-        $scope: scope
-      });
-    };
+    $controller('UserCtrl', { $scope: scope });
   }));
 
   afterEach(function() {
@@ -42,10 +37,16 @@ describe('Controller: UserCtrl', function () {
   });
 
   it('should attach a faux users list to scope', function () {
-    httpBackend.expectGET('/api/user');
-    var controller = createController();
     httpBackend.flush();
     expect(scope.users).toBeDefined();
     expect(scope.users).not.toBeNull();
+
+    // @TODO zdwolfe: 
+    // I couldn't figure out how to force 
+    // karma to flush scope and resolve the Restangular
+    // promise. I opened an issue with Restangular here:
+    // https://github.com/mgonto/restangular/issues/324
+
+    expect(scope.users[0].name).toBe('faux');
   });
 });

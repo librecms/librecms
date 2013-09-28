@@ -16,5 +16,6 @@ angular.module('librecmsApp', ['restangular'])
       });
 
     RestangularProvider.setBaseUrl('/api');
+    RestangularProvider.setRestangularFields({ id: "_id" });
     $locationProvider.html5Mode(true);
   });
