@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('librecmsApp', ['restangular'])
+angular.module('librecmsApp', ['restangular', 'ui.bootstrap'])
   .config(function ($routeProvider, $locationProvider, RestangularProvider) {
     $routeProvider
       .when('/', {
