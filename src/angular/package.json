@@ -1,8 +1,19 @@
 {
   "name": "librecms",
-  "version": "0.0.0",
-  "dependencies": {
-  },
+  "contributors": [
+    "Zachary Wolfe",
+    "Jessie Smith",
+    "Nick Buhay",
+    "Mike Clarke",
+    "Tiffany Lum",
+    "Marius Espejo",
+    "Shawn Berger"
+  ],
+  "description": "librecms is a free/libre Course Management System written For Students By Students.",
+  "license": "MIT",
+  "private": true,
+  "url": "https://github.com/librecms/librecms",
+  "version": "0.0.1",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
@@ -42,7 +53,7 @@
     "karma-ng-html2js-preprocessor": "~0.1.0"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">=0.10.0"
   },
   "scripts": {
     "test": "grunt test"
