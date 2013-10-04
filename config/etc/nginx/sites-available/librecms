@@ -4,8 +4,9 @@ upstream api {
 
 server {
   listen 0.0.0.0:80 default deferred;
-  server_name librecms.zdwolfe.net;
+  server_name librecms;
   access_log /var/log/nginx/librecms.access.log;
+  error_log /var/log/nginx/librecms.error.log;
 
   underscores_in_headers on;
   location /api/ {
