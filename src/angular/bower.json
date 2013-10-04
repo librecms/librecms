@@ -10,7 +10,8 @@
     "angular-sanitize": "~1.0.7",
     "restangular": "~1.1.3",
     "angular-bootstrap": "~0.6.0",
-    "bootstrap": "git@github.com:bowerjs/bootstrap.git#2e56de5914c9024951466305a42666fc286e6a0e"
+    "bootstrap": "git@github.com:bowerjs/bootstrap.git#2e56de5914c9024951466305a42666fc286e6a0e",
+    "flatui": "742fcb645673e4ea4e62603efc26e7923ba8833c"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
