@@ -16,7 +16,7 @@
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
-</head>
+  </head>
   <body ng-app="librecmsApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -34,6 +34,13 @@
   <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
   <script src="bower_components/restangular/dist/restangular.js"></script>
   <script src="bower_components/lodash/lodash.js"></script>
+  <script src="bower_components/jquery/jquery.min.js"></script>
+  <script src="bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
+  <script src="bower_components/flatui/js/bootstrap.min.js"></script>
+  <script src="bower_components/flatui/js/bootstrap-select.js"></script>
+  <script src="bower_components/flatui/js/bootstrap-switch.js"></script>
+  <script src="bower_components/flatui/js/flatui-checkbox.js"></script>
+  <script src="bower_components/flatui/js/flatui-radio.js"></script>
 
     <!-- build:js scripts/modules.js -->
     <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -42,6 +49,7 @@
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/flatui.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/user.js"></script>
