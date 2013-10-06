@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('MainCtrl', function ($scope, $http) {
-    $scope.title = 'librecms';
+  .controller('MainCtrl', function () {
+    console.log('Hello from MainCtrl');
   });

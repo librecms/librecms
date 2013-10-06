@@ -1,21 +1,18 @@
 'use strict';
 
-angular.module('librecmsApp', ['restangular', 'ui.bootstrap'])
-  .config(function ($routeProvider, $locationProvider, RestangularProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+angular.module('librecmsApp', ['restangular', 'ui.bootstrap', 'ui.router'])
+  .config(function ($locationProvider, RestangularProvider, $stateProvider) {
+    $stateProvider
+      .state('main', {
+        abstract: true,
+        templateUrl: 'views/main.html'
       })
-      .when('/user', {
-        templateUrl: 'views/user.html',
-        controller: 'UserCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
+      .state('main.user', {
+        url: '/user',
+        templateUrl: 'views/user.html'
       });
 
     RestangularProvider.setBaseUrl('/api');
-    RestangularProvider.setRestangularFields({ id: "_id" });
+    RestangularProvider.setRestangularFields({ id: '_id' });
     $locationProvider.html5Mode(true);
   });

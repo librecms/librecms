@@ -16,6 +16,7 @@ module.exports = function(config) {
       'app/bower_components/restangular/dist/restangular.js',
       'app/bower_components/lodash/lodash.js',
       'app/bower_components/angular-bootstrap/ui-bootstrap.min.js',
+      'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/spec/**/*.js'
