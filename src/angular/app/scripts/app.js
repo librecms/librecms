@@ -11,8 +11,15 @@ angular.module('librecmsApp', ['restangular', 'ui.bootstrap', 'ui.router'])
     var user = {
       name: 'user',
       parent: 'main',
-      templateUrl: 'views/user.html',
-      url: '/user'
+      url: '/user',
+      views: {
+        'center-widget': {
+          templateUrl: 'views/user.html'
+        },
+        'left-widget': {
+          templateUrl: 'views/left-navbar.html'
+        }
+      }
     };
 
     $stateProvider.state(main);

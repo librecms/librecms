@@ -1,0 +1,44 @@
+body, html, .container-fluid {
+  height: 100%;
+}
+
+/* 
+ * Max height
+ */
+.fill {
+  height: 100%;
+  min-height: 100%;
+}
+
+.row {
+  margin: 0;
+}
+
+/*
+ * remove bootstrap's left margin on span
+ * because FlatUI elements don't often have 
+ * bootstrap-style spacing
+ */
+.no-space [class*="span"] {
+  margin-left: 0;
+}
+
+/* 
+ * FlatUI is a little presumptuous
+ */
+.palette {
+  text-transform: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+.widget {
+  padding: 10px 10px;
+  margin: 0;
+}
+
+#center-widget {
+}
+
+#left-widget {
+}
