@@ -22,6 +22,22 @@ angular.module('librecmsApp', ['restangular', 'ui.bootstrap', 'ui.router'])
       }
     };
 
+    /*
+      var content = {
+        name: 'content',
+        parent: 'main',
+        url: '/content',
+        views: {
+          'left-widget': {
+            templateUrl: 'views/left-navbar.html'
+          },
+          'center-widget': {
+            templateUrl: 'views/content.html'
+          }
+        }
+      };
+    */
+
     $stateProvider.state(main);
     $stateProvider.state(user);
 
