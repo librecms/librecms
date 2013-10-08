@@ -7,9 +7,9 @@
     "angular-resource": "~1.0.7",
     "angular-sanitize": "~1.0.7",
     "angular-ui-router": "~0.2.0",
-    "bootstrap": "https://github.com/bowerjs/bootstrap.git#2.3.2",
+    "bootstrap": "3.0.0",
     "es5-shim": "~2.0.8",
-    "flatui": "742fcb645673e4ea4e62603efc26e7923ba8833c",
+    "flatui": "https://github.com/designmodo/Flat-UI.git#32491d5da1c0af5a047dfe6c8d4c38117563e9b5",
     "jquery": "~2.0.3",
     "jquery-ui": "1.10.3",
     "json3": "~3.2.4",
@@ -23,7 +23,8 @@
   "name": "librecms",
   "resolutions": {
     "angular": "~1.2.0",
-    "jquery": "~2.0.3"
+    "jquery": "~2.0.3",
+    "bootstrap": "3.0.0"
   },
   "version": "0.0.0"
 }
