@@ -18,6 +18,9 @@ angular.module('librecmsApp', ['restangular', 'ui.bootstrap', 'ui.router'])
         },
         'left-widget': {
           templateUrl: 'views/left-navbar.html'
+        },
+        'top-widget': {
+          templateUrl: 'views/top-navbar.html'
         }
       }
     };
