@@ -16,6 +16,10 @@ body, html, #container {
   margin: 0;
 }
 
+.palette-clouds {
+  color: #555;
+}
+
 .widget {
   padding: 10px 10px;
   margin: 0;
@@ -79,4 +83,15 @@ body, html, #container {
 
 .navbar-menu-item-text {
   padding-left: 8px;
+}
+
+ul.nav > li > a {
+  color: #555;
+}
+
+ul.nav > li.active > a, ul.nav li.active > a:hover {
+  border-bottom: #E74C3C 2px solid;
+}
+
+#center-widget {
 }
