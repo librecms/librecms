@@ -1,8 +1,10 @@
-<div class="row no-space fill">
-  <div class="span3 fill palette palette-belize-hole">
-    <div id="left-widget" ui-view="left-widget" class="widget"></div>
+<div id="left-container" class="span3 palette palette-peter-river">
+  <div id="left-widget" ui-view="left-widget" class="widget">
   </div>
-  <div class="span9 fill palette palette-clouds">
-    <div id="center-widget" ui-view="center-widget" class="widget"></div>
+</div>
+<div id="main" class="containe-fluid row palette palette-clouds" ng-controller="MainCtrl">
+  <div id="center-container" class="span9 offset3 palette-clouds">
+    <div id="center-widget" ui-view="center-widget" class="widget">
+    </div>
   </div>
 </div>

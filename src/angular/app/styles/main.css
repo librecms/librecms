@@ -1,31 +1,19 @@
-body, html, .container-fluid {
-  height: 100%;
-}
-
-/* 
- * Max height
- */
-.fill {
-  height: 100%;
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
   min-height: 100%;
+  overflow: hidden;
 }
 
 .row {
   margin: 0;
+  padding: 0;
 }
 
-/*
- * remove bootstrap's left margin on span
- * because FlatUI elements don't often have 
- * bootstrap-style spacing
- */
 .no-space [class*="span"] {
   margin-left: 0;
 }
 
-/* 
- * FlatUI is a little presumptuous
- */
 .palette {
   text-transform: inherit;
   padding: 0;
@@ -37,8 +25,67 @@ body, html, .container-fluid {
   margin: 0;
 }
 
-#center-widget {
+#left-container {
+  height: 100%;
+  position: fixed;
 }
 
-#left-widget {
+#center-container {
+  height: 100%;
+  min-height: 100%;
+}
+
+.navbar-section {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+#navbar-container > .navbar-section {
+  border-bottom: solid white 2px;
+}
+
+#navbar-container > .navbar-section:last-child {
+  border: none;
+}
+
+#navbar-container a, #navbar-container a:hover, #navbar-container a:visited {
+  text-decoration: none; color: inherit;
+}
+
+#navbar-user-info {
+  text-align: center;
+} 
+
+#navbar-courses-container {
+  padding-left: 24px;
+}
+
+.navbar-course-name {
+  font-size: 20px;
+}
+
+.navbar-course-icon {
+}
+
+#navbar-courses-header {
+  color: #34495E;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.navbar-course-item {
+  line-height: 36px;
+}
+
+#navbar-menu-container {
+  padding-left: 24px;
+  font-size: 20px;
+}
+
+.navbar-menu-item-icon {
+  color: rgba(0,0,0,.2); 
+}
+
+.navbar-menu-item-text {
+  padding-left: 8px;
 }

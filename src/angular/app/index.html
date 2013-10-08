@@ -9,13 +9,14 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <link rel="stylesheet" href="bower_components/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/flatui/css/flat-ui.css">
+    <link rel="stylesheet" href="bower_components/flatui/css/flat-ui.css"/>
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
   </head>
   <body>
-    <div ui-view id="main" class="fill full-width palette-clouds" ng-controller="MainCtrl"></div>
+    <div ui-view id="container" class="" ></div>
 
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
@@ -39,6 +40,7 @@
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/controllers/user.js"></script>
+    <script src="scripts/controllers/navbar.js"></script>
     <!-- endbuild -->
 </body>
 </html>
