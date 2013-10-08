@@ -90,7 +90,10 @@ ul.nav > li > a {
 }
 
 ul.nav > li.active > a, ul.nav li.active > a:hover {
+  border: none;
   border-bottom: #E74C3C 2px solid;
+  color: #E74C3C;
+  background-color: inherit;
 }
 
 #center-widget {
