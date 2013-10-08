@@ -1,8 +1,4 @@
-.container-fluid {
-  padding-left: 0;
-  padding-right: 0;
-  min-height: 100%;
-  overflow: hidden;
+body, html, #container {
 }
 
 .row {
@@ -25,12 +21,7 @@
   margin: 0;
 }
 
-#left-container {
-  height: 100%;
-  position: fixed;
-}
-
-#center-container {
+.fill {
   height: 100%;
   min-height: 100%;
 }

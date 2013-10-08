@@ -1,10 +1,11 @@
-<div id="left-container" class="span3 palette palette-peter-river">
-  <div id="left-widget" ui-view="left-widget" class="widget">
+<div class="row ">
+
+  <div id="left-container" class="col-xs-3 col-sm-3 col-md-2 palette palette-peter-river">
+    <div id="left-widget" ui-view="left-widget" class="widget"></div>
   </div>
-</div>
-<div id="main" class="containe-fluid row palette palette-clouds" ng-controller="MainCtrl">
-  <div id="center-container" class="span9 offset3 palette-clouds">
-    <div id="center-widget" ui-view="center-widget" class="widget">
-    </div>
+
+  <div id="center-container" class="col-xs-12 col-sm-9 col-md-10 palette-clouds">
+    <div id="center-widget" ui-view="center-widget" class="widget "></div>
   </div>
+
 </div>
