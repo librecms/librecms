@@ -85,6 +85,7 @@ body, html, #container {
   padding-left: 8px;
 }
 
+/*
 ul.nav > li > a {
   color: #555;
 }
@@ -95,6 +96,7 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   color: #E74C3C;
   background-color: inherit;
 }
+*/
 
 #center-widget {
 }

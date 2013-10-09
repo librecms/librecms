@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('librecmsApp', ['restangular', 'ui.bootstrap', 'ui.router'])
+angular.module('librecmsApp', ['restangular', 'ui.router'])
   .config(function ($locationProvider, RestangularProvider, $stateProvider) {
     var main = {
       abstract: true,
