@@ -25,7 +25,7 @@ angular.module('librecmsApp', ['restangular', 'ui.bootstrap', 'ui.router'])
       }
     };
 
-    /*
+    
       var content = {
         name: 'content',
         parent: 'main',
@@ -36,13 +36,16 @@ angular.module('librecmsApp', ['restangular', 'ui.bootstrap', 'ui.router'])
           },
           'center-widget': {
             templateUrl: 'views/content.html'
+          },
+	  'top-widget': {
+	    templateUrl: 'views/top-navbar.html'
           }
         }
       };
-    */
-
+    
     $stateProvider.state(main);
     $stateProvider.state(user);
+    $stateProvider.state(content);
 
     RestangularProvider.setBaseUrl('/api');
     RestangularProvider.setRestangularFields({ id: '_id' });
