@@ -50,39 +50,8 @@ body, html, #container {
 #navbar-user-info {
   text-align: center;
 } 
-
-#navbar-courses-container {
-  padding-left: 24px;
-}
-
-.navbar-course-name {
-  font-size: 20px;
-}
-
-.navbar-course-icon {
-}
-
-#navbar-courses-header {
-  color: #34495E;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.navbar-course-item {
-  line-height: 36px;
-}
-
-#navbar-menu-container {
-  padding-left: 24px;
-  font-size: 20px;
-}
-
-.navbar-menu-item-icon {
-  color: rgba(0,0,0,.2); 
-}
-
-.navbar-menu-item-text {
-  padding-left: 8px;
+.navbar .nav > li.active > a, .navbar .nav > li.active > a:hover, .navbar .nav > li.active > a:focus {
+  color: #E74C3C;
 }
 
 .navbar .nav > li:first-child > a, .navbar .nav > li:first-child {
