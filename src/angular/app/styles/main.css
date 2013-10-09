@@ -85,7 +85,10 @@ body, html, #container {
   padding-left: 8px;
 }
 
-/*
+.navbar .nav > li:first-child > a, .navbar .nav > li:first-child {
+  border-radius: 0;
+}
+
 ul.nav > li > a {
   color: #555;
 }
@@ -96,7 +99,6 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   color: #E74C3C;
   background-color: inherit;
 }
-*/
 
 #center-widget {
 }
