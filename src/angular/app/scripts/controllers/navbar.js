@@ -21,4 +21,5 @@ angular.module('librecmsApp')
         id: 362
       }
     ]
+    $scope.currentCourse = $scope.courses[0];
   });
