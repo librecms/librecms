@@ -19,6 +19,7 @@ module.exports = function(config) {
       'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
+      'app/views/**/*.html',
       'test/spec/**/*.js'
     ],
 
@@ -27,6 +28,14 @@ module.exports = function(config) {
 
     // web server port
     port: 8080,
+
+    preprocessors: {
+      'app/views/**/*.html': 'html2js'
+    },
+
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'app/'
+    },
 
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
