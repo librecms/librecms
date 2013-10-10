@@ -45,7 +45,8 @@
     "karma-requirejs": "~0.1.0",
     "karma-script-launcher": "~0.1.0",
     "load-grunt-tasks": "~0.1.0",
-    "time-grunt": "~0.1.0"
+    "time-grunt": "~0.1.0",
+    "grunt-contrib-less": "~0.7.0"
   },
   "engines": {
     "node": ">=0.10.0"

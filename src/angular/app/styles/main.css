@@ -35,6 +35,10 @@ body, html, #container {
   padding-bottom: 24px;
 }
 
+#navbar-container {
+  text-align: center;
+}
+
 #navbar-container > .navbar-section {
   border-bottom: solid white 2px;
 }
@@ -47,9 +51,6 @@ body, html, #container {
   text-decoration: none; color: inherit;
 }
 
-#navbar-user-info {
-  text-align: center;
-} 
 .navbar .nav > li.active > a, .navbar .nav > li.active > a:hover, .navbar .nav > li.active > a:focus {
   color: #E74C3C;
 }
