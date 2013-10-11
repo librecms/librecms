@@ -1,4 +1,5 @@
 body, html, #container {
+  padding: 0;
 }
 
 .row {
@@ -25,26 +26,6 @@ body, html, #container {
   min-height: 100%;
 }
 
-.navbar-section {
-  padding-top: 24px;
-  padding-bottom: 24px;
-}
-
-#left-navbar-container {
-  text-align: center;
-}
-
-#left-navbar-container > .navbar-section {
-  border-bottom: solid white 2px;
-}
-
-#left-navbar-container > .navbar-section:last-child {
-  border: none;
-}
-
-#left-navbar-container a, #left-navbar-container a:hover, #left-navbar-container a:visited {
-  text-decoration: none; color: inherit;
-}
 
 #top-navbar {
   background-color: inherit;
@@ -54,6 +35,7 @@ body, html, #container {
 
 .navbar .nav > li.active > a, .navbar .nav > li.active > a:hover, .navbar .nav > li.active > a:focus {
   color: #E74C3C;
+  background-color: inherit;
 }
 
 .navbar .nav > li:first-child > a, .navbar .nav > li:first-child {
@@ -75,9 +57,37 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   padding: 0;
 }
 
-#center-widget {
+#left-navbar-container { 
+  padding: 0 20px;
 }
 
-#container {
-  padding: 0;
+#left-navbar-container > .navbar-section {
+  border-bottom: solid white 2px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+#left-navbar-container > .navbar-section:last-child {
+  border: none;
+}
+
+#left-navbar-container a, #left-navbar-container a:hover, #left-navbar-container a:visited {
+  text-decoration: none; color: inherit;
+}
+
+#left-navbar-user-container {
+  text-align: center;
+}
+
+#left-navbar-courses-header {
+  color:  rgba(0,0,0,.2);
+}
+
+#left-navbar-courses-list-container {
+  margin-top: 20px;
+}
+
+#left-navbar-courses-list > li {
+  padding-top: 10px;
+  font-size: 1.25em;
 }

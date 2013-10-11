@@ -1,6 +1,6 @@
 <div id="left-navbar-container" ng-controller="NavbarCtrl">
-  <div id="navbar-user-info-container" class="row navbar-section">
-    <div id="navbar-user-info">
+  <div class="row navbar-section">
+    <div id="left-navbar-user-container" class="col-lg-12 col-md-12 col-sm-12">
 
       <div class="row">
         <span class="icon-stack icon-4x">
@@ -10,9 +10,25 @@
       </div>
 
       <div class="row">
-        <h3>Zachary Wolfe</h3>
+        <h6>{{ user.fullname }}</h6>
       </div>
 
     </div>
   </div>
+
+  <div class="row navbar-section">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+
+      <div class="row">
+        <h4 id="left-navbar-courses-header">Courses</h4>
+      </div>
+
+      <div id="left-navbar-courses-list-container" class="row">
+        <ul id="left-navbar-courses-list" class="list-unstyled">
+          <li ng-repeat="course in user.courses"><a href="/course/{{ course.id }}">{{ course.name }}</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div> 
 </div>
