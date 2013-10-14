@@ -9,6 +9,7 @@
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
+  grunt.loadNpmTasks('grunt-contrib-less');
 
   // configurable paths
   var yeomanConfig = {
@@ -245,6 +246,18 @@ module.exports = function (grunt) {
           ]
         }
       }
+    },
+    less: {
+      flatui: {
+        options: {
+          paths: [
+            '<%= yeoman.app %>/bower_components/flatui/less'
+          ]
+        },
+        files: {
+          '<%= yeoman.app %>/styles/flatui.css': '<%= yeoman.app %>/styles/flatui.less'
+        }
+      }
     }
   });
 
@@ -257,6 +270,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
+    'less.flatui',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -274,5 +288,9 @@ module.exports = function (grunt) {
     'jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('dev', [
+    'less.flatui'
   ]);
 };
