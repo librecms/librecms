@@ -4,6 +4,8 @@ angular.module('librecmsApp')
   .controller('ContentCtrl', function ($scope) {
     console.log('hello from ContentCtrl');
 
+    $('#contentModal').modal();
+
     $scope.content = [
       { 
         name: 'Agile',

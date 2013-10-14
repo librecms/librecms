@@ -1,53 +1,26 @@
 'use strict';
 
 angular.module('librecmsApp', ['restangular', 'ui.router'])
-  .config(function ($locationProvider, RestangularProvider, $stateProvider) {
+  .config(function (RestangularProvider, $stateProvider) {
     var main = {
       abstract: true,
       name: 'main',
-      templateUrl: 'views/main.html'
+      templateUrl: 'views/main.html',
     };
 
-    var user = {
-      name: 'user',
+    var course = {
+      name: 'course',
       parent: 'main',
-      url: '/user',
-      views: {
-        'center-widget': {
-          templateUrl: 'views/user.html'
-        },
-        'left-widget': {
-          templateUrl: 'views/left-navbar.html'
-        },
-        'top-widget': {
-          templateUrl: 'views/top-navbar.html'
-        }
-      }
+      url: '/course',
+      templateUrl: 'views/course.html',
+      controller: 'CourseCtrl'
     };
+    
+    /* Also have grades, etc */
 
-    
-      var content = {
-        name: 'content',
-        parent: 'main',
-        url: '/content',
-        views: {
-          'left-widget': {
-            templateUrl: 'views/left-navbar.html'
-          },
-          'center-widget': {
-            templateUrl: 'views/content.html'
-          },
-	  'top-widget': {
-	    templateUrl: 'views/top-navbar.html'
-          }
-        }
-      };
-    
     $stateProvider.state(main);
-    $stateProvider.state(user);
-    $stateProvider.state(content);
+    $stateProvider.state(course);
 
     RestangularProvider.setBaseUrl('/api');
     RestangularProvider.setRestangularFields({ id: '_id' });
-    $locationProvider.html5Mode(true);
   });
