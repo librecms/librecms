@@ -25,5 +25,5 @@ angular.module('librecmsApp')
     $scope.user = {
       fullname: "Zachary Wolfe",
       courses: courses
-    }
+    };
   });

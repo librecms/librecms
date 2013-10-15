@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('CourseCtrl', function ($scope, $stateParams) {
-    console.log('$stateParams.courseId = ' + $stateParams.courseId);
+  .controller('CourseCtrl', function () {
+    console.log('hello from CourseCtrl');
   });

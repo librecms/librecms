@@ -2,24 +2,37 @@
 
 angular.module('librecmsApp', ['restangular', 'ui.router'])
   .config(function (RestangularProvider, $stateProvider) {
-    var main = {
-      abstract: true,
-      name: 'main',
-      templateUrl: 'views/main.html'
-    };
 
-    var course = {
-      name: 'course',
-      parent: 'main',
+    $stateProvider.state('main', {
+      abstract: true,
+      templateUrl: 'views/main.html'
+    })
+    .state('main.course', {
       url: '/course/{courseId}',
       templateUrl: 'views/course.html',
       controller: 'CourseCtrl'
-    };
-    
-    /* Also have grades, etc */
-
-    $stateProvider.state(main);
-    $stateProvider.state(course);
+    })
+    .state('main.course-assignment', {
+      url: '/course/{courseId}/assignment/{assignmentId}',
+      templateUrl: 'views/course.item.html',
+      controller: 'ContentCtrl'
+    })
+    .state('main.course-assignment-list', {
+      url: '/course/{courseId}/assignments',
+      templateUrl: 'views/course.item.list.html',
+      controller: 'ContentCtrl',
+      data: {
+        itemType: 'assignment'
+      }
+    })
+    .state('main.course-item-list', {
+      url: '/course/{courseId}/items',
+      templateUrl: 'views/course.item.list.html',
+      controller: 'ContentCtrl',
+      data: {
+        itemType: 'item'
+      }
+    });
 
     RestangularProvider.setBaseUrl('/api');
     RestangularProvider.setRestangularFields({ id: '_id' });
