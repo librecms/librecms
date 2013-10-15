@@ -2,6 +2,7 @@
 // http://karma-runner.github.io/0.10/config/configuration-file.html
 
 module.exports = function(config) {
+  'use strict';
   config.set({
     // base path, that will be used to resolve files and exclude
     basePath: '',
@@ -15,7 +16,6 @@ module.exports = function(config) {
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/restangular/dist/restangular.js',
       'app/bower_components/lodash/lodash.js',
-      'app/bower_components/angular-bootstrap/ui-bootstrap.min.js',
       'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
