@@ -11,7 +11,7 @@ angular.module('librecmsApp', ['restangular', 'ui.router'])
     var course = {
       name: 'course',
       parent: 'main',
-      url: '/course',
+      url: '/course/{courseId}',
       templateUrl: 'views/course.html',
       controller: 'CourseCtrl'
     };
