@@ -5,7 +5,7 @@ angular.module('librecmsApp', ['restangular', 'ui.router'])
     var main = {
       abstract: true,
       name: 'main',
-      templateUrl: 'views/main.html',
+      templateUrl: 'views/main.html'
     };
 
     var course = {
