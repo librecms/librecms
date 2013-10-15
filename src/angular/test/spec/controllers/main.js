@@ -7,9 +7,7 @@ describe('Controller: MainCtrl', function () {
 
   // load controller widgets/views/partials
   var views = [
-    'views/left-navbar.html',
     'views/main.html',
-    'views/top-navbar.html'
   ];
 
   views.forEach(function(view) {
