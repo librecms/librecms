@@ -5,7 +5,8 @@ angular.module('librecmsApp', ['restangular', 'ui.router'])
 
     $stateProvider.state('main', {
       abstract: true,
-      templateUrl: 'views/main.html'
+      templateUrl: 'views/main.html',
+      controller: 'MainCtrl'
     })
     .state('main.course', {
       url: '/course/{courseId}',
