@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('MainCtrl', function ($rootScope) {
+  .controller('MainCtrl', function () {
     console.log('Hello from MainCtrl');
   });
