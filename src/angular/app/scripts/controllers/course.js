@@ -10,8 +10,6 @@ angular.module('librecmsApp')
       $scope.user = user;
     });
 
-    console.log('hello from CourseCtrl');
-
     $scope.setNewUser = function() {
       var newUser = {
         firstName: 'Nick',

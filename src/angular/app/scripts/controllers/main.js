@@ -2,7 +2,6 @@
 
 angular.module('librecmsApp')
   .controller('MainCtrl', function ($scope, UserService) {
-    console.log('Hello from MainCtrl');
     // Gather initial user from UserService
     $scope.user = UserService.user;
 
