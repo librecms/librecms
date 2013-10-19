@@ -23,7 +23,46 @@ angular.module('librecmsApp', ['restangular', 'ui.router'])
       templateUrl: 'views/course.item.list.html',
       controller: 'ContentCtrl',
       data: {
-        itemType: 'assignment'
+        itemType: 'assignments'
+      }
+    })
+    .state('main.course-quiz', {
+      url: '/course/{courseId}/quiz/{quizId}',
+      templateUrl: 'views/course.item.html',
+      controller: 'ContentCtrl',
+    })
+    .state('main.course-quiz-list', {
+      url: '/course/{courseId}/quizzes',
+      templateUrl: 'views/course.item.list.html',
+      controller: 'ContentCtrl',
+      data: {
+        itemType: 'quizzes'
+      }
+    })
+    .state('main.course-exam', {
+      url: '/course/{courseId}/exam/{examId}',
+      templateUrl: 'views/course.item.html',
+      controller: 'ContentCtrl',
+    })
+    .state('main.course-exam-list', {
+      url: '/course/{courseId}/exams',
+      templateUrl: 'views/course.item.list.html',
+      controller: 'ContentCtrl',
+      data: {
+        itemType: 'exams'
+      }
+    })
+    .state('main.course-note', {
+      url: '/course/{courseId}/notes/{noteId}',
+      templateUrl: 'views/course.item.html',
+      controller: 'ContentCtrl',
+    })
+    .state('main.course-notes-list', {
+      url: '/course/{courseId}/notes',
+      templateUrl: 'views/course.item.list.html',
+      controller: 'ContentCtrl',
+      data: {
+        itemType: 'notes'
       }
     })
     .state('main.course-item-list', {

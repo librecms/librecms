@@ -1,21 +1,22 @@
 <div class="container" ng-controller="ContentCtrl">
- <div class="row">
-  <div class="span5">
-   Sort By: 
-   <select ng-model="contentSort">
-    <option value="Type" selected="selected">Relevance</option>
-    <option value="-Posted">Posted (Earliest)</option>
-    <option value="Posted">Posted (Latest)</option>
-    <option value="-Due Date">Due date (Earliest)</option>
-    <option value="Due Date">Due Date (Latest)</option>
-   </select>
-  </div>
- </div>
- <br>
- <div class="unstyled">
-   <div id="" class="row" ng-repeat="ctnt in content">
-        <div class="span2 well" style="float:none;">
-          <a class="content-list-name" data-toggle="modal" data-target="#contentModal" href="/content">{{ ctnt.name }}</a>
-        </div>
+  <div class="row">
+    <div class="span5">
+    Sort By: 
+    <select ng-model="contentSort">
+      <option value="Type" selected="selected">Relevance</option>
+      <option value="-Posted">Posted (Earliest)</option>
+      <option value="Posted">Posted (Latest)</option>
+      <option value="-Due Date">Due date (Earliest)</option>
+      <option value="Due Date">Due Date (Latest)</option>
+    </select>
    </div>
- </div>
+  </div>
+  <br>
+  <div class="unstyled">
+    <div id="" class="row" ng-repeat="ctnt in content">
+      <div class="span2 well" style="float:none;">
+        <a class="content-list-name" data-toggle="modal" data-target="#contentModal" href="/content">{{ ctnt.name }}</a>
+      </div>
+    </div>
+  </div>
+</div>
