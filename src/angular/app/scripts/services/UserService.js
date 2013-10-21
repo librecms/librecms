@@ -34,10 +34,10 @@ angular.module('librecmsApp')
     // Public API here
     return {
       user: user,
-      updateUser: function(newUser) {
-        console.log('updateUser newUser = ' + JSON.stringify(newUser));
+      update: function(newUser) {
+        console.log('update newUser = ' + JSON.stringify(newUser));
         user = newUser;
-        $rootScope.$broadcast('UserService.updateUser', user);
+        $rootScope.$broadcast('UserService.update', user);
       }
     };
   });
