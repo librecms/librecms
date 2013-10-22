@@ -58,5 +58,6 @@
     "test": "grunt test --verbose"
   },
   "url": "https://github.com/librecms/librecms",
+  "repository": "https://github.com/librecms/librecms.git",
   "version": "0.0.1"
 }
