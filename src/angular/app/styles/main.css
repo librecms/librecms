@@ -97,3 +97,7 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   padding-top: 10px;
   font-size: 1.25em;
 }
+
+.content-item {
+  min-height: 128px;
+}

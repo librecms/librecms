@@ -1,24 +1,22 @@
 <div class="container">
   {{ course }}
   <div class="row">
-    <div class="span5">
-    Sort By: 
-    <select ng-model="contentSort" ng-init="contentSort='posted'">
-      <option value="relevance">Relevance</option>
-      <option value="-posted">Posted (Earliest)</option>
-      <option value="posted">Posted (Latest)</option>
-      <option value="-due">Due date (Earliest)</option>
-      <option value="due">Due Date (Latest)</option>
-    </select>
-   </div>
+    <div class="col-lg-5">
+      Sort By: 
+      <select ng-model="contentSort" ng-init="contentSort='posted'">
+        <option value="relevance">Relevance</option>
+        <option value="-posted">Posted (Earliest)</option>
+        <option value="posted">Posted (Latest)</option>
+        <option value="-due">Due date (Earliest)</option>
+        <option value="due">Due Date (Latest)</option>
+      </select>
+    </div>
   </div>
-  <br>
-  <div class="unstyled">
-    <div id="" class="row" ng-repeat="ctnt in content | orderBy:contentSort">
-      <div class="span2 well" style="float:none;">
-        <a href="/#/course/{{ course.id }}/{{ itemType }}/{{ ctnt.id }}" class="content-list-name" data-toggle="modal">{{ ctnt.name }}</a>
-        Posted: {{ctnt.posted}} Due: {{ctnt.due}}
-      </div>
+
+  <div class="row">
+    <div id="" class="content-item col-lg-4 col-sm-4 col-xs-4 col-md-4 well" ng-repeat="ctnt in content | orderBy:contentSort">
+      <h6><a href="/#/course/{{ course.id }}/{{ itemType }}/{{ ctnt.id }}" class="content-list-name">{{ ctnt.name }}</a></h6>
+    Posted: {{ctnt.posted}} Due: {{ctnt.due}}
     </div>
   </div>
 </div>
