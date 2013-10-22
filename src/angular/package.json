@@ -55,7 +55,7 @@
   "name": "librecms",
   "private": true,
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test --verbose"
   },
   "url": "https://github.com/librecms/librecms",
   "version": "0.0.1"
