@@ -5,8 +5,8 @@ angular.module('librecmsApp')
     // Gather initial user from UserService
     $scope.user = UserService.user;
 
-    // Listen for updateUser event and set scope accordingly
-    $scope.$on('UserService.updateUser', function(e, user) {
+    // Listen for update event and set scope accordingly
+    $scope.$on('UserService.update', function(e, user) {
       $scope.user = user;
     });
   });

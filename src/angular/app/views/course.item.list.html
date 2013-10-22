@@ -1,4 +1,5 @@
-<div class="container" ng-controller="ContentCtrl">
+<div class="container">
+  {{ course }}
   <div class="row">
     <div class="span5">
     Sort By: 
@@ -15,7 +16,7 @@
   <div class="unstyled">
     <div id="" class="row" ng-repeat="ctnt in content | orderBy:contentSort">
       <div class="span2 well" style="float:none;">
-        <a class="content-list-name" data-toggle="modal">{{ ctnt.name }}</a>
+        <a href="/#/course/{{ course.id }}/{{ itemType }}/{{ ctnt.id }}" class="content-list-name" data-toggle="modal">{{ ctnt.name }}</a>
         Posted: {{ctnt.posted}} Due: {{ctnt.due}}
       </div>
     </div>
