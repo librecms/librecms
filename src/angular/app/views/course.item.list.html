@@ -3,8 +3,8 @@
   <div class="row">
     <div class="span5">
     Sort By: 
-    <select ng-model="contentSort">
-      <option value="type" selected="selected">Relevance</option>
+    <select ng-model="contentSort" ng-init="contentSort='posted'">
+      <option value="relevance">Relevance</option>
       <option value="-posted">Posted (Earliest)</option>
       <option value="posted">Posted (Latest)</option>
       <option value="-due">Due date (Earliest)</option>
