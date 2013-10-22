@@ -6,3 +6,6 @@ before_script:
   - 'npm install -g bower grunt-cli'
   - 'npm install'
   - 'bower install'
+branches:
+  only:
+    - master
