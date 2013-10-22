@@ -5,7 +5,18 @@ angular.module('librecmsApp')
                                        $stateParams) {
     console.log('hello from ContentCtrl');
 
-    var assignments = [];
+    var assignments = [
+    ];
+
+    for (var i = 0; i < 50; i++) {
+      var id = Math.floor((Math.random()*10)+1);
+      assignments.push({
+        id: id,
+        name: 'assignment' + i,
+        due: id,
+        posted: id
+      });
+    }
 
     var notes = [
       {
@@ -13,14 +24,16 @@ angular.module('librecmsApp')
         name: 'compilers',
         type: 'lecture',
         due: '',
-        posted: '9/11/2013'
+        posted: '9/11/2013',
+        attachment: true
       },
       {
         id: '20',
         name: 'assembly',
         type: 'notes',
         due: '',
-        posted: '9/8/2013'
+        posted: '9/8/2013',
+        attachment: false
       }
     ];
 
