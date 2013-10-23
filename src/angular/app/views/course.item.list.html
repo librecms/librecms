@@ -14,9 +14,9 @@
   </div>
 
   <div class="row">
-    <div id="" class="content-item col-lg-4 col-sm-4 col-xs-4 col-md-4 well" ng-repeat="ctnt in content | orderBy:contentSort">
-      <h6><a href="/#/course/{{ course.id }}/{{ itemType }}/{{ ctnt.id }}" class="content-list-name">{{ ctnt.name }}</a></h6>
-    Posted: {{ctnt.posted}} Due: {{ctnt.due}}
+    <div id="" class="content-item col-lg-4 col-sm-4 col-xs-4 col-md-4 well" ng-repeat="content in contentList | orderBy:contentSort">
+      <h6><a href="/#/course/{{ course.id }}/{{ itemType }}/{{ content.id }}" class="content-list-name">{{ content.name }}</a></h6>
+    Posted: {{content.posted}} Due: {{content.due}}
     </div>
   </div>
 </div>
