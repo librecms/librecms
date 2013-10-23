@@ -1,7 +1,39 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <h3>{{ content.name }}</h3>
+      <h3>HELLO{{ content.name }}</h3>
     </div>
+  </div>
+  <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        Posted:&nbsp; {{content.posted}}
+        <br>
+        Due:&nbsp; {{ content.due }}
+      </div>
+  </div>
+  <div class="row">&nbsp;</div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      DESCRIPTION
+      <div class="well">
+        <p>
+          {{ content.descr }}
+        </p>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      DROPBOX
+      <div class="well">
+        <button>Submit</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      COMMENTS
+      <div class="well">
+       comments...
+      </div>
+    </div> 
   </div>
 </div>
