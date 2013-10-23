@@ -27,5 +27,6 @@ describe('Controller: MainCtrl', function () {
   }));
 
   it('should have a blank test', function () {
+    expect(true).toBe(false);
   });
 });
