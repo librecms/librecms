@@ -72,6 +72,11 @@ angular.module('librecmsApp', ['restangular', 'ui.router'])
       data: {
         itemType: 'item'
       }
+    })
+    .state('main.course-timeline', {
+      url: '/course/{courseId}/timeline',
+      templateUrl: 'views/widgets/timeline.html',
+      controller: 'TimelineCtrl'
     });
 
     RestangularProvider.setBaseUrl('/api');
