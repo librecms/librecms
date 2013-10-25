@@ -1,0 +1,20 @@
+.content-item {
+  min-height: 128px;
+}
+
+#assignment-header {
+  margin-bottom: 20px;
+}
+
+#assignment-description {
+  min-height: 200px;
+  max-height: 200px;
+  height: 200px;
+  overflow: auto;
+}
+
+#assignment-submission-widget, #assignment-attachments-widget {
+  min-height: 80px;
+  max-height: 200px;
+  height: 100%;
+}

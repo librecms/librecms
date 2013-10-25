@@ -98,21 +98,6 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   font-size: 1.25em;
 }
 
-.content-item {
-  min-height: 128px;
-}
-
-#assignment-header {
-  margin-bottom: 20px;
-}
-
-#assignment-description {
-  min-height: 200px;
-  max-height: 200px;
-  height: 200px;
-  overflow: auto;
-}
-
 /************************ Timeline Style *********************/
 .timeline {
   position: relative;
