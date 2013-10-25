@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('librecmsApp', ['restangular', 'ui.router'])
+angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
   .config(function (RestangularProvider, $stateProvider) {
 
     $stateProvider.state('main', {
@@ -72,6 +72,11 @@ angular.module('librecmsApp', ['restangular', 'ui.router'])
       data: {
         itemType: 'item'
       }
+    })
+    .state('main.calendar', {
+      url: '/calendar',
+      templateUrl: 'views/calendar.html',
+      controller: 'CalendarCtrl'
     });
 
     RestangularProvider.setBaseUrl('/api');
