@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
+angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'ui.bootstrap.modal'])
   .config(function (RestangularProvider, $stateProvider) {
 
     $stateProvider.state('main', {

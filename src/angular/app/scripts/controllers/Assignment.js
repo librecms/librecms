@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('AssignmentCtrl', function ($scope, $stateParams) {
+  .controller('AssignmentCtrl', function ($scope, $stateParams, $modal) {
     $scope.assignmentId = $stateParams.assignmentId;
     $scope.assignment = {
       name: 'Homework 5',
@@ -12,4 +12,24 @@ angular.module('librecmsApp')
         }
       ]
     };
+
+    $scope.opts = {
+      backdrop: true,
+      keyboard: true,
+      backdropClick: true,
+      template: 'views/course.assignment.submit.html'
+    };
+
+    $scope.openModal = function(){
+      $modal.open($scope.opts);
+    };
+
+    $scope.openMessageBox = function(){
+      var title = 'This is a message box';
+      var msg = 'This is the content of the message box';
+      var btns = [{result:'cancel', label: 'Cancel'}, {result:'ok', label: 'OK', cssClass: 'btn-primary'}];
+
+      $modal.messageBox(title, msg, btns).open();
+    };
+
   });
