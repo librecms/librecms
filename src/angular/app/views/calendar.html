@@ -1,0 +1,19 @@
+<div>
+<h3> Calendar </h3>
+	<div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+        <h10>{{alertMessage}}</h10>
+    </div>
+
+    <div class="btn-group">
+        <button class="btn btn-success" ng-click="changeView('agendaDay', myCalendar)">Day</button>
+        <button class="btn btn-success" ng-click="changeView('agendaWeek', myCalendar)">Week</button>
+        <button class="btn btn-success" ng-click="changeView('month', myCalendar)">Month</button>
+        <button class="btn btn-success" ng-click="clickSwitch('today',myCalendar)">Today</button>
+        <button class="btn btn-success" ng-click="clickSwitch('prev',myCalendar)">Prev</button>
+        <button class="btn btn-success" ng-click="clickSwitch('next',myCalendar)">Next</button>
+    </div>
+
+    <div class="calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+
+</div>
+
