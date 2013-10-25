@@ -59,6 +59,10 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   background-color: inherit;
 }
 
+.navbar-collapse.in {
+  overflow-y: inherit;
+}
+
 #center-container {
   padding: 0;
 }
