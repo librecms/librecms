@@ -1,37 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Loading Bootstrap -->
-	<link href="bootstrap/css/bootstrap.css" rel="stylesheet">
-	<!-- Loading Flat UI -->
-	<link rel="stylesheet" href="css/flat-ui.css">
-	<link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="stylesheet" href="css/fullcalendar.css">
+<div>
+<h3> Calendar </h3>
+	<div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+        <h10>{{alertMessage}}</h10>
+    </div>
 
-	<title>Calendar</title>
-</head>
-<body>
-	<div>
+    <div class="btn-group">
+        <button class="btn btn-success" ng-click="changeView('agendaDay', myCalendar)">Day</button>
+        <button class="btn btn-success" ng-click="changeView('agendaWeek', myCalendar)">Week</button>
+        <button class="btn btn-success" ng-click="changeView('month', myCalendar)">Month</button>
+        <button class="btn btn-success" ng-click="clickSwitch('today',myCalendar)">Today</button>
+        <button class="btn btn-success" ng-click="clickSwitch('prev',myCalendar)">Prev</button>
+        <button class="btn btn-success" ng-click="clickSwitch('next',myCalendar)">Next</button>
+    </div>
 
-	</div>
-	<div>
+    <div class="calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
 
-	</div>
-	<!-- Load JS here for greater good =============================-->
-	<script src="js/jquery-1.8.3.min.js"></script>
-	<script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-	<script src="js/jquery.ui.touch-punch.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/bootstrap-select.js"></script>
-	<script src="js/bootstrap-switch.js"></script>
-	<script src="js/flatui-checkbox.js"></script>
-	<script src="js/flatui-radio.js"></script>
-	<script src="js/jquery.tagsinput.js"></script>
-	<script src="js/jquery.placeholder.js"></script>
-	<!--- kfdsajfdsjajk;ld-->
-	<script src="js/angular.min.js"></script>
-	<script src="js/course_home.js"></script>
-	<script src="js/components.js"></script>
-</body>
-</html>
+</div>
+
