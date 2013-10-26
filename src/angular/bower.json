@@ -18,6 +18,7 @@
   },
   "name": "librecms",
   "resolutions": {
+    "angular": ">=1",
     "angular": "~1.2.0",
     "jquery": "~2.0.3"
   },

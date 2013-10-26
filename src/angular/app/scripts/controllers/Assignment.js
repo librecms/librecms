@@ -12,4 +12,5 @@ angular.module('librecmsApp')
         }
       ]
     };
+    $scope.showSubmit = true;
   });
