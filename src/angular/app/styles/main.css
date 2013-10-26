@@ -102,12 +102,6 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   font-size: 1.25em;
 }
 
-.modal {
-  display: block;
-  height: 0;
-  overflow: visible;
-}
-
 /************************ Timeline Style *********************/
 .timeline {
   position: relative;

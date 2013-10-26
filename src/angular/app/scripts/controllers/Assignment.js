@@ -12,7 +12,4 @@ angular.module('librecmsApp')
         }
       ]
     };
-
-
-    $scope.items = ['item1', 'item2', 'item3'];
   });

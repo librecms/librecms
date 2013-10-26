@@ -18,3 +18,59 @@
   max-height: 200px;
   height: 100%;
 }
+
+#submit-modal .btn i {
+  color: black;
+}
+
+#submission-description {
+  width: 100%;
+  max-width: 100%;
+  min-height: 125px;
+  max-height: 125px;
+  height: 125px;
+  border: 0;
+  background-color: inherit;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#submission-description-container {
+  background-color: white;
+}
+
+#submission-submit-container {
+  padding-left: 0;
+
+}
+
+#submission-attachment-icon {
+  margin-left: 8px;
+}
+
+#submission-discard-container {
+  padding-right: 0;
+}
+
+#submission-discard-icon {
+  float: right;
+}
+
+.attachment-box {
+  padding: 2px 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #3498db;
+  background-color: #F5F5F5;
+  margin: 10px 0;
+  width: 80%;
+}
+
+.attachment-box > i.fa-times {
+  cursor: pointer;
+}
+
+.attachment-box-right {
+  float: right;
+  color: rgba(0,0,0,.3);
+}
