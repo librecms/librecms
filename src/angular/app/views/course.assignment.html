@@ -1,39 +1,45 @@
 <div class="container">
-  <div class="row">
+  <div id="assignment-header" class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <h3>HELLO{{ content.name }}</h3>
+      <h3>{{ assignment.name }}</h3>
+      <div>Posted: 10/25/2013 Due: 10/27/2013</div>
     </div>
   </div>
   <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        Posted:&nbsp; {{content.posted}}
-        <br>
-        Due:&nbsp; {{ content.due }}
-      </div>
-  </div>
-  <div class="row">&nbsp;</div>
-  <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+    <div class="col-lg-5 col-md-5 col-sm-7 col-xs-12">
       DESCRIPTION
-      <div class="well">
-        <p>
-          {{ content.descr }}
-        </p>
+      <div id="assignment-description" class="well">
+        <small>
+          {{ assignment.description }}
+        </small>
       </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-      DROPBOX
-      <div class="well">
-        <button>Submit</button>
+    <div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
+      <div class="row">
+        DROPBOX
+        <div id="assignment-submission-widget" class="well">
+          <button class="btn btn-block btn-lg btn-info" data-ng-click="open()">Submit</a>
+        </div>
+      </div>
+      <div class="row">
+        ATTACHMENTS
+        <div id="assignment-attachments-widget" class="well">
+          <ul class="list-unstyled">
+            <li data-ng-repeat="attachment in assignment.attachments">
+            <a>{{ attachment.title }}</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
       COMMENTS
       <div class="well">
-       comments...
+        comments...
       </div>
     </div> 
   </div>
+
 </div>
