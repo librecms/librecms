@@ -79,3 +79,17 @@
   float: right;
   color: rgba(0,0,0,.3);
 }
+
+.submission-collaborator-container {
+  padding-bottom: 5px;
+}
+
+.submission-collaborator {
+  background-color: #f1c40f;
+  margin: 2px;
+  border-radius: 2px;
+}
+
+.submission-collaborator-remove {
+  float: right;
+}
