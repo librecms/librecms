@@ -18,4 +18,5 @@ angular.module('librecmsApp')
       $scope.user = user;
     });
 
+    $scope.showSubmit = false;
   });
