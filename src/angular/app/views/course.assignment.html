@@ -22,6 +22,7 @@
           <button data-toggle="modal" data-target="#submit-modal" class="btn btn-block btn-lg btn-info">Submit</button>
         </div>
       </div>
+
       <div class="row">
         ATTACHMENTS
         <div id="assignment-attachments-widget" class="well">
@@ -31,9 +32,10 @@
             </li>
           </ul>
         </div>
-      </div>
+      </div> <!-- /.row -->
     </div>
   </div>
+
   <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
       COMMENTS
@@ -42,9 +44,10 @@
       </div>
     </div> 
   </div>
+</div> <!-- /.container -->
 
-  <!-- Modal -->
-  <div class="modal fade" id="submit-modal" tabindex="-1" role="dialog" aria-labelledby="submit-modal" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="submit-modal" tabindex="-1" role="dialog" aria-labelledby="submit-modal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -53,32 +56,27 @@
       </div>
       <div class="modal-body">
         <div class="row">
-
-          <div class="col-md-12">
-            <div id="submission-description-container">
-              <div class="row">
-                <div role="textbox" contenteditable="true" id="submission-description" placeholder="Enter description here" tabindex="1"
-                  ></div>
+          <div id="submission-description-container" class="col-md-12 well">
+            <div class="row">
+              <div role="textbox" contenteditable="true" id="submission-description" placeholder="Enter description here" tabindex="1"
+                >
               </div>
-              <div class="row">
-                <ul class="list-unstyled">
-                  <li class="attachment-box">
-                  <span class="attachment-box-left"><small>AnotherHomeworkSubmission.pdf</small></span>
-                  <i role="button" class="attachment-box-right fa fa-times"></i>
-                  </li>
-                  <li class="attachment-box">
-                  <span class="attachment-box-left"><small>ZachsHomework.pdf</small></span>
-                  <i role="button" class="attachment-box-right fa fa-times"></i>
-                  </li>
-                </ul>
-              </div>
-
+            </div> 
+            <div class="row">
+              <ul id="submission-attachment-list" class="list-unstyled">
+                <li class="submission-attachment-box">
+                <span class="submission-attachment-box-left"><small>AnotherHomeworkSubmission.pdf</small></span>
+                <i role="button" class="submission-attachment-box-right fa fa-times"></i>
+                </li>
+                <li class="submission-attachment-box">
+                <span class="submission-attachment-box-left"><small>ZachsHomework.pdf</small></span>
+                <i role="button" class="submission-attachment-box-right fa fa-times"></i>
+                </li>
+              </ul>
             </div>
-          </div>
-
+          </div> <!-- /#submission-description-container -->
 
         </div>
-
         <div class="row">
           <div class="col-md-12">
             <div id="submission-submit-container" class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
@@ -97,4 +95,4 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-</div>
+
