@@ -16,7 +16,7 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
     .state('main.course-assignment', {
       url: '/course/{courseId}/assignment/{assignmentId}',
       templateUrl: 'views/course.assignment.html',
-      controller: 'ContentCtrl'
+      controller: 'AssignmentCtrl'
     })
     .state('main.course-assignment-list', {
       url: '/course/{courseId}/assignments',
@@ -53,9 +53,9 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
       }
     })
     .state('main.course-note', {
-      url: '/course/{courseId}/notes/{noteId}',
-      templateUrl: 'views/course.item.html',
-      controller: 'ContentCtrl',
+      url: '/course/{courseId}/note/{noteId}',
+      templateUrl: 'views/course.assignment.html',
+      controller: 'NoteCtrl',
     })
     .state('main.course-notes-list', {
       url: '/course/{courseId}/notes',

@@ -102,10 +102,6 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   font-size: 1.25em;
 }
 
-.content-item {
-  min-height: 128px;
-}
-
 /************************ Timeline Style *********************/
 .timeline {
   position: relative;
