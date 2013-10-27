@@ -30,6 +30,7 @@
   background-color: inherit;
   overflow-y: auto;
   overflow-x: hidden;
+  border: 0; 
   margin: 0;
   padding: 0;
 }
