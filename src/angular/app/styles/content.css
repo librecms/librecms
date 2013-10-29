@@ -1,0 +1,80 @@
+.content-item {
+  min-height: 128px;
+}
+
+#assignment-header {
+  margin-bottom: 20px;
+}
+
+#assignment-description {
+  min-height: 200px;
+  max-height: 200px;
+  height: 200px;
+  overflow: auto;
+}
+
+#assignment-submission-widget, #assignment-attachments-widget {
+  min-height: 80px;
+  max-height: 200px;
+  height: 100%;
+}
+
+#submit-modal .btn i {
+  color: black;
+}
+
+#submission-description {
+  width: 100%;
+  max-width: 100%;
+  height: 300px;
+  background-color: inherit;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+#submission-attachment-list {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  padding-bottom: 4px;
+}
+
+#submission-description-container {
+  background-color: white;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#submission-discard-icon {
+  float: right;
+}
+
+#submission-attachment-list > li {
+  margin-bottom: 4px;
+}
+
+#submission-attachment-list:last-child {
+  margin-bottom: 0;
+}
+
+.submission-attachment-box {
+  padding: 4px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(52, 152, 219, 0.5);
+  background-color: #F5F5F5
+  margin: 10px 0;
+  width: 80%;
+}
+
+.submission-attachment-box > i.fa-times {
+  cursor: pointer;
+}
+
+.submission-attachment-box-right {
+  float: right;
+  color: rgba(0,0,0,.3);
+}
