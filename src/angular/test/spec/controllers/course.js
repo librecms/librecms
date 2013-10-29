@@ -16,6 +16,13 @@ describe('Controller: CourseCtrl', function () {
     });
   }));
 
-  it('should should have an empty test', function () {
-  });
+  it('should should have an empty test', inject(function ($state, $q) {
+    /*
+    // This doesn't work, open issue with ui-router team: 
+    // https://github.com/angular-ui/ui-router/issues/537
+    $state.transitionTo('main.course');
+    $q.flush();
+    expect($state.current).toBe('main.course');
+    */
+  }));
 });
