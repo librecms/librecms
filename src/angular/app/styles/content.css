@@ -30,6 +30,7 @@
   background-color: inherit;
   overflow-y: auto;
   overflow-x: hidden;
+  border: 0; 
   margin: 0;
   padding: 0;
 }
@@ -77,4 +78,18 @@
 .submission-attachment-box-right {
   float: right;
   color: rgba(0,0,0,.3);
+}
+
+.submission-collaborator-container {
+  padding-bottom: 5px;
+}
+
+.submission-collaborator {
+  background-color: #f1c40f;
+  margin: 2px;
+  border-radius: 2px;
+}
+
+.submission-collaborator-remove {
+  float: right;
 }

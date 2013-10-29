@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
-      <div class="row">
+      <div class="row" ng-show="showSubmit">
         DROPBOX
         <div id="assignment-submission-widget" class="well">
           <!-- Button trigger modal -->
@@ -58,9 +58,7 @@
         <div class="row">
           <div id="submission-description-container" class="col-md-12 well">
             <div class="row">
-              <div role="textbox" contenteditable="true" id="submission-description" placeholder="Enter description here" tabindex="1"
-                >
-              </div>
+              <textarea role="textbox" contenteditable="true" id="submission-description" placeholder="Enter description here" tabindex="1"></textarea>
             </div> 
             <div class="row">
               <ul id="submission-attachment-list" class="list-unstyled">
@@ -77,14 +75,32 @@
           </div> <!-- /#submission-description-container -->
 
         </div>
+        <div class="row submission-collaborator-container">
+          <div class="col-md-12">
+            <div class="col-md-2 submission-collaborator">
+              <table><tr>
+                <td><small>Marius</small></td>
+                <td><i class="submission-collaborator-remove fa fa-times"></i></td>
+              </tr></table>
+            </div>
+            <div class="col-md-2 submission-collaborator">
+              <table><tr>
+                <td><small>Nick</small></td>
+                <td><i class="submission-collaborator-remove fa fa-times"></i></td>
+              </tr></table>
+           </div>
+         </div>
+       </div>
+
         <div class="row">
           <div class="col-md-12">
-            <div id="submission-submit-container" class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+            <div id="submission-submit-container" class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
               <button type="button" class="btn btn-large btn-primary ">Submit</button>
-              <button class="btn" id="submission-attachment-icon"><i class="fa fa-paperclip fa-lg"></i></button>
+              <button class="btn" id="submission-attachment-icon" title="Add Attachment"><i class="fa fa-paperclip fa-lg"></i></button>
+              <button class="btn" id="submission-collaborator-icon" title="Add Collaborator"><i class="fa fa-plus fa-lg"></i></button>
             </div>
 
-            <div id="submission-discard-container" class="col-md-2 col-md-offset-6 col-lg-2 col-sm-2 col-xs-2">
+            <div id="submission-discard-container" class="col-md-2 col-md-offset-4 col-lg-2 col-sm-2 col-xs-2">
               <button class="btn" id="submission-discard-icon"><i class="fa fa-trash-o fa-lg"></i></button>
             </div>
           </div>
