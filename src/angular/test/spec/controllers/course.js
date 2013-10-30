@@ -5,6 +5,16 @@ describe('Controller: CourseCtrl', function () {
   // load the controller's module
   beforeEach(module('librecmsApp'));
 
+  // load controller widgets/views/partials
+  var views = [
+    'views/course.html',
+    'views/main.html'
+  ];
+
+  views.forEach(function(view) {
+    beforeEach(module(view));
+  });
+
   var CourseCtrl,
     scope;
 
@@ -16,6 +26,9 @@ describe('Controller: CourseCtrl', function () {
     });
   }));
 
-  it('should should have an empty test', function () {
-  });
+  it('should should transition to main.course', inject(function ($state, $rootScope) {
+    $state.transitionTo('main.course');
+    $rootScope.$apply();
+    expect($state.current.name).toBe('main.course');
+  }));
 });
