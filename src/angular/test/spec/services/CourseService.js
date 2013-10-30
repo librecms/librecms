@@ -11,8 +11,14 @@ describe('Service: CourseService', function () {
     CourseService = _CourseService_;
   }));
 
-  it('should do something', function () {
+  it('should define CourseService', function () {
     expect(!!CourseService).toBe(true);
+  });
+
+  it('should have a valid API', function() {
+    expect(typeof(CourseService.getCourse)).toBe('function');
+    expect(typeof(CourseService.setCourse)).toBe('function');
+    expect(typeof(CourseService.setCourseById)).toBe('function');
   });
 
 });
