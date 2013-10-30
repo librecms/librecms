@@ -17,7 +17,7 @@ module.exports = function(config) {
       'app/bower_components/restangular/dist/restangular.js',
       'app/bower_components/lodash/lodash.js',
       'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
-      'app/bower_components/angular-ui-calendar/src/calendar.js',
+      'app/bower_components/angular-ui-calendar/src/calendar.js', 
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'app/views/**/*.html',
