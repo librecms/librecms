@@ -1,12 +1,11 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('MainCtrl', function ($scope, UserService, CourseService, $stateParams) {
+  .controller('NoteCtrl', function ($scope, UserService, CourseService, $stateParams) {
     // Gather initial user from UserService
     $scope.user = UserService.user;
 
     var courseId = $stateParams.courseId;
-    console.log('MainCtrl courseId = ' + courseId);
     $scope.course = CourseService.getCourse(courseId);
 
     $scope.$on('CourseService.update', function(e, course) {
@@ -18,4 +17,6 @@ angular.module('librecmsApp')
     $scope.$on('UserService.update', function(e, user) {
       $scope.user = user;
     });
+
+    $scope.showSubmit = false;
   });

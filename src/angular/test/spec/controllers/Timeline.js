@@ -1,27 +1,17 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: TimelineCtrl', function () {
 
   // load the controller's module
   beforeEach(module('librecmsApp'));
 
-  // load controller widgets/views/partials
-  var views = [
-    'views/main.html'
-  ];
-
-  views.forEach(function(view) {
-    beforeEach(module(view));
-  });
-
-
-  var MainCtrl,
+  var TimelineCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    TimelineCtrl = $controller('TimelineCtrl', {
       $scope: scope
     });
   }));

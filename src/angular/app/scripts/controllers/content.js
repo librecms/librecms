@@ -65,17 +65,17 @@ angular.module('librecmsApp')
       var courseId = $stateParams.courseId;
       $scope.course = CourseService.getCourse(courseId);
 
-      if ($state.current.data.itemType === 'assignments') {
-        $scope.content = assignments;
+      if ($state.current.data.itemType === 'assignment') {
+        $scope.contentList = assignments;
       }
-      else if ($state.current.data.itemType === 'quizzes') {
-        $scope.content = quizzes;
+      else if ($state.current.data.itemType === 'quiz') {
+        $scope.contentList = quizzes;
       }
-      else if ($state.current.data.itemType === 'exams') {
-        $scope.content = exams;
+      else if ($state.current.data.itemType === 'exam') {
+        $scope.contentList = exams;
       }
-      else if ($state.current.data.itemType === 'notes') {
-        $scope.content = notes;
+      else if ($state.current.data.itemType === 'note') {
+        $scope.contentList = notes;
       }
       console.log('content = ' + JSON.stringify($scope.content));
     } catch(err) { }

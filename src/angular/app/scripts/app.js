@@ -15,15 +15,15 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
     })
     .state('main.course-assignment', {
       url: '/course/{courseId}/assignment/{assignmentId}',
-      templateUrl: 'views/course.item.html',
-      controller: 'ContentCtrl'
+      templateUrl: 'views/course.assignment.html',
+      controller: 'AssignmentCtrl'
     })
     .state('main.course-assignment-list', {
       url: '/course/{courseId}/assignments',
       templateUrl: 'views/course.item.list.html',
       controller: 'ContentCtrl',
       data: {
-        itemType: 'assignments'
+        itemType: 'assignment'
       }
     })
     .state('main.course-quiz', {
@@ -36,7 +36,7 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
       templateUrl: 'views/course.item.list.html',
       controller: 'ContentCtrl',
       data: {
-        itemType: 'quizzes'
+        itemType: 'quiz'
       }
     })
     .state('main.course-exam', {
@@ -49,20 +49,20 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
       templateUrl: 'views/course.item.list.html',
       controller: 'ContentCtrl',
       data: {
-        itemType: 'exams'
+        itemType: 'exam'
       }
     })
     .state('main.course-note', {
-      url: '/course/{courseId}/notes/{noteId}',
-      templateUrl: 'views/course.item.html',
-      controller: 'ContentCtrl',
+      url: '/course/{courseId}/note/{noteId}',
+      templateUrl: 'views/course.assignment.html',
+      controller: 'NoteCtrl',
     })
     .state('main.course-notes-list', {
       url: '/course/{courseId}/notes',
       templateUrl: 'views/course.item.list.html',
       controller: 'ContentCtrl',
       data: {
-        itemType: 'notes'
+        itemType: 'note'
       }
     })
     .state('main.course-item-list', {
@@ -72,6 +72,11 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
       data: {
         itemType: 'item'
       }
+    })
+    .state('main.course-timeline', {
+      url: '/course/{courseId}/timeline',
+      templateUrl: 'views/widgets/timeline.html',
+      controller: 'TimelineCtrl'
     })
     .state('main.calendar', {
       url: '/calendar',

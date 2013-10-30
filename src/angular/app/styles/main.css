@@ -59,6 +59,10 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   background-color: inherit;
 }
 
+.navbar-collapse.in {
+  overflow-y: inherit;
+}
+
 #center-container {
   padding: 0;
 }
@@ -98,6 +102,130 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   font-size: 1.25em;
 }
 
-.content-item {
-  min-height: 128px;
+/************************ Timeline Style *********************/
+.timeline {
+  position: relative;
+  padding: 30px 0 50px 0;
+}
+
+.timeline-container {
+  list-style: none;
+}
+
+/* Vertical line designating timeline */
+.timeline:before {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  top: 0;
+  left: 140px;
+  background-color: #555; 
+}
+
+.date {
+  position: relative;
+  z-index: 1;
+  margin-left: 65px;
+  width: 75px;
+  text-align: center;
+  background-color: #555;
+  color: #fff;
+  padding: 5px 0 5px 0;
+  border-radius: 5px;
+}
+
+
+.event {
+  position: relative;
+  margin-bottom: 80px;
+  padding-right: 40px;
+}
+
+.thumbnail {
+  position: absolute;
+  top: 25px;
+  left: 53px;
+  width: 100px;
+  height: 100px;
+  box-shadow: 
+    0 0 0 5px #fff, 
+    0 1px 1px rgba(255,255,255,0.5);
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.thumbnail:before {
+    content: '';
+    position: absolute;
+    height: 8px;
+    z-index: -1;
+    /*background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAICAYAAADA+m62AAAAPElEQVQYV2NkQAP/gYARCNDFUQRgirAphitEl0TngxXisg5ZnBGXIpgbYfIYjkb3BNxGbBLYxIgyEaQRAA8KKAWYsZtjAAAAAElFTkSuQmCC);*/
+    width: 51px;
+    top: 42px;
+    left: 100%;
+    margin-left: 8px;
+}
+
+.thumbnail span {
+    color: #555; 
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: -35px;
+}
+
+.arrow-left {
+  position: absolute;
+  left: -50px;
+  top: 40px;
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-right: 50px solid #fff;
+}
+
+.user-posting {
+    margin-left: 230px;
+    position: relative;
+}
+
+.user-content-inner {
+  position: relative;
+  padding: 20px;
+  background: #fff;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.user-content-toolbar {
+  position: relative;
+  height: 50px;
+  background-color: #E74C3C;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.class-name, .user-name {
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: 100;
+}
+
+.class-name {
+  color: #E74C3C;
+}
+
+.user-text {
+  padding-top: 20px;
+}
+
+.time {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
