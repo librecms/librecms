@@ -26,6 +26,12 @@ describe('Controller: CourseCtrl', function () {
     });
   }));
 
+  it('should have all dependencies injected', inject(function($state, $stateParams, CourseService) {
+    expect(!!$state).toBe(true);
+    expect(!!$stateParams).toBe(true);
+    expect(!!CourseService).toBe(true);
+  }));
+
   it('should should transition to main.course', inject(function ($state, $rootScope) {
     $state.transitionTo('main.course');
     $rootScope.$apply();
