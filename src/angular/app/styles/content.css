@@ -93,3 +93,15 @@
 .submission-collaborator-remove {
   float: right;
 }
+
+#collaborator-search {
+}
+.collaborator-search-input {
+ margin-bottom: 2px;
+}
+
+.searched-collaborator {
+ width: 100px;
+ margin: 1px 5px 1px 5px;
+ background-color: lightgray;
+}

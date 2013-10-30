@@ -75,6 +75,18 @@
           </div> <!-- /#submission-description-container -->
 
         </div>
+
+        <div id="collaborator-search" class="row submission-collaborator-search-container" ng-hide="hideCollabs">
+          <div class="collaborator-search-input">
+            Search: <input ng-model="query" value="name">
+          </div>
+          <ul class="collaborator-search" ng-show="query">
+            <li ng-repeat="person in roster | filter:query" class="searched-collaborator col-lg-3 col-md-3 col-sm-4 col-xs-4">
+               {{person.name}} <i class="fa fa-plus fa-md"></i>
+            </li>
+          </ul>   
+        </div>
+
         <div class="row submission-collaborator-container">
           <div class="col-md-12">
             <div class="col-md-2 submission-collaborator">
@@ -97,7 +109,7 @@
             <div id="submission-submit-container" class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
               <button type="button" class="btn btn-large btn-primary ">Submit</button>
               <button class="btn" id="submission-attachment-icon" title="Add Attachment"><i class="fa fa-paperclip fa-lg"></i></button>
-              <button class="btn" id="submission-collaborator-icon" title="Add Collaborator"><i class="fa fa-plus fa-lg"></i></button>
+              <button class="btn" id="submission-collaborator-icon" title="Add Collaborator" ng-click="toggleCollabs()"><i class="fa fa-user fa-lg"></i></button>
             </div>
 
             <div id="submission-discard-container" class="col-md-2 col-md-offset-4 col-lg-2 col-sm-2 col-xs-2">
@@ -111,4 +123,3 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
