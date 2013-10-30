@@ -7,30 +7,30 @@ angular.module('librecmsApp')
       id: '',
       initalized: false
     };
-    
-    function update(newCourse) {
+
+    function setCourse(newCourse) {
       course = newCourse;
-      $rootScope.$broadcast('CourseService.update', course);
+      $rootScope.$broadcast('CourseService.courseUpdated');
+    }
+
+    function setCourseById(courseId) {
+      // This simulates an asynchronous HTTP/GET to /api/course/1234
+      setTimeout(function() {
+        var newCourse = {
+          id: courseId,
+          name: 'course' + courseId
+        };
+        setCourse(newCourse);
+      },0);
+    }
+
+    function getCourse() {
       return course;
     }
 
-    function updateCourseById(courseId) {
-      console.log('updateCourseById courseId = ' + courseId);
-      var newCourse = {
-        id: courseId,
-        name: 'course' + courseId
-      };
-      return update(newCourse);
-    }
-
     return {
-      course: course,
-      update: update,
-      getCourse: function(courseId) {
-        if (course.initalized) {
-          return course;
-        }
-        return updateCourseById(courseId);
-      }
+      setCourse: setCourse,
+      setCourseById: setCourseById,
+      getCourse: getCourse
     };
   });
