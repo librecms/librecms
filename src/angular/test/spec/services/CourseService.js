@@ -21,4 +21,7 @@ describe('Service: CourseService', function () {
     expect(typeof(CourseService.setCourseById)).toBe('function');
   });
 
+  it('should do something', function () {
+    expect(!!CourseService).toBe(true);
+  });
 });
