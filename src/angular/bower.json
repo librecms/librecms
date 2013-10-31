@@ -20,6 +20,7 @@
   "name": "librecms",
   "resolutions": {
     "fullcalendar": "7808e352e7b24c296424f05bfa642f08face0ac8",
+    "fullcalendar": "7808e352e7b24c296424f05bfa642f08face0ac8"
     "angular": ">=1",
     "angular": "~1.2.0",
     "jquery": "~2.0.3"
