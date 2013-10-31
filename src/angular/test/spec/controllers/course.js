@@ -32,9 +32,12 @@ describe('Controller: CourseCtrl', function () {
     expect(!!CourseService).toBe(true);
   }));
 
-  it('should should transition to main.course', inject(function ($state, $rootScope) {
-    $state.transitionTo('main.course');
+  it('should should transition to main.course', inject(function ($state, $rootScope, $stateParams) {
+    $state.transitionTo('main.course', {
+      courseId: '1234'
+    });
     $rootScope.$apply();
+    expect($stateParams.courseId).toBe('1234');
     expect($state.current.name).toBe('main.course');
   }));
 });

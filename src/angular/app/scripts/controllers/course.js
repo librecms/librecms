@@ -21,8 +21,6 @@ angular.module('librecmsApp')
     });
    
 
-    console.log('Hello from CourseCtrl');
-
     // Listen for updateUser event and set scope accordingly
     $scope.$on('UserService.updateUser', function(e, user) {
       $scope.user = user;
