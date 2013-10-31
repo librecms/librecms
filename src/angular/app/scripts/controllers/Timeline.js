@@ -2,16 +2,22 @@
 
 angular.module('librecmsApp')
   .controller('TimelineCtrl', function ($scope) {
-  	console.log('hello from TimelineCtrl');
+    console.log('hello from TimelineCtrl');
     // API.getEvents(courseId);
     $scope.events = [
       {
         time: '9:30pm',
-        userText: 'This is some userText'
+        professorText: 'This is some userText',
+        courseName: 'CMPSC 483W',
+        professorName: 'Max Fomitchev',
+        paletteName: 'lightred'
       },
       {
         time: '10:30pm',
-        userText: 'This is some more userText'
+        professorText: 'This is some more userText',
+        courseName: 'CMPSC 455',
+        professorName: 'Xiantao Li',
+        paletteName: 'lightyellow'
       }
     ];
 
