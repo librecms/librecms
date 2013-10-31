@@ -1,22 +1,39 @@
-<div class="timeline">
-	<ul class="timeline-container">
-		<li class="date-container">
-			<div class="date">Sept 18</div>
-		</li>
-		<li class="event">
-			<div class="thumbnail"></div>
-			<div class="user-posting">
-				<div class="arrow-left"></div>
-				<div class="user-content">
-					<div class="user-content-inner">
-						<h3 class="class-name">CMPSC 483W</h3>
-						<p class="time">4:50 pm</p>
-						<h6 class="user-name">Jessie Smith</h6>
-						<p class="user-text">Some text here. Some text here. Some text here. Some text here.</p>
-					</div>
-					<div class="user-content-toolbar"></div>
-				</div>
-			</div>
-		</li>
-	</ul>
-</div>
+<div class="container">
+  <div class="new-post">
+    <div class="new-post-container row">
+      <div class="col-xs-9 col-sm-10">
+        <input type="text" value placeholder="Create new announcement" class="form-control new-post-input" ng-model="announcement">
+      </div>
+      <div class="col-xs-3 col-sm-2">
+        <button type="button" class="btn btn-block btn-info" ng-click="addPost()">Post</button>
+      </div>
+    </div>
+  </div>
+  <div class="timeline">
+    <ul class="timeline-container">
+      <li class="date-container row">
+      <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2"> 
+        <div class="date">Sept 18</div>
+      </div>
+      </li>
+      <li class="event" ng-repeat="event in events">
+      <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-0">
+          <div class="thumbnail"></div>
+        </div>
+        <div class="user-posting col-lg-10 col-md-9 col-sm-8 col-xs-12">
+          <div class="arrow-left"></div>
+          <div class="user-content">
+            <div class="user-content-inner">
+              <h3 class="class-name">CMPSC 483W</h3>
+              <p class="time">{{ event.time }}</p>
+              <h6 class="user-name">Jessie Smith</h6>
+              <p class="user-text">{{ event.userText }}</p>
+            </div>
+            <div class="user-content-toolbar"></div>
+          </div>
+        </div>
+        </li>
+      </ul>
+    </div>
+  </div>

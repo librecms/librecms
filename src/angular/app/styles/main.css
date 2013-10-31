@@ -110,28 +110,29 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
 
 .timeline-container {
   list-style: none;
+  padding-left: 0;
 }
 
 /* Vertical line designating timeline */
 .timeline:before {
   content: '';
-  position: absolute;
   width: 5px;
   height: 100%;
+  position: absolute;
   top: 0;
-  left: 140px;
+  left: 62px;
   background-color: #555; 
 }
 
 .date {
-  position: relative;
   z-index: 1;
-  margin-left: 65px;
+  position: relative;
+  padding: 5px 0 5px 0;
+  margin: 20px 0 20px 10px;
   width: 75px;
   text-align: center;
   background-color: #555;
   color: #fff;
-  padding: 5px 0 5px 0;
   border-radius: 5px;
 }
 
@@ -139,13 +140,11 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
 .event {
   position: relative;
   margin-bottom: 80px;
-  padding-right: 40px;
 }
 
 .thumbnail {
   position: absolute;
   top: 25px;
-  left: 53px;
   width: 100px;
   height: 100px;
   box-shadow: 
@@ -228,4 +227,36 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   position: absolute;
   right: 20px;
   top: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .date {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .thumbnail, .arrow-left {
+    display: none;
+  } 
+
+  .timeline:before {
+    left: 50%;
+    right: 50%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .time {
+    position: static;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .user-content-inner {
+    text-align: center;
+  }
+
+  .time {
+    position: absolute;
+  }
 }
