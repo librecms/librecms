@@ -57,26 +57,25 @@ angular.module('librecmsApp')
       }
     ];
 
-    try {
-      console.log('ContentCtrl state.itemtype = ' +
-          $state.current.data.itemType);
+    $scope.setItemType = function() {
       $scope.itemType = $state.current.data.itemType;
+      $scope.course = CourseService.getCourse($stateParams.courseId);
 
-      var courseId = $stateParams.courseId;
-      $scope.course = CourseService.getCourse(courseId);
-
-      if ($state.current.data.itemType === 'assignment') {
+      if ($scope.itemType === 'assignment') {
         $scope.contentList = assignments;
       }
-      else if ($state.current.data.itemType === 'quiz') {
+      else if ($scope.itemType === 'quiz') {
         $scope.contentList = quizzes;
       }
-      else if ($state.current.data.itemType === 'exam') {
+      else if ($scope.itemType === 'exam') {
         $scope.contentList = exams;
       }
-      else if ($state.current.data.itemType === 'note') {
+      else if ($scope.itemType === 'note') {
         $scope.contentList = notes;
       }
-      console.log('content = ' + JSON.stringify($scope.content));
-    } catch(err) { }
+    };
+
+    if($state.current.data && $state.current.data.itemType) {
+      $scope.setItemType();
+    }
   });
