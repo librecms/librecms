@@ -21,9 +21,9 @@
   "name": "librecms",
   "resolutions": {
     "fullcalendar": "7808e352e7b24c296424f05bfa642f08face0ac8",
-    "angular": ">= 1.0.6",
-    "jquery": "~2.0.3",
-    "bootstrap": "3.0.0"
+    "bootstrap": "3.0.0",
+    "angular": "~1.2.0",
+    "jquery": "~2.0.3"
   },
   "version": "0.0.0"
 }
