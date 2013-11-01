@@ -11,6 +11,7 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-html-validation');
+  grunt.loadNpmTasks('grunt-retire');
 
   // configurable paths
   var yeomanConfig = {
@@ -271,6 +272,12 @@ module.exports = function (grunt) {
         '<%= yeoman.app %>/*.html',
         '<%= yeoman.app %>/views/**/*.html'
       ]
+    },
+    retire: {
+      files: [
+        '<%= yeoman.dist %>/*.js',
+        '<%= yeoman.dist %>/**/*.js'
+      ]
     }
   });
 
@@ -287,7 +294,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'less.flatui',
+    'less:flatui',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -308,6 +315,6 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('dev', [
-    'less.flatui'
+    'less:flatui'
   ]);
 };

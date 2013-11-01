@@ -47,7 +47,8 @@
     "karma-script-launcher": "~0.1.0",
     "load-grunt-tasks": "~0.1.0",
     "time-grunt": "~0.1.0",
-    "grunt-html-validation": "~0.1.6"
+    "grunt-html-validation": "~0.1.6",
+    "grunt-retire": "~0.1.1"
   },
   "engines": {
     "node": ">=0.10.0"

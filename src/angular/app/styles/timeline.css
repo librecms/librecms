@@ -1,0 +1,232 @@
+/************************ Timeline Style *********************/
+
+
+/****** New Timeline Post ******/
+.new-post-container {
+  margin: 50px 0;
+}
+
+.new-post-input:focus {
+  border-color: #3498DB;
+}
+
+/****** Timeline Events ******/
+.timeline {
+  position: relative;
+}
+
+.content-item {
+  min-height: 128px;
+}
+
+/************************ Timeline Style *********************/
+.timeline {
+  position: relative;
+  padding: 30px 0 50px 0;
+}
+
+.timeline-container {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* Vertical line designating timeline */
+.timeline:before {
+  content: '';
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 62px;
+  background-color: #555; 
+}
+
+.date {
+  z-index: 1;
+  position: relative;
+  padding: 5px 0 5px 0;
+  margin: 20px 0 20px 10px;
+  width: 75px;
+  text-align: center;
+  background-color: #555;
+  color: #fff;
+  border-radius: 5px;
+}
+
+
+.event {
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.thumbnail {
+  position: absolute;
+  top: 25px;
+  width: 100px;
+  height: 100px;
+  box-shadow: 
+    0 0 0 5px #fff, 
+    0 1px 1px rgba(255,255,255,0.5);
+  background-repeat: no-repeat;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.arrow-left {
+  position: absolute;
+  left: -35px;
+  top: 40px;
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-right: 50px solid #fff;
+}
+
+.user-content-inner {
+  position: relative;
+  padding: 20px;
+  background: #fff;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.user-content-toolbar {
+  position: relative;
+  height: 50px;
+  background-color: #E74C3C;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.class-name, .user-name {
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: 100;
+}
+
+.class-name {
+  color: #E74C3C;
+}
+
+.user-text {
+  padding-top: 20px;
+}
+
+.time {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+/********** Palettes ********/
+.lightturquoise {
+  background-color: #1ABC9C;
+}
+
+.turquoise {
+  background-color: #16A085;
+}
+
+.lightgreen {
+  background-color: #2ECC71;
+}
+
+.green {
+  background-color: #27AE60;
+}
+
+.lightblue {
+  background-color: #3498DB;
+}
+
+.blue {
+  background-color: #2980B9;
+}
+
+.lightpurple {
+  background-color: #9B59B6;
+}
+
+.purple {
+  background-color: #8E44AD;
+}
+
+.lightnavy {
+  background-color: #34495E;
+}
+
+.navy {
+  background-color: #2C3E50;
+}
+
+.lightyellow {
+  background-color: #F1C40F;
+}
+
+.yellow {
+  background-color: #F39C12;
+}
+
+.lightorange {
+  background-color: #E67E22;
+}
+
+.orange {
+  background-color: #D35400;
+}
+
+.lightred {
+  background-color: #E74C3C;
+}
+
+.red {
+  background-color: #C0392B;
+}
+
+.lightgray {
+  background-color: #ECF0F1;
+}
+
+.gray {
+  background-color: #BDC3C7;
+}
+
+.lightslate {
+  background-color: #95A5A6;
+}
+
+.slate {
+  background-color: #7F8C8D;
+}
+
+@media only screen and (max-width: 768px) {
+  .date {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .thumbnail, .arrow-left {
+    display: none;
+  } 
+
+  .timeline:before {
+    left: 50%;
+    right: 50%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .time {
+    position: static;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .user-content-inner {
+    text-align: center;
+  }
+
+  .time {
+    position: absolute;
+  }
+}
