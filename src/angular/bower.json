@@ -11,7 +11,8 @@
     "restangular": "~1.1.3",
     "font-awesome": "~4.0.0",
     "angular-ui-calendar": "~0.1.3",
-    "fullcalendar": "https://github.com/librecms/fullcalendar-component.git#7808e352e7b24c296424f05bfa642f08face0ac8"
+    "fullcalendar": "https://github.com/librecms/fullcalendar-component.git#7808e352e7b24c296424f05bfa642f08face0ac8",
+    "angular-ui-date": "~0.0.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
@@ -20,10 +21,9 @@
   "name": "librecms",
   "resolutions": {
     "fullcalendar": "7808e352e7b24c296424f05bfa642f08face0ac8",
-    "fullcalendar": "7808e352e7b24c296424f05bfa642f08face0ac8"
-    "angular": ">=1",
-    "angular": "~1.2.0",
-    "jquery": "~2.0.3"
+    "angular": ">= 1.0.6",
+    "jquery": "~2.0.3",
+    "bootstrap": "3.0.0"
   },
   "version": "0.0.0"
 }
