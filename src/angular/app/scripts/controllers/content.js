@@ -1,9 +1,17 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('ContentCtrl', function ($state, $scope, CourseService,
+  .controller('ContentCtrl', function ($state, $scope, UserService, CourseService,
                                        $stateParams) {
     console.log('hello from ContentCtrl');
+
+    $scope.instructorView = true;
+    /*if (UserService.isInstructor() == true) {
+      $scope.instructorView = true;
+    }*/
+    $scope.dateOptions = {
+      yearRange:'1900:-0'
+    };
 
     var assignments = [
     ];
