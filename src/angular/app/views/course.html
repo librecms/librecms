@@ -1,6 +1,10 @@
 <div>
-  user = {{ user }}
-  <br/>
-  course = {{ course }}
-  <button ng-click="setNewUser()">Call setNewUser</button>
+	<div class="col-xs-6">
+	  user = {{ user }}
+	  <br/>
+	  course = {{ course }}
+	  <button ng-click="setNewUser()">Call setNewUser</button>
+	</div>
+  
+  <div id="timeine-widget" ui-view="timeline" class="col-xs-6"></div>
 </div>

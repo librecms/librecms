@@ -10,8 +10,16 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
     })
     .state('main.course', {
       url: '/course/{courseId}',
-      templateUrl: 'views/course.html',
-      controller: 'CourseCtrl'
+      views: {
+        'timeline@main.course': {
+          templateUrl: 'views/widgets/timeline.html',
+          controller: 'TimelineCtrl'
+        },
+        '@main': {
+          templateUrl: 'views/course.html',
+          controller: 'CourseCtrl' 
+        }
+      }      
     })
     .state('main.course-assignment', {
       url: '/course/{courseId}/assignment/{assignmentId}',
