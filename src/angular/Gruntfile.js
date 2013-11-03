@@ -10,6 +10,7 @@ module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt);
   require('time-grunt')(grunt);
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-html-validation');
 
   // configurable paths
   var yeomanConfig = {
@@ -258,6 +259,18 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/styles/flatui.css': '<%= yeoman.app %>/styles/flatui.less'
         }
       }
+    },
+    validation: {
+      options: {
+        reset: grunt.option('reset') || false,
+        stoponerror: false,
+        path: '.tmp/validation-status.json',
+        reportpath: '.tmp/validation-report.json'
+      },
+      files: [
+        '<%= yeoman.app %>/*.html',
+        '<%= yeoman.app %>/views/**/*.html'
+      ]
     }
   });
 
@@ -266,6 +279,10 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'karma'
+  ]);
+
+  grunt.registerTask('validate-html', [
+    'validation'
   ]);
 
   grunt.registerTask('build', [
