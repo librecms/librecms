@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
 <div class="row">
-    <div class="col-sm-10">
-        <h3> Calendar </h3>
-        <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
-            <h10>{{alertMessage}}</h10>
-        </div>
+    <div class="containter col-md-12 col-lg-9">
 
         <div class="btn-group">
             <button class="btn btn-success btn-sm" ng-click="changeView('agendaDay', myCalendar)">Day</button>
@@ -19,8 +15,8 @@
         <div class="calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
 
     </div>
-    <div class="col-sm-2">
-        <h5> Upcoming Events </h5>
+    <div class="containter col-md-12 col-lg-3">
+        <ol><h4>Upcomming Events</h4>
         <li ng-repeat="e in events | orderBy:predicate | limitTo:quantity" >
             <div ng-class="{strike:strike}">
             <div class="alert alert-info">
@@ -28,6 +24,7 @@
             </div>
             </div>
         </li> 
+    </ol>
     </div>
 </div>
 </html>

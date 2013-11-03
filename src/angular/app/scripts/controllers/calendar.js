@@ -51,7 +51,7 @@ angular.module('librecmsApp')
     /* config object */
     $scope.uiConfig = {
       calendar:{
-        height: 450,
+        height: 600,
         editable: true,
         header:{
           left: '', //'month basicWeek basicDay agendaWeek agendaDay',
