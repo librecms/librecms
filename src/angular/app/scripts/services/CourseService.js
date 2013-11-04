@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .factory('CourseService', function CourseService($rootScope) {
+  .factory('CourseService', function CourseService($rootScope, Restangular) {
+    var Courses = Restangular.all('courses');
+
     var course = {
       name: '',
       id: '',
@@ -14,23 +16,30 @@ angular.module('librecmsApp')
     }
 
     function setCourseById(courseId) {
-      // This simulates an asynchronous HTTP/GET to /api/course/1234
-      setTimeout(function() {
-        var newCourse = {
-          id: courseId,
-          name: 'course' + courseId
-        };
-        setCourse(newCourse);
-      },0);
+      if (courseId) {
+        Courses.get(courseId)
+          .then(function(newCourse) {
+            setCourse(newCourse);
+          });
+      }
     }
 
     function getCourse() {
       return course;
     }
 
+    function getPosts() {
+      Courses.get(course._id).getList('events')
+        .then(function(events) {
+          course.events = events;
+          setCourse(course);
+        });
+    }
+
     return {
       setCourse: setCourse,
       setCourseById: setCourseById,
-      getCourse: getCourse
+      getCourse: getCourse,
+      getPosts: getPosts
     };
   });

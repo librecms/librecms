@@ -2,20 +2,20 @@
 
 angular.module('librecmsApp')
   .controller('MainCtrl', function ($scope, UserService, CourseService, $stateParams) {
+    console.log('hello from mainctrl');
     // Gather initial user from UserService
-    $scope.user = UserService.user;
+    $scope.user = UserService.getUser();
+    $scope.$on('UserService.update', function() {
+      $scope.user = UserService.getUser();
+    });
 
+    // Listen to changes to the course object
+    $scope.$on('CourseService.courseUpdated', function() {
+      $scope.course = CourseService.getCourse();
+      console.log('MainCtrl course updated course = ' + JSON.stringify($scope.course));
+    });
+
+    // Gather course ID from the state (/course/{courseId}) 
     var courseId = $stateParams.courseId;
-    console.log('MainCtrl courseId = ' + courseId);
-    $scope.course = CourseService.getCourse(courseId);
-
-    $scope.$on('CourseService.update', function(e, course) {
-      $scope.course = course;
-    });
-
-
-    // Listen for update event and set scope accordingly
-    $scope.$on('UserService.update', function(e, user) {
-      $scope.user = user;
-    });
+    CourseService.setCourseById(courseId);
   });
