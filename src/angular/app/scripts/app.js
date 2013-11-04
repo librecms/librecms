@@ -73,8 +73,8 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
         itemType: 'item'
       }
     })
-    .state('main.course-timeline', {
-      url: '/course/{courseId}/timeline',
+    .state('main.course.timeline', {
+      url: '/timeline',
       templateUrl: 'views/widgets/timeline.html',
       controller: 'TimelineCtrl'
     })
