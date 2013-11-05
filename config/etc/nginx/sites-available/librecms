@@ -1,5 +1,6 @@
 upstream api { 
     server 127.0.0.1:3030;
+    # server librecms-api.nodejitsu.com:80;
 }
 
 server {
@@ -24,6 +25,5 @@ server {
   location / {
     index index.html;
     root /var/www/librecms/src/angular/app;
-    try_files $uri $uri/ /index.html =404;
   }
 }
