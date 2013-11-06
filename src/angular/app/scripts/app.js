@@ -29,7 +29,7 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
     .state('main.course-assignment-list', {
       url: '/course/{courseId}/assignments',
       templateUrl: 'views/course.item.list.html',
-      controller: 'ContentCtrl',
+      controller: 'AssignmentListCtrl',
       data: {
         itemType: 'assignment'
       }
@@ -37,12 +37,12 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
     .state('main.course-quiz', {
       url: '/course/{courseId}/quiz/{quizId}',
       templateUrl: 'views/course.item.html',
-      controller: 'ContentCtrl',
+      controller: 'QuizCtrl',
     })
     .state('main.course-quiz-list', {
       url: '/course/{courseId}/quizzes',
       templateUrl: 'views/course.item.list.html',
-      controller: 'ContentCtrl',
+      controller: 'QuizListCtrl',
       data: {
         itemType: 'quiz'
       }
@@ -50,12 +50,12 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
     .state('main.course-exam', {
       url: '/course/{courseId}/exam/{examId}',
       templateUrl: 'views/course.item.html',
-      controller: 'ContentCtrl',
+      controller: 'ExamCtrl',
     })
     .state('main.course-exam-list', {
       url: '/course/{courseId}/exams',
       templateUrl: 'views/course.item.list.html',
-      controller: 'ContentCtrl',
+      controller: 'ExamListCtrl',
       data: {
         itemType: 'exam'
       }
@@ -68,7 +68,7 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
     .state('main.course-notes-list', {
       url: '/course/{courseId}/notes',
       templateUrl: 'views/course.item.list.html',
-      controller: 'ContentCtrl',
+      controller: 'NoteListCtrl',
       data: {
         itemType: 'note'
       }
