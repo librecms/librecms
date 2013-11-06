@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <div class="row">
-    <div class="containter col-md-12 col-lg-9">
+    <div class="containter col-md-12 col-lg-9" align="center">
 
         <div class="btn-group">
             <button class="btn btn-success btn-sm" ng-click="changeView('agendaDay', myCalendar)">Day</button>
@@ -15,16 +15,16 @@
         <div class="calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
 
     </div>
-    <div class="containter col-md-12 col-lg-3">
-        <ol><h4>Upcomming Events</h4>
-        <li ng-repeat="e in events | orderBy:predicate | limitTo:quantity" >
+    <div class="containter col-md-12 col-lg-3" ng-controller="EventbarCtrl">
+        <div align="center"><h4>Upcoming Events</h4>
+        <div ng-repeat="e in events | orderBy:predicate | limitTo:quantity | upcoming:predicate" >
             <div ng-class="{strike:strike}">
             <div class="alert alert-info">
                 <input type="checkbox" ng-model="strike"> <b> {{e.title}}</b> - {{e.start | date:"MMM dd" }} 
             </div>
             </div>
-        </li> 
-    </ol>
+        </div>
+    </div>
     </div>
 </div>
 </html>

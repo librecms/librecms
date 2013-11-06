@@ -16,9 +16,6 @@ angular.module('librecmsApp')
       {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
     ];
 
-    $scope.predicate = 'start';
-    $scope.quantity = 5;
-
     /* Change View */
     $scope.changeView = function(view,calendar) {
       calendar.fullCalendar('changeView',view);
