@@ -41,6 +41,7 @@ angular.module('librecmsApp')
       course.post('posts', newPost)
         .then(function(newPostObject) {
           course.posts.push(newPostObject);
+          setCourse(course);
         });
     }
 
