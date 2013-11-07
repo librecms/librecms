@@ -11,7 +11,7 @@ angular.module('librecmsApp')
     // Gather course ID from the state (/course/{courseId}) 
     var courseId = $stateParams.courseId;
     CourseService.setCourseById(courseId);
-   
+
     // Gather initial user from UserService
     $scope.user = UserService.user;
     // Listen for updateUser event and set scope accordingly

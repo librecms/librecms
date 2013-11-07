@@ -11,7 +11,8 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infin
     .state('main.course', {
       abstract: true,
       url: '/course/{courseId}',
-      templateUrl: 'views/course.html'
+      templateUrl: 'views/course.html',
+      controller: 'CourseCtrl'
     })
     .state('main.course.home', {
       url: '',
