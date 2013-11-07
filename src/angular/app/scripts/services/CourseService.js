@@ -7,6 +7,7 @@ angular.module('librecmsApp')
     var course = {
       name: '',
       id: '',
+      posts: [],
       initalized: false
     };
 
@@ -36,10 +37,18 @@ angular.module('librecmsApp')
         });
     }
 
+    function createPost(newPost) {
+      course.post('posts', newPost)
+        .then(function(newPostObject) {
+          course.posts.push(newPostObject);
+        });
+    }
+
     return {
       setCourse: setCourse,
       setCourseById: setCourseById,
       getCourse: getCourse,
-      getPosts: getPosts
+      getPosts: getPosts,
+      createPost: createPost
     };
   });

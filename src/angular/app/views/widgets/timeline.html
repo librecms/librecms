@@ -10,9 +10,9 @@
       </div>
     </div>
   </div>
-  <div class="timeline">
+  <div class="timeline" infinite-scroll="loadMorePosts()" inifinite-scroll-distance="2">
     <ul class="timeline-container">
-      <li class="event" ng-repeat="post in course.posts">
+      <li class="event" ng-repeat="post in visiblePosts">
         <div class="date-container row">
           <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2"> 
             <div class="date">{{ post.date | date:'shortDate' }}</div>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar'])
+angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll'])
   .config(function (RestangularProvider, $stateProvider) {
 
     $stateProvider.state('main', {
