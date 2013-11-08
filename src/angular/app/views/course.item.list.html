@@ -1,5 +1,4 @@
 <div class="container">
-  {{ course }}
   <div class="row">
     <div class="col-lg-5">
       Sort By: 
@@ -15,8 +14,11 @@
 
   <div class="row">
     <div id="" class="content-item col-lg-4 col-md-4 col-sm-4 col-xs-12  well" ng-repeat="content in contentList | orderBy:contentSort">
-      <h6><a href="/#/course/{{ course.id }}/{{ itemType }}/{{ content.id }}" class="content-list-name">{{ content.name }}</a></h6>
-      Posted: {{content.posted}} Due: {{content.due}}
+      <h6>
+        <a href="/#/course/{{ course.id }}/{{ itemType }}/{{ content.id }}" class="content-list-name">{{ content.title }}</a>
+      </h6>
+      Posted: {{ content.posted | date:'shortDate' }} 
+      Due: {{ content.due | date:'shortDate'}}
     </div>
   </div>
 </div>
