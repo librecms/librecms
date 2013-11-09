@@ -7,10 +7,9 @@
           <div id="left-navbar-user-container" class="col-lg-12 col-md-12 col-sm-12">
 
             <div class="row">
-              <span class="icon-stack icon-4x">
-                <i class="icon-circle icon-stack-base icon-4x"></i>
-                <i class="icon-user icon-dark icon-5x"></i>
-              </span>
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <i class="fa fa-user fa-4x"></i>
+              </div>
             </div>
 
             <div class="row">
@@ -29,9 +28,12 @@
 
             <div id="left-navbar-courses-list-container" class="row">
               <ul id="left-navbar-courses-list" class="list-unstyled">
-                <li ng-repeat="courseList in user.courses"><a href="/#/course/{{ courseList._id }}">{{ courseList.name }}</a></li>
+                <li ng-repeat="courseList in user.courses">
+                  <a ui-sref="main.course.home({ courseId: courseList._id })">{{ courseList.name }}</a>
+                </li>
               </ul>
             </div>
+
           </div>
         </div> 
       </div>
