@@ -28,7 +28,7 @@
 
             <div id="left-navbar-courses-list-container" class="row">
               <ul id="left-navbar-courses-list" class="list-unstyled">
-                <li ng-repeat="courseList in user.courses">
+                <li ng-repeat="courseList in user.courses | orderBy:'name':false">
                   <a ui-sref="main.course.home({ courseId: courseList._id })">{{ courseList.name }}</a>
                 </li>
               </ul>
