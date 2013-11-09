@@ -7,11 +7,11 @@ angular.module('librecmsApp')
     // Listen to changes to the course object
     $scope.$on('CourseService.courseUpdated', function() {
       // Get first 20 posts
-      $scope.visiblePosts = $scope.course.posts.slice(0, 2);
+      $scope.visiblePosts = $scope.course.posts.slice(-2);
 
       if(!$scope.loadMorePosts) {
         $scope.loadMorePosts = function() {
-          $scope.visiblePosts = $scope.course.posts.slice(0, $scope.visiblePosts.length + 2);
+          $scope.visiblePosts = $scope.course.posts.slice(-1*($scope.visiblePosts.length + 2));
         };
       }
     });

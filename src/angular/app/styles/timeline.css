@@ -72,7 +72,7 @@
   background-color: #fff;
 }
 
-.arrow-left {
+/*.arrow-left {
   position: absolute;
   left: -35px;
   top: 40px;
@@ -81,6 +81,7 @@
   border-top: 40px solid transparent;
   border-right: 50px solid #fff;
 }
+*/
 
 .user-content-inner {
   position: relative;
