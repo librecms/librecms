@@ -2,7 +2,10 @@
   <div id="assignment-header" class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <h3>{{ assignment.name }}</h3>
-      <div>Posted: 10/25/2013 Due: 10/27/2013</div>
+      <div>
+        Posted: {{ assignment.posted | date:'shortDate' }} 
+        Due: {{ assignment.due | date:'shortDate' }}
+      </div>
     </div>
   </div>
   <div class="row">
