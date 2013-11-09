@@ -7,6 +7,8 @@ angular.module('librecmsApp')
     var m = date.getMonth();
     var y = date.getFullYear();
 
+    console.log('hello from Calendar.js');
+
     $scope.events = [
       {title: 'Homework Click here!',start: new Date(y, m, 1), url: 'http://localhost/#/course//assignment/1'},
       {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
