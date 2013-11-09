@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<html>
 <div class="row">
     <div class="containter col-md-12 col-lg-9" align="center">
-
         <div class="btn-group">
             <button class="btn btn-success btn-sm" ng-click="changeView('agendaDay', myCalendar)">Day</button>
             <button class="btn btn-success btn-sm" ng-click="changeView('agendaWeek', myCalendar)">Week</button>
@@ -11,9 +8,7 @@
             <button class="btn btn-success btn-sm" ng-click="clickSwitch('prev',myCalendar)">Prev</button>
             <button class="btn btn-success btn-sm" ng-click="clickSwitch('next',myCalendar)">Next</button>
         </div>
-
         <div class="calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
-
     </div>
     <div class="containter col-md-12 col-lg-3" ng-controller="EventbarCtrl">
         <div align="center"><h4>Upcoming Events</h4>
@@ -25,7 +20,7 @@
             </div>
         </div>
     </div>
+</div>
+    <div ui-view>
     </div>
 </div>
-</html>
-

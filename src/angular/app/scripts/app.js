@@ -26,6 +26,19 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infin
         }
       }
     })
+    .state('main.calendar', {
+      url: '/calendar',
+      views: {
+        '@main': {
+          controller: 'CalendarCtrl',
+          templateUrl: 'views/calendar.html'
+        },
+        'eventbar@main.calendar': {
+          templateUrl: 'views/widgets/eventbar.html',
+          controller: 'EventbarCtrl'
+        }
+      }
+    })
     .state('main.course.assignmentList', {
       url: '/assignments',
       templateUrl: 'views/course.item.list.html',
@@ -50,11 +63,6 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infin
       url: '/exams',
       templateUrl: 'views/course.item.list.html',
       controller: 'ExamListCtrl'
-    })
-    .state('main.calendar', {
-      url: '/calendar',
-      templateUrl: 'views/calendar.html',
-      controller: 'CalendarCtrl'
     });
 
     RestangularProvider.setBaseUrl('/api');

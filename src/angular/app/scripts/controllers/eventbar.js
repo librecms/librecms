@@ -29,7 +29,6 @@ angular.module('librecmsApp')
 angular.module('librecmsApp').filter('upcoming', function() {
   return function(e) {
     var date = new Date();
-    var count = 0;
     var returnArray = new Array();
     for(var i = 0; i < e.length; i++) {
       if(date.getTime() <= e[i].start.getTime()) {
