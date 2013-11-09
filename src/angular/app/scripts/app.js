@@ -31,6 +31,11 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infin
       templateUrl: 'views/course.item.list.html',
       controller: 'AssignmentListCtrl'
     })
+    .state('main.course.assignment', {
+      url: '/assignment/{assignmentId}',
+      templateUrl: 'views/course.assignment.html',
+      controller: 'AssignmentCtrl'
+    })
     .state('main.course.quiz', {
       url: '/quiz/{quizId}',
       templateUrl: 'views/course.item.html',

@@ -4,6 +4,8 @@ angular.module('librecmsApp')
   .controller('NoteListCtrl', function($scope) {
     console.log('hello from NoteListCtrl');
 
+    $scope.itemType = "note";
+
     if ($scope.course && $scope.course.notes) {
       $scope.contentList = $scope.course.notes;
     }

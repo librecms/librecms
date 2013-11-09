@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('AssignmentCtrl', function ($scope, $stateParams) {
+  .controller('AssignmentCtrl', function ($scope, $stateParams, UserService) {
     $scope.assignmentId = $stateParams.assignmentId;
     $scope.assignment = {
       name: 'Homework 5',
@@ -12,34 +12,43 @@ angular.module('librecmsApp')
         }
       ]
     };
+    $scope.submissionDescription = "";
+    $scope.submissionAttachments = [];
+    $scope.submissionCollaborators = [
+      {
+        _id: '945',
+        name: 'Marius'
+      }
+    ];
+
     $scope.roster = [
       {
         name: 'Nick',
-        id: '123'
+        _id: '123'
       },
       {
         name: 'Marius',
-        id: '945'
+        _id: '945'
       },
       {
         name: 'Zach',
-        id: '425'
+        _id: '425'
       },
       {
         name: 'Jessie',
-        id: '657'
+        _id: '657'
       },
       {
         name: 'Mike',
-        id: '838'
+        _id: '838'
       },
       {
         name: 'Shawn',
-        id: '454'
+        _id: '454'
       },
       {
         name: 'Tiffany',
-        id: '324'
+        _id: '324'
       }
     ];
     $scope.showSubmit = true;
@@ -47,4 +56,34 @@ angular.module('librecmsApp')
     $scope.toggleCollabs = function() {
       $scope.hideCollabs = $scope.hideCollabs === false ? true : false;
     };
+
+    // Adding Collaborator Tag
+    $scope.addTag = function(collabName,collabId) {
+
+      //Add collaborator to list of collaborators
+      $scope.submissionCollaborators.push({name: collabName, _id: collabId});
+      console.log($scope.submissionCollaborators);
+    };
+    
+    // Removing Collaborator Tag
+    $scope.removeTag = function(collabName, collabId) {
+
+      //Remove collaborator from list of collaborators
+      delete $scope.submissionCollaborators[collabId];
+      for(var i=0;i < $scope.submissionCollaborators.length;i++) {
+        if($scope.submissionCollaborators[i]._id == collabId) {
+          $scope.submissionCollaborators.splice(i,1);
+          break;
+        }
+      }
+    };
+
+    // POST user submission
+    $scope.submit = function() {
+      Assignment.post({
+        userId : UserService.getUser(); 
+        description: $scope.submissionDescription,
+        attachments: $scope.submissionAttachments,
+        collaborators: $scope.submissionCollaborators
+    })
   });
