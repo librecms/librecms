@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('MainCtrl', function ($scope, UserService, CourseService, $stateParams, $state) {
-    $scope.$state = $state;
+  .controller('MainCtrl', function ($scope, UserService, CourseService,
+                                    $stateParams, $state, $rootScope) {
+    $rootScope.$state = $state;
     console.log('hello from mainctrl');
     // Gather initial user from UserService
     $scope.user = UserService.getUser();

@@ -62,16 +62,16 @@
             <li ng-class="{ active: $state.includes('main.calendar') }">
               <a ui-sref="main.calendar()">Calendar</a>
             </li>
-            <li ng-class="{ active: $state.includes('main.course.assignments') }">
+            <li ng-class="{ active: $state.includes('main.course.assignments') || $state.includes('main.course.assignment') }">
               <a ui-sref="main.course.assignments({courseId: course._id})">Assignments</a>
             </li>
-            <li ng-class="{ active: $state.includes('main.course.quizzes') }">
+            <li ng-class="{ active: $state.includes('main.course.quizzes') || $state.includes('main.course.quiz') }">
               <a ui-sref="main.course.quizzes({courseId: course._id})">Quizzes</a>
             </li>
-            <li ng-class="{ active: $state.includes('main.course.exams') }">
+            <li ng-class="{ active: $state.includes('main.course.exams') || $state.includes('main.course.exam')}">
               <a ui-sref="main.course.exams({courseId: course._id})">Exams</a>
             </li>
-            <li ng-class="{ active: $state.includes('main.course.notes') }">
+            <li ng-class="{ active: $state.includes('main.course.notes') || $state.includes('main.course.exam')}">
               <a ui-sref="main.course.notes({courseId: course._id})">Notes</a>
             </li>
           </ul>
