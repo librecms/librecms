@@ -12,7 +12,6 @@
       </select>
     </div>
   </div>
-
   <div class="row">
     <div id="" class="content-item col-lg-4 col-md-4 col-sm-4 col-xs-12  well" ng-repeat="content in contentList | orderBy:contentSort">
       <h6>
@@ -41,13 +40,12 @@
       <button data-toggle="modal" data-target="#submit-modal" class="btn btn-xs btn-primary">New</button>
     </div>
   </div>
-
   <div class="row">
     <div id="" class="content-item col-lg-4 col-md-4 col-sm-4 col-xs-12  well" ng-repeat="content in contentList | orderBy:contentSort">
       <h6><a href="/#/course/{{ course._id }}/{{ itemType }}/{{ content._id }}" class="content-list-name">{{ content.title }}</a></h6>
       <b>Posted:</b> {{content.posted | date:'shortDate'}} <b>Due:</b> {{content.due | date:'shortDate'}}<br>
-      <a data-toggle="modal" data-target="#edit-modal" class="col-lg-2" ng-click="editModal({{content}})"><small>Edit</small></a>
-      <a data-toggle="modal" data-target="#remove-modal" class="col-lg-2" ng-click="editModal({{content}})"><small>Remove</small></a>
+      <a data-toggle="modal" data-target="#edit-modal" class="col-lg-2 material-instructor-links" ng-click="editModal({{content}})"><small>Edit</small></a>
+      <a data-toggle="modal" data-target="#remove-modal" class="col-lg-2 material-instructor-links" ng-click="editModal({{content}})"><small>Remove</small></a>
     </div>
   </div>
 </div>
@@ -58,7 +56,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Create New</h4>
+        <h4 class="modal-title">Create New {{itemType}}</h4>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -70,21 +68,11 @@
         <div class="row">
           <div class="col-lg-3">Time Due:</div>
           <div ng-model="dueTime" class="col-lg-6">
-            <timepicker show-meridian="true"></timepicker>
-          </div>
-        </div>
-	<div class="row">
-	  <div class="col-lg-3">Type:</div><div class="col-lg-6">
-            <select ng-model="newMaterialType" ng-required="true">
-              <option value="assignment">Assignment</option>
-              <option value="exam">Exam</option>
-              <option value="note">Note</option>
-              <option value="quiz">Quiz</option>
-            </select>
+            <timepicker show-meridian="true" ng-model="newMaterialTime"></timepicker>
           </div>
         </div>
         <div class="row">
-          <textarea id="new-material-description" ng-model="newMaterialDescription" role="textbox" contenteditable="true" placeholder="Enter description here..." tabindex="1"></textarea>
+          <textarea class="material-description" ng-model="newMaterialDescription" role="textbox" contenteditable="true" placeholder="Enter description here..." tabindex="1"></textarea>
         </div>
         <div class="row">
           <ul class="list-unstyled">
@@ -100,7 +88,7 @@
                 <span><i class="fa fa-paperclip fa-lg"></i></span>
                 <input type="file"/>
               </div>
-        <button type="button" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" ng-click="Submit()">Submit</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -124,21 +112,11 @@
         <div class="row">
           <div class="col-lg-3">Time Due:</div>
           <div ng-model="dueTime" class="col-lg-6">
-            <timepicker show-meridian="true"></timepicker>
-          </div>
-        </div>
-	<div class="row">
-	  <div class="col-lg-3">Type:</div><div class="col-lg-6">
-            <select ng-model="editMaterialType" ng-required="true">
-              <option value="assignment">Assignment</option>
-              <option value="exam">Exam</option>
-              <option value="note">Note</option>
-              <option value="quiz">Quiz</option>
-            </select>
+            <timepicker show-meridian="true" ng-model="editMaterialTime"></timepicker>
           </div>
         </div>
         <div class="row">
-          <textarea id="new-material-description" ng-model="editMaterialDescription" role="textbox" contenteditable="true" placeholder="selectedContent.description" tabindex="1"></textarea>
+          <textarea class="material-description" ng-model="editMaterialDescription" role="textbox" contenteditable="true" placeholder="{{selectedContent.description}}" tabindex="1"></textarea>
         </div>
         <div class="row">
           <ul class="list-unstyled">
