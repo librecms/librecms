@@ -1,4 +1,5 @@
-<div class="container">
+<!-- Student View -->
+<div class="container" ng-hide="instructorView">
   <div class="row">
     <div class="col-lg-5">
       Sort By: 
@@ -17,8 +18,84 @@
       <h6>
         <a href="/#/course/{{ course._id }}/{{ itemType }}/{{ content._id }}" class="content-list-name">{{ content.title }}</a>
       </h6>
-      Posted: {{ content.posted | date:'shortDate' }} 
-      Due: {{ content.due | date:'shortDate'}}
+      <b>Posted:</b> {{ content.posted | date:'shortDate' }} 
+      <b>Due:</b> {{ content.due | date:'shortDate'}}
     </div>
   </div>
 </div>
+
+<!-- Instructor View -->
+<div class="container" ng-show="instructorView">
+  {{ course }}
+  <div class="row">
+    <div class="col-lg-5">
+      Sort By: 
+      <select ng-model="contentSort" ng-init="contentSort='posted'">
+        <option value="relevance">Relevance</option>
+        <option value="-posted">Posted (Earliest)</option>
+        <option value="posted">Posted (Latest)</option>
+        <option value="-due">Due date (Earliest)</option>
+        <option value="due">Due Date (Latest)</option>
+      </select>
+    </div>
+    <div id="create-material-button" class="col-lg-3 offset8">
+      <button data-toggle="modal" data-target="#new-modal" class="btn btn-sm btn-primary">New</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="" class="content-item col-lg-4 col-md-4 col-sm-4 col-xs-12  well" ng-repeat="content in contentList | orderBy:contentSort">
+      <h6><a href="/#/course/{{ course._id }}/{{ itemType }}/{{ content._id }}" class="content-list-name">{{ content.name }}</a></h6>
+      <b>Posted:</b> {{content.posted}} <b>Due:content.due}}
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="new-modal" tabindex="-1" role="dialog" aria-labelledby="new-modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create New</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+	  <div class="col-lg-3">Name:</div><div class="col-lg-6"><input type="text" name="title" ng-required="true"></div>
+	</div>
+	<div class="row">
+	  <div class="col-lg-3">Due Date:</div><div class="col-lg-6"><input ui-date="dateOptions" name="due"></div>
+	</div>
+        <div class="row">
+          <div class="col-lg-3">Time Due:</div>
+          <div ng-model="dueTime" class="col-lg-6">
+            <timepicker show-meridian="true"></timepicker>
+          </div>
+        </div>
+	<div class="row">
+	  <div class="col-lg-3">Type:</div><div class="col-lg-6">
+            <select ng-model="newMaterialType" ng-required="true">
+              <option>Assignment</option>
+              <option>Exam</option>
+              <option>Note</option>
+              <option>Quiz</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <textarea id="new-material-description" role="textbox" contenteditable="true" placeholder="Enter description here..." tabindex="1"></textarea>
+        </div>
+        <div class="row">
+          <ul class="list-unstyled">
+            <li class="attachment-box">
+              {{attachments}}
+            </li>
+          </ul>
+        </div>
+      </div><!-- /.modal-body -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

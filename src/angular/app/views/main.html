@@ -1,48 +1,46 @@
 <div id="main" class="row palette-peter-river">
 
   <div id="left-container" class="col-lg-2 col-md-3 col-sm-3 palette palette-peter-river">
-    <div id="left-widget" ui-view="left-widget" >
-      <div id="left-navbar-container"> 
-        <div class="row navbar-section">
-          <div id="left-navbar-user-container" class="col-lg-12 col-md-12 col-sm-12">
+    <div id="left-navbar-container"> 
+      <div class="row navbar-section">
+        <div id="left-navbar-user-container" class="col-lg-12 col-md-12 col-sm-12">
 
-            <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <i class="fa fa-user fa-4x"></i>
-              </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <i class="fa fa-user fa-4x"></i>
             </div>
-
-            <div class="row">
-              <h6>{{ user.name.first }} {{ user.name.last }}</h6>
-            </div>
-
           </div>
+
+          <div class="row">
+            <h6>{{ user.name.first }} {{ user.name.last }}</h6>
+          </div>
+
         </div>
-
-        <div class="row navbar-section">
-          <div class="col-lg-12 col-md-12 col-sm-12">
-
-            <div class="row">
-              <h4 id="left-navbar-courses-header">Courses</h4>
-            </div>
-
-            <div id="left-navbar-courses-list-container" class="row">
-              <ul id="left-navbar-courses-list" class="list-unstyled">
-                <li ng-repeat="courseList in user.courses | orderBy:'name':false">
-                  <a ui-sref="main.course.home({ courseId: courseList._id })">{{ courseList.name }}</a>
-                </li>
-              </ul>
-            </div>
-
-          </div>
-        </div> 
       </div>
 
+      <div class="row navbar-section">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+
+          <div class="row">
+            <h4 id="left-navbar-courses-header">Courses</h4>
+          </div>
+
+          <div id="left-navbar-courses-list-container" class="row">
+            <ul id="left-navbar-courses-list" class="list-unstyled">
+              <li ng-repeat="courseList in user.courses | orderBy:'name':false">
+                <a ui-sref="main.course.home({ courseId: courseList._id })">{{ courseList.name }}</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div> 
     </div>
+
   </div>
 
   <div id="center-container" class="col-lg-10 col-md-9 col-sm-9 palette-clouds">
-    <div id="top-widget">
+    <div id="top-widget" class="row">
       <nav id="top-navbar" class="navbar navbar-default" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -52,29 +50,36 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">{{ currentCourse.name }}</a>
+          <a ui-sref="main.course({courseId: course._id})" class="navbar-brand" >{{ course.name }}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Grades</a></li>
-            <li><a href="#/calendar">Calendar</a></li>
-            <li class="dropdown">
-              <a role="button" class="dropdown-toggle" data-toggle="dropdown">Course Content<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/#/course/{{ course._id }}/assignments">Assignments</a></li>
-                <li><a href="/#/course/{{ course._id }}/quizzes">Quizzes</a></li>
-                <li><a href="/#/course/{{ course._id }}/exams">Exams</a></li>
-                <li><a href="/#/course/{{ course._id }}/notes">Notes</a></li>
-              </ul>
+            <li ng-class="{ active: $state.includes('main.grades') }">
+              <a ui-sref="main.course.grades({courseId: course._id})">Grades</a>
+            </li>
+            <li ng-class="{ active: $state.includes('main.calendar') }">
+              <a ui-sref="main.calendar()">Calendar</a>
+            </li>
+            <li ng-class="{ active: $state.includes('main.course.assignments') }">
+              <a ui-sref="main.course.assignments({courseId: course._id})">Assignments</a>
+            </li>
+            <li ng-class="{ active: $state.includes('main.course.quizzes') }">
+              <a ui-sref="main.course.quizzes({courseId: course._id})">Quizzes</a>
+            </li>
+            <li ng-class="{ active: $state.includes('main.course.exams') }">
+              <a ui-sref="main.course.exams({courseId: course._id})">Exams</a>
+            </li>
+            <li ng-class="{ active: $state.includes('main.course.notes') }">
+              <a ui-sref="main.course.notes({courseId: course._id})">Notes</a>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </nav>
     </div>
 
-    <div id="center-widget" ui-view></div>
+    <div id="center-widget" class="row" ui-view></div>
 
   </div>
 

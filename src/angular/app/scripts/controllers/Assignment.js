@@ -1,25 +1,12 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('AssignmentCtrl', function ($scope, $stateParams, UserService) {
-    $scope.assignmentId = $stateParams.assignmentId;
-    $scope.assignment = {
-      name: 'Homework 5',
-      description: 'Do questions 1, 2, 3 and 4 from chapter 5',
-      attachments: [
-        {
-          title: 'SOMEPDF.pdf'
-        }
-      ]
-    };
-    $scope.submissionDescription = "";
-    $scope.submissionAttachments = [];
-    $scope.submissionCollaborators = [
-      {
-        _id: '945',
-        name: 'Marius'
-      }
-    ];
+  .controller('AssignmentCtrl', function ($scope, $stateParams, UserService, Restangular) {
+    var courseId = $stateParams.courseId;
+    var assignmentId = $stateParams.assignmentId;
+    Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(function(assignment) {
+      $scope.assignment = assignment;
+    });
 
     $scope.roster = [
       {
@@ -69,9 +56,8 @@ angular.module('librecmsApp')
     $scope.removeTag = function(collabName, collabId) {
 
       //Remove collaborator from list of collaborators
-      delete $scope.submissionCollaborators[collabId];
       for(var i=0;i < $scope.submissionCollaborators.length;i++) {
-        if($scope.submissionCollaborators[i]._id == collabId) {
+        if($scope.submissionCollaborators[i]._id === collabId) {
           $scope.submissionCollaborators.splice(i,1);
           break;
         }
@@ -81,10 +67,13 @@ angular.module('librecmsApp')
     // POST user submission
     $scope.submit = function() {
       Assignment.post({
+        userId : UserService.getUser(), 
+      console.log(JSON.stringify($scope.assignment, null, 4));
+      $scope.assignment.post({
         userId : UserService.getUser(),
         description: $scope.submissionDescription,
         attachments: $scope.submissionAttachments,
         collaborators: $scope.submissionCollaborators
-      })
-    }
+      });
+    };
   });

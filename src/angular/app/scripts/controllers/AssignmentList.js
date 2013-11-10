@@ -5,6 +5,13 @@ angular.module('librecmsApp')
     console.log('hello from AssignmentListCtrl');
 
     $scope.itemType = "assignment";
+    
+    //Check if Instructor
+    //if (UserService.isInstructor() == true) {
+    //  $scope.instructorview = true;
+    //}
+    $scope.instructorView = true;
+    $scope.itemType = 'assignment';
 
     if ($scope.course && $scope.course.assignments) {
       $scope.contentList = $scope.course.assignments;
