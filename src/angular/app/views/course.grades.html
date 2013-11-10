@@ -1,2 +1,62 @@
 <div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <h6>Course Grade:</h6>
+      {{grade}}
+    </div>
+    <div class="col-lg-6">
+      <div class="categories-overall-averages">Homework</div><div>{{grades.homework}}
+      </div><br>
+      <div class="categories-overall-averages">Quizzes</div><div>{{grades.quizzes}}
+      </div><br>
+      <div class="categories-overall-averages">Exams</div><div>{{grades.exams}}
+      </div><br>
+      <div class="categories-overall-averages">Other</div><div>{{grades.other}}
+      </div><br>
+    </div>
+  </div>
+  <div class="row grade-selection-tabs">
+    <div ng-class="{active: activeTab=='all'}" class="grade-tab col-lg-2" ng-click="changeTab('all')">
+      All
+    </div>
+    <div ng-class="{active: activeTab=='attendance'}" class="grade-tab col-lg-2" ng-click="changeTab('attendance')">
+      Attendance
+    </div>
+    <div ng-class="{active: activeTab=='exams'}" class="grade-tab col-lg-2" ng-click="changeTab('exams')">
+      Exams
+    </div>
+    <div ng-class="{active: activeTab=='homework'}" class="grade-tab col-lg-2" ng-click="changeTab('homework')">
+      Homework
+    </div>
+    <div ng-class="{active: activeTab=='quizzes'}" class="grade-tab col-lg-2" ng-click="changeTab('quizzes')">
+      Quizzes
+    </div>
+    <div ng-class="{active: activeTab=='other'}" class="grade-tab col-lg-2" ng-click="changeTab('other')">
+      Other
+    </div>
+  </div>
+  <div class="row grade-selection-container col-lg-12">
+    <div class="row">
+      <div class="col-lg-6 grade-selection-container-header">
+        Title
+      </div>
+      <div class="col-lg-3 grade-selection-container-header">
+        Grade
+      </div>
+      <div class="col-lg-3 grade-selection-container-header">
+        Average
+      </div>
+    </div>
+    <div class="row well" ng-repeat="grade in gradeList">
+       <div class="col-lg-6 grade-selection-container-title">
+         {{grade.title}}
+       </div>
+       <div class="col-lg-3 grade-selection-container-item">
+         {{grade.score}}
+       </div>
+       <div class="col-lg-3 grade-selection-container-item">
+         {{grade.average}}
+       </div>
+    </div>
+  </div>
 </div>
