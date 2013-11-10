@@ -81,7 +81,7 @@ angular.module('librecmsApp')
     // POST user submission
     $scope.submit = function() {
       Assignment.post({
-        userId : UserService.getUser(); 
+        userId : UserService.getUser(), 
         description: $scope.submissionDescription,
         attachments: $scope.submissionAttachments,
         collaborators: $scope.submissionCollaborators

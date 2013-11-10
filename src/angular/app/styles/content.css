@@ -2,6 +2,22 @@
   min-height: 128px;
 }
 
+#ui-datepicker-div {
+  background-color:white;
+}
+
+#new-material-description {
+  width: 100%;
+  max-width:100%;
+  height:200px;
+  background-color: inherit;
+  overflow-y:auto;
+  overflow-x:hidden;
+  border:0;
+  margin:0;
+  padding:0;
+}
+
 #assignment-header {
   margin-bottom: 20px;
 }
