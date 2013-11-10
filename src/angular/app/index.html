@@ -23,8 +23,8 @@
     <!-- Font family -->
     <!-- <link href='http://fonts.googleapis.com/css?family=Advent+Pro:100,300' rel='stylesheet' type='text/css'> -->
   </head>
-  <body>
-    <div ui-view id="main-container" class="palette palette-clouds"></div>
+  <body class="palette palette-clouds">
+    <div ui-view id="main-container" class="palette palette-clouds container"></div>
 
   <script src="bower_components/jquery/jquery.min.js"></script>
   <script src="bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
@@ -39,6 +39,7 @@
     <!-- build:js scripts/modules.js -->
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-date/src/date.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -54,6 +55,7 @@
     <script src="scripts/controllers/course.js"></script>
     <script src="scripts/services/UserService.js"></script>
     <script src="scripts/services/CourseService.js"></script>
+    <script src="scripts/services/EventbarService.js"></script>
     <script src="scripts/controllers/calendar.js"></script>
     <script src="scripts/controllers/note.js"></script>
     <script src="scripts/controllers/Assignment.js"></script>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('librecmsApp')
-.controller('EventbarCtrl', function($scope) {
+.controller('EventbarCtrl', function($scope, EventbarService) {
 
   var date = new Date();
   var d = date.getDate();
@@ -24,6 +24,10 @@ angular.module('librecmsApp')
 
   $scope.predicate = 'start';
   $scope.quantity = 5;
+
+  $scope.getEvents = function() {
+  EventbarService.getEvents();
+}
 });
 
 angular.module('librecmsApp').filter('upcoming', function() {

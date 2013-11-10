@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll'])
+angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date'])
   .config(function (RestangularProvider, $stateProvider) {
 
     $stateProvider.state('main', {
@@ -33,23 +33,28 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infin
           controller: 'CalendarCtrl',
           templateUrl: 'views/calendar.html'
         },
-        'eventbar@main.calendar': {
+        '@main.calendar': {
           templateUrl: 'views/widgets/eventbar.html',
           controller: 'EventbarCtrl'
         }
       }
     })
-    .state('main.course.assignmentList', {
+    .state('main.course.assignments', {
       url: '/assignments',
       templateUrl: 'views/course.item.list.html',
       controller: 'AssignmentListCtrl'
+    })
+    .state('main.course.assignment', {
+      url: '/assignment/{assignmentId}',
+      templateUrl: 'views/course.assignment.html',
+      controller: 'AssignmentCtrl'
     })
     .state('main.course.quiz', {
       url: '/quiz/{quizId}',
       templateUrl: 'views/course.item.html',
       controller: 'QuizCtrl'
     })
-    .state('main.course.quizList', {
+    .state('main.course.quizzes', {
       url: '/quizzes',
       templateUrl: 'views/course.item.list.html',
       controller: 'QuizListCtrl'
