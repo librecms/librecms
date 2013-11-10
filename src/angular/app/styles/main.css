@@ -39,6 +39,10 @@ body, html, #main-container, #main {
   padding-top: 10px;
 }
 
+#top-navbar .navbar-brand {
+  min-width: 128px;
+}
+
 .navbar .nav > li.active > a, .navbar .nav > li.active > a:hover, .navbar .nav > li.active > a:focus {
   color: #E74C3C;
   background-color: inherit;

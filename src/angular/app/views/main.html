@@ -52,22 +52,29 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">{{ currentCourse.name }}</a>
+          <a class="navbar-brand" href="#">{{ course.name }}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Grades</a></li>
-            <li><a href="#/calendar">Calendar</a></li>
-            <li class="dropdown">
-              <a role="button" class="dropdown-toggle" data-toggle="dropdown">Course Content<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/#/course/{{ course._id }}/assignments">Assignments</a></li>
-                <li><a href="/#/course/{{ course._id }}/quizzes">Quizzes</a></li>
-                <li><a href="/#/course/{{ course._id }}/exams">Exams</a></li>
-                <li><a href="/#/course/{{ course._id }}/notes">Notes</a></li>
-              </ul>
+            <li ng-class="{ active: $state.includes('grades') }">
+              <a ui-sref="main.course.grades({courseId: course._id})">Grades</a>
+            </li>
+            <li ng-class="{ active: $state.includes('calendar') }">
+              <a ui-sref="main.calendar()">Calendar</a>
+            </li>
+            <li ng-class="{ active: $state.includes('assignments') }">
+              <a ui-sref="main.course.assignments({courseId: course._id})">Assignments</a>
+            </li>
+            <li ng-class="{ active: $state.includes('quiz') }">
+              <a ui-sref="main.course.quizzes({courseId: course._id})">Quizzes</a>
+            </li>
+            <li ng-class="{ active: $state.includes('exam') }">
+              <a ui-sref="main.course.exams({courseId: course._id})">Exams</a>
+            </li>
+            <li ng-class="{ active: $state.includes('note') }">
+              <a ui-sref="main.course.notes({courseId: course._id})">Notes</a>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->

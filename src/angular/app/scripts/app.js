@@ -39,7 +39,7 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infin
         }
       }
     })
-    .state('main.course.assignmentList', {
+    .state('main.course.assignments', {
       url: '/assignments',
       templateUrl: 'views/course.item.list.html',
       controller: 'AssignmentListCtrl'
@@ -54,7 +54,7 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infin
       templateUrl: 'views/course.item.html',
       controller: 'QuizCtrl'
     })
-    .state('main.course.quizList', {
+    .state('main.course.quizzes', {
       url: '/quizzes',
       templateUrl: 'views/course.item.list.html',
       controller: 'QuizListCtrl'
