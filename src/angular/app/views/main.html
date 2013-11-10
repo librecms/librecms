@@ -58,22 +58,22 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li ng-class="{ active: $state.includes('grades') }">
+            <li ng-class="{ active: $state.includes('main.grades') }">
               <a ui-sref="main.course.grades({courseId: course._id})">Grades</a>
             </li>
-            <li ng-class="{ active: $state.includes('calendar') }">
+            <li ng-class="{ active: $state.includes('main.calendar') }">
               <a ui-sref="main.calendar()">Calendar</a>
             </li>
-            <li ng-class="{ active: $state.includes('assignments') }">
+            <li ng-class="{ active: $state.includes('main.course.assignments') }">
               <a ui-sref="main.course.assignments({courseId: course._id})">Assignments</a>
             </li>
-            <li ng-class="{ active: $state.includes('quiz') }">
+            <li ng-class="{ active: $state.includes('main.course.quizzes') }">
               <a ui-sref="main.course.quizzes({courseId: course._id})">Quizzes</a>
             </li>
-            <li ng-class="{ active: $state.includes('exam') }">
+            <li ng-class="{ active: $state.includes('main.course.exams') }">
               <a ui-sref="main.course.exams({courseId: course._id})">Exams</a>
             </li>
-            <li ng-class="{ active: $state.includes('note') }">
+            <li ng-class="{ active: $state.includes('main.course.notes') }">
               <a ui-sref="main.course.notes({courseId: course._id})">Notes</a>
             </li>
           </ul>
