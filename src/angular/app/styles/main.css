@@ -104,3 +104,8 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   padding-top: 10px;
   font-size: 1.25em;
 }
+
+#left-navbar-courses-list > li.active {
+  text-decoration: underline;
+  font-weight: bold;
+}

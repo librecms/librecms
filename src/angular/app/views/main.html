@@ -27,7 +27,8 @@
 
           <div id="left-navbar-courses-list-container" class="row">
             <ul id="left-navbar-courses-list" class="list-unstyled">
-              <li ng-repeat="courseList in user.courses | orderBy:'name':false">
+              <li ng-class="{active: course._id === courseList._id}"
+                ng-repeat="courseList in user.courses | orderBy:'name':false">
                 <a ui-sref="main.course.home({ courseId: courseList._id })">{{ courseList.name }}</a>
               </li>
             </ul>
@@ -56,22 +57,22 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav">
-            <li ng-class="{ active: $state.includes('main.grades') }">
+            <li ng-class="{ active: $state.is('main.grades') }">
               <a ui-sref="main.course.grades({courseId: course._id})">Grades</a>
             </li>
-            <li ng-class="{ active: $state.includes('main.calendar') }">
+            <li ng-class="{ active: $state.is('main.calendar') }">
               <a ui-sref="main.calendar()">Calendar</a>
             </li>
-            <li ng-class="{ active: $state.includes('main.course.assignments') || $state.includes('main.course.assignment') }">
+            <li ng-class="{ active: $state.is('main.course.assignments') || $state.is('main.course.assignment') }">
               <a ui-sref="main.course.assignments({courseId: course._id})">Assignments</a>
             </li>
-            <li ng-class="{ active: $state.includes('main.course.quizzes') || $state.includes('main.course.quiz') }">
+            <li ng-class="{ active: $state.is('main.course.quizzes') || $state.is('main.course.quiz') }">
               <a ui-sref="main.course.quizzes({courseId: course._id})">Quizzes</a>
             </li>
-            <li ng-class="{ active: $state.includes('main.course.exams') || $state.includes('main.course.exam')}">
+            <li ng-class="{ active: $state.is('main.course.exams') || $state.is('main.course.exam')}">
               <a ui-sref="main.course.exams({courseId: course._id})">Exams</a>
             </li>
-            <li ng-class="{ active: $state.includes('main.course.notes') || $state.includes('main.course.exam')}">
+            <li ng-class="{ active: $state.is('main.course.notes') || $state.is('main.course.exam')}">
               <a ui-sref="main.course.notes({courseId: course._id})">Notes</a>
             </li>
           </ul>
