@@ -33,7 +33,7 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infin
           controller: 'CalendarCtrl',
           templateUrl: 'views/calendar.html'
         },
-        'eventbar@main.calendar': {
+        '@main.calendar': {
           templateUrl: 'views/widgets/eventbar.html',
           controller: 'EventbarCtrl'
         }
