@@ -3,18 +3,29 @@
 angular.module('librecmsApp')
 .controller('CalendarCtrl', function($scope, Restangular) {
   console.log('hello from Calendar.js');
-  // Need to massage the URL because URL might change depending on state / 
-  // our development so we don't want to explicityly store that in
-  // the database
-  $scope.$on('UserService.update', function() {
+
+  function getUserEvents() {
     var startOfThisMonth = moment(new Date()).startOf('month').toDate().getTime();
-    $scope.events = [];
     Restangular.one('users', $scope.user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
+      // Gather events from API and reformat their
+      // start and end components into Javascript Date objects
       $scope.events = events;
-      console.log(JSON.stringify($scope.events, null, false));
-      $scope.eventSources = $scope.events;
+      $scope.events.map(function(event) {
+        event.start = new Date(event.start);
+        event.end = new Date(event.end);
+      });
+      $scope.eventSources.push($scope.events);
     });
-  });
+  }
+
+  $scope.events = [];
+  $scope.eventSources = $scope.events;
+
+  if ($scope.user) {
+    getUserEvents();
+  }
+
+  $scope.$on('UserService.update', getUserEvents);
 
   /* Change View */
   $scope.changeView = function(view,calendar) {
@@ -29,17 +40,12 @@ angular.module('librecmsApp')
   $scope.uiConfig = {
     calendar:{
       height: 600,
-      editable: true,
+      editable: false,
       header:{
         left: '', //'month basicWeek basicDay agendaWeek agendaDay',
         center: 'title',
         right: ''
-      },
-      dayClick: $scope.alertEventOnClick,
-      eventDrop: $scope.alertOnDrop,
-      eventResize: $scope.alertOnResize
+      }
     }
   };
-
-  /* event sources array */
 });
