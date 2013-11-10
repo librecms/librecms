@@ -53,6 +53,17 @@
   border-radius: 5px;
 }
 
+.no-announcements {
+  z-index: 1;
+  position: relative;
+  padding:  5px 0 5px 0;
+  margin: 20px 0 20px 10px;
+  text-align: center;
+  background-color: #555;
+  color: #fff;
+  border-radius: 5px;
+}
+
 
 .event {
   position: relative;

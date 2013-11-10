@@ -12,6 +12,7 @@
   </div>
   <div class="timeline" infinite-scroll="loadMorePosts()" inifinite-scroll-distance="2">
     <ul class="timeline-container">
+      <div ng-show="!visiblePosts.length" class="no-announcements">No Announcements</div>
       <li class="event" ng-repeat="post in visiblePosts | orderBy:'date':true">
         <div class="date-container row">
           <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2"> 
