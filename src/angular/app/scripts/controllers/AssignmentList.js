@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('AssignmentListCtrl', function($scope) {
+  .controller('AssignmentListCtrl', function($scope, $stateParams) {
     console.log('hello from AssignmentListCtrl');
+
+    var courseId = $stateParams.courseId;
+    
 
     $scope.itemType = "assignment";
     
@@ -21,4 +24,10 @@ angular.module('librecmsApp')
     $scope.$on('CourseService.courseUpdated', function() {
       $scope.contentList = $scope.course.assignments;
     });
+
+    //Save content for editing when selected for modal use
+    $scope.editModal = function(editContent) {
+      $scope.selectedContent = editContent;
+    };
+
   });
