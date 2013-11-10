@@ -1,17 +1,14 @@
 <div class="row">
-    <div class="containter col-md-12 col-lg-9" align="center">
-        <div class="btn-group">
-            <button class="btn btn-success btn-sm" ng-click="changeView('agendaDay', myCalendar)">Day</button>
-            <button class="btn btn-success btn-sm" ng-click="changeView('agendaWeek', myCalendar)">Week</button>
-            <button class="btn btn-success btn-sm" ng-click="changeView('month', myCalendar)">Month</button>
-            <button class="btn btn-success btn-sm" ng-click="clickSwitch('today',myCalendar)">Today</button>
-            <button class="btn btn-success btn-sm" ng-click="clickSwitch('prev',myCalendar)">Prev</button>
-            <button class="btn btn-success btn-sm" ng-click="clickSwitch('next',myCalendar)">Next</button>
-        </div>
-        <div class="calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+  <div class="containter col-md-12 col-lg-9" align="center">
+    <div class="btn-group">
+      <button class="btn btn-success btn-sm" ng-click="changeView('agendaDay', myCalendar)">Day</button>
+      <button class="btn btn-success btn-sm" ng-click="changeView('agendaWeek', myCalendar)">Week</button>
+      <button class="btn btn-success btn-sm" ng-click="changeView('month', myCalendar)">Month</button>
+      <button class="btn btn-success btn-sm" ng-click="clickSwitch('today',myCalendar)">Today</button>
+      <button class="btn btn-success btn-sm" ng-click="clickSwitch('prev',myCalendar)">Prev</button>
+      <button class="btn btn-success btn-sm" ng-click="clickSwitch('next',myCalendar)">Next</button>
     </div>
-</div>
-    <div ng-controller="EventbarCtrl"><button ng-click="getEvents()" class="btn btn-danger">Do Et</button><br></div>
-    <div ui-view>
-    </div>
+    <div class="calendar" ng-model="eventSources" calendar="myCalendar" config="uiConfig.calendar" ui-calendar="uiConfig.calendar"></div>
+  </div>
+  <div ui-view></div>
 </div>
