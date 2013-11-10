@@ -11,6 +11,7 @@ angular.module('librecmsApp')
     //  $scope.instructorview = true;
     //}
     $scope.instructorView = true;
+    $scope.itemType = 'assignment';
 
     if ($scope.course && $scope.course.assignments) {
       $scope.contentList = $scope.course.assignments;
