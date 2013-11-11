@@ -1,0 +1,52 @@
+.categories-overall-averages {
+  padding:2px;
+  margin:1px;
+}
+
+.grade-tab {
+  cursor:pointer;
+  border-top-left-radius:1em;
+  border-top-right-radius:1em;
+  text-align:center;
+  color: white;
+  background-color:#7f8c8d;
+  height:20px;
+}
+
+.grade-tab.active {
+  background-color:#3498db;
+ }
+
+.grade-selection-container {
+  border: 1px solid black;
+  height:400px;
+  max-height:400px;
+  overflow-y:auto;
+  overflow-x:none;
+}
+
+.grade-selection-container-header {
+  text-align:center;
+  border-bottom:1px solid black;
+  border-right:1px solid black;
+  font-weight:bold;
+}
+
+.grade-selection-container-title {
+  /*border-bottom:1px solid black;*/
+  height:30px;
+  max-height:30px;
+  overflow-y:auto;
+  overflow-x:none;
+  padding-top:5px;
+}
+
+.grade-selection-container-item {
+  text-align:center;
+  /*border-bottom:1px solid black;*/
+  height:30px;
+  max-height:30px;
+  overflow-y:auto;
+  overflow-x:none;
+  padding-top:5px;
+}
