@@ -60,7 +60,7 @@
       </div>
       <div class="modal-body">
         <div class="row">
-	  <div class="col-lg-3">Name:</div><div class="col-lg-6"><input type="text" name="title" ng-model="newMaterialName" ng-required="true"></div>
+	  <div class="col-lg-3">Name:</div><div class="col-lg-6"><input type="text" name="title" ng-model="newMaterialTitle" ng-required="true"></div>
 	</div>
 	<div class="row">
 	  <div class="col-lg-3">Due Date:</div><div class="col-lg-6"><input ui-date="dateOptions" ng-model="newMaterialDueDate" name="due"></div>
@@ -76,7 +76,7 @@
         </div>
         <div class="row">
           <ul class="list-unstyled">
-            <li class="attachment-box">
+            <li class="attachment-box" ng-model="newMaterialAttachments">
               {{attachments}}
             </li>
           </ul>
@@ -104,23 +104,23 @@
       </div>
       <div class="modal-body">
         <div class="row">
-	  <div class="col-lg-3">Name:</div><div class="col-lg-6"><input type="text" name="title" placeholder="{{selectedContent.title}}" ng-model="editMaterialName" ng-required="true"></div>
+	  <div class="col-lg-3">Name:</div><div class="col-lg-6"><input type="text" name="title" ng-model="editMaterial.title" ng-required="true"></div>
 	</div>
 	<div class="row">
-	  <div class="col-lg-3">Due Date:</div><div class="col-lg-6"><input ui-date="dateOptions" placeholder="{{selectedContent.due | date:'shortDate'}}" ng-model="editMaterialDueDate" name="due"></div>
+	  <div class="col-lg-3">Due Date:</div><div class="col-lg-6"><input ui-date="dateOptions"  placeholder="{{editMaterial.due | date:'shortDate'}}" ng-model="editMaterial.due" name="due"></div>
 	</div>
         <div class="row">
           <div class="col-lg-3">Time Due:</div>
           <div ng-model="dueTime" class="col-lg-6">
-            <timepicker show-meridian="true" ng-model="editMaterialTime"></timepicker>
+            <timepicker show-meridian="true" ng-model="editMaterial.time"></timepicker>
           </div>
         </div>
         <div class="row">
-          <textarea class="material-description" ng-model="editMaterialDescription" role="textbox" contenteditable="true" placeholder="{{selectedContent.description}}" tabindex="1"></textarea>
+          <textarea class="material-description" ng-model="editMaterial.description" role="textbox" contenteditable="true" tabindex="1"></textarea>
         </div>
         <div class="row">
           <ul class="list-unstyled">
-            <li class="attachment-box">
+            <li class="attachment-box" ng-model"editMaterial.attachments">
               {{attachments}}
             </li>
           </ul>

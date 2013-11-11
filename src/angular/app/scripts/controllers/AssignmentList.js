@@ -28,6 +28,7 @@ angular.module('librecmsApp')
     $scope.submit = function() {
       $scope.assignment.post({
         userId : UserService.getUser(),
+        title: $scope.newMaterialTitle,
         due : $scope.newMaterialDueDate,
         time : $scope.newMaterialTime,
         description : $scope.newMaterialDescription,
@@ -37,17 +38,18 @@ angular.module('librecmsApp')
 
     //Save content for editing when selected for modal use
     $scope.editModal = function(editContent) {
-      $scope.selectedContent = editContent;
+      $scope.editMaterial = editContent;
     };
 
     //Update Content Being edited
     $scope.updateContent = function() {
       $scope.assignment.put({
         userId : UserService.getUser(),
-        due: $scope.editMaterialDueDate,
-        time: $scope.editMaterialTime,
-        attachments: $scope.editMaterialAttachments,
-        description: $scope.editMaterialDescription
+        title: $scope.editMaterial.title,
+        due: $scope.editMaterial.due,
+        time: $scope.editMaterial.time,
+        attachments: $scope.editMaterial.attachments,
+        description: $scope.editMaterial.description
       });
     };
 

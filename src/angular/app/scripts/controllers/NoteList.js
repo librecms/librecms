@@ -27,6 +27,7 @@ angular.module('librecmsApp')
     $scope.submit = function() {
       $scope.note.post({
         userId : UserService.getUser(),
+        title: $scope.newMaterialTitle,
         due : $scope.newMaterialDueDate,
         time : $scope.newMaterialTime,
         description : $scope.newMaterialDescription,
@@ -36,13 +37,14 @@ angular.module('librecmsApp')
 
     //Save content for editing when selected for modal use
     $scope.editModal = function(editContent) {
-      $scope.selectedContent = editContent;
+      $scope.editMaterial = editContent;
     };
 
     //Update Content Being edited
     $scope.updateContent = function() {
       $scope.note.put({
         userId : UserService.getUser(),
+        title: $scope.editMaterialTitle,
         due: $scope.editMaterialDueDate,
         time: $scope.editMaterialTime,
         attachments: $scope.editMaterialAttachments,
