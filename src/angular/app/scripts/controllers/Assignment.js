@@ -1,12 +1,16 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('AssignmentCtrl', function ($scope, $stateParams, UserService, Restangular) {
+  .controller('AssignmentCtrl',
+              function ($scope, $state, UserService,
+                        Restangular, $stateParams, $log) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
-    Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(function(assignment) {
-      $scope.assignment = assignment;
-    });
+    if (courseId && assignmentId) {
+      Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(function(assignment) {
+        $scope.assignment = assignment;
+      });
+    }
 
     $scope.roster = [
       {
@@ -38,6 +42,7 @@ angular.module('librecmsApp')
         _id: '324'
       }
     ];
+
     $scope.showSubmit = true;
     $scope.hideCollabs = true;
     $scope.toggleCollabs = function() {
@@ -66,6 +71,10 @@ angular.module('librecmsApp')
 
     // POST user submission
     $scope.submit = function() {
+      if (!$scope.assignment) {
+        $log.warn('attempting to submit to invalid $scope.assignment.');
+        return;
+      }
       $scope.assignment.post({
         userId : UserService.getUser(),
         description: $scope.submissionDescription,

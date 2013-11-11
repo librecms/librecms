@@ -19,6 +19,7 @@ module.exports = function(config) {
       'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
       'app/bower_components/angular-ui-calendar/src/calendar.js',
       'app/bower_components/ngInfiniteScroll/ng-infinite-scroll.js',
+      'app/bower_components/angular-ui-date/src/date.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'app/views/**/*.html',

@@ -2,15 +2,14 @@
 
 angular.module('librecmsApp')
   .controller('CourseCtrl', function ($scope, UserService,
-                                      CourseService, $stateParams) {
+                                      CourseService, $stateParams, $log) {
     // Listen to changes to the course object
     $scope.$on('CourseService.courseUpdated', function() {
       $scope.course = CourseService.getCourse();
     });
 
     // Gather course ID from the state (/course/{courseId}) 
-    var courseId = $stateParams.courseId;
-    CourseService.setCourseById(courseId);
+    CourseService.setCourseById($stateParams.courseId);
 
     // Gather initial user from UserService
     $scope.user = UserService.user;
