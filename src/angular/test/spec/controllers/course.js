@@ -19,7 +19,7 @@ describe('Controller: CourseCtrl', function () {
 
   var testUser = {
     'password': '$2a$10$Qorm7q9Gd4jir3dcPH01p',
-    '_id': '527840d3123657810a000007',
+    '_id': '527561723e4889199063e34b',
     '__v': 0,
     'name': {
       'first': 'Zachary',
@@ -27,8 +27,8 @@ describe('Controller: CourseCtrl', function () {
       'user': 'zdwolfe'
     }
   };
-  var testUserUrl = '/api/users/527840d3123657810a000007';
-  var testUserCoursesUrl = '/api/users/527840d3123657810a000007/courses';
+  var testUserUrl = '/api/users/527561723e4889199063e34b';
+  var testUserCoursesUrl = '/api/users/527561723e4889199063e34b/courses';
 
   var testCourse = {
     '__v': 0,
@@ -63,7 +63,7 @@ describe('Controller: CourseCtrl', function () {
     ],
     'students': [
       {
-        'userId': '527840d3123657810a000007',
+        'userId': '527561723e4889199063e34b',
         '_id': '527e6b1207340c595500000c',
         'assessments': [],
         'assignments': []
