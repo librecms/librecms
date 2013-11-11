@@ -6,16 +6,21 @@
   background-color:white;
 }
 
-#new-material-description {
+.material-description {
   width: 100%;
   max-width:100%;
   height:200px;
+  max-height:200px;
   background-color: inherit;
   overflow-y:auto;
   overflow-x:hidden;
   border:0;
   margin:0;
   padding:0;
+}
+
+.material-instructor-links {
+  cursor:pointer;
 }
 
 #assignment-header {

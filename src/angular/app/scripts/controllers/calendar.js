@@ -1,68 +1,51 @@
 'use strict';
 
 angular.module('librecmsApp')
-	.controller('CalendarCtrl', function($scope) {
-	var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
+.controller('CalendarCtrl', function($scope, Restangular) {
+  console.log('hello from Calendar.js');
 
-    console.log('hello from Calendar.js');
+  function getUserEvents() {
+    var startOfThisMonth = moment(new Date()).startOf('month').toDate().getTime();
+    Restangular.one('users', $scope.user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
+      // Gather events from API and reformat their
+      // start and end components into Javascript Date objects
+      $scope.events = events;
+      $scope.events.map(function(event) {
+        event.start = new Date(event.start);
+        event.end = new Date(event.end);
+      });
+      $scope.eventSources.push($scope.events);
+    });
+  }
 
-    $scope.events = [
-      {title: 'Homework Click here!',start: new Date(y, m, 1), url: 'http://localhost/#/course//assignment/1'},
-      {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-      {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-      {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-      {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-    ];
+  $scope.events = [];
+  $scope.eventSources = $scope.events;
 
-    /* Change View */
-    $scope.changeView = function(view,calendar) {
-      calendar.fullCalendar('changeView',view);
-    };
+  if ($scope.user) {
+    getUserEvents();
+  }
 
-    $scope.clickSwitch = function(action, calendar) {
-      calendar.fullCalendar(action);
-    };
+  $scope.$on('UserService.update', getUserEvents);
 
-    $scope.alertEventOnClick = function( date, allDay, jsEvent, view ){
-        $scope.$apply(function(){
-          $scope.alertMessage = ('Day Clicked ' + date);
-        });
-    };
-    
-    /* alert on Drop */
-    $scope.alertOnDrop = function(event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
-        $scope.$apply(function(){
-          $scope.alertMessage = ('Event Droped to make dayDelta ' + dayDelta);
-        });
-    };
+  /* Change View */
+  $scope.changeView = function(view,calendar) {
+    calendar.fullCalendar('changeView',view);
+  };
 
-     /* alert on Resize */
-    $scope.alertOnResize = function(event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view ){
-        $scope.$apply(function(){
-          $scope.alertMessage = ('Event Resized to make dayDelta ' + minuteDelta);
-        });
-    };
-    
-    /* config object */
-    $scope.uiConfig = {
-      calendar:{
-        height: 600,
-        editable: true,
-        header:{
-          left: '', //'month basicWeek basicDay agendaWeek agendaDay',
-          center: 'title',
-          right: ''
-        },
-        dayClick: $scope.alertEventOnClick,
-        eventDrop: $scope.alertOnDrop,
-        eventResize: $scope.alertOnResize
+  $scope.clickSwitch = function(action, calendar) {
+    calendar.fullCalendar(action);
+  };
+
+  /* config object */
+  $scope.uiConfig = {
+    calendar:{
+      height: 600,
+      editable: false,
+      header:{
+        left: '', //'month basicWeek basicDay agendaWeek agendaDay',
+        center: 'title',
+        right: ''
       }
-    };
-
-   /* event sources array */
-   $scope.eventSources = [$scope.events];
+    }
+  };
 });

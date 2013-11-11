@@ -68,6 +68,11 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infin
       url: '/exams',
       templateUrl: 'views/course.item.list.html',
       controller: 'ExamListCtrl'
+    })
+    .state('main.course.grades', {
+      url: '/grades',
+      templateUrl: 'views/course.grades.html',
+      controller: 'GradesCtrl'
     });
 
     RestangularProvider.setBaseUrl('/api');

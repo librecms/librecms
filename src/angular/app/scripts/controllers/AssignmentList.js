@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('AssignmentListCtrl', function($scope) {
+  .controller('AssignmentListCtrl', function($scope, $stateParams) {
     console.log('hello from AssignmentListCtrl');
+
+    var courseId = $stateParams.courseId;
+    
 
     $scope.itemType = "assignment";
     
@@ -11,8 +14,7 @@ angular.module('librecmsApp')
     //  $scope.instructorview = true;
     //}
     $scope.instructorView = true;
-    $scope.itemType = 'assignment';
-
+    
     if ($scope.course && $scope.course.assignments) {
       $scope.contentList = $scope.course.assignments;
     }
@@ -21,4 +23,39 @@ angular.module('librecmsApp')
     $scope.$on('CourseService.courseUpdated', function() {
       $scope.contentList = $scope.course.assignments;
     });
+
+    //POST new content
+    $scope.submit = function() {
+      $scope.assignment.post({
+        userId : UserService.getUser(),
+        due : $scope.newMaterialDueDate,
+        time : $scope.newMaterialTime,
+        description : $scope.newMaterialDescription,
+        attachments : $scope.newMaterialAttachments
+      });
+    };
+
+    //Save content for editing when selected for modal use
+    $scope.editModal = function(editContent) {
+      $scope.selectedContent = editContent;
+    };
+
+    //Update Content Being edited
+    $scope.updateContent = function() {
+      $scope.assignment.put({
+        userId : UserService.getUser(),
+        due: $scope.editMaterialDueDate,
+        time: $scope.editMaterialTime,
+        attachments: $scope.editMaterialAttachments,
+        description: $scope.editMaterialDescription
+      });
+    };
+
+    //Remove Content
+    $scope.removeContent = function() {
+      $scope.assignment.del({
+        userId : UserService.getUser()
+      });
+    };
+
   });
