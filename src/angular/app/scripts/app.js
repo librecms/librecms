@@ -7,7 +7,7 @@ angular.module('librecmsApp', dependencies)
     // constant / reusable widget declarations
     var AUTH_WIDGET = {
       templateUrl: 'views/widgets/auth.html',
-      controller: 'AuthWidgetCtrl'
+      controller: ''
     };
 
     

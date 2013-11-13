@@ -7,24 +7,25 @@ angular.module('librecmsApp')
     // User Role and Role Mask definitions.
     var roleMasks = {
       nobody: 0,
-      public: 15,
+      'public': 1,
       student: 2,
       instructor: 4,
-      admin: 8
+      admin: 8,
+      everybody: 15
     };
 
     var userRoles = {
-      public: 1,
+      'public': 1,
       student: 3,
       instructor: 5,
       admin: 9
     };
 
 
-    // Authentication methods
+    // Authorization methods
     // @param role is user's role
     // @param masks is an array of (or single) user mask
-    function _authenticate(role, masks) {
+    function _authorize(role, masks) {
       masks = Array.isArray(masks) ? masks : [masks];
       return masks.some(function(mask) {
         return role & mask;
@@ -35,8 +36,8 @@ angular.module('librecmsApp')
     // @pram sRole a string representation of their role ('student'), etc.
     // @param sMashs an array of string representations of masks
     // Default mask to 'nobody' and role to 'public'
-    // Finally run _authenticate based Nuerical role / masks
-    function authenticate(sRole, sMasks) {
+    // Finally run _authorize based Nuerical role / masks
+    function authorize(sRole, sMasks) {
       sMasks = Array.isArray(sMasks) ? sMasks : [sMasks];
       var masks = sMasks.map(function(sMask) {
         return roleMasks.hasOwnProperty(sMask) ?
@@ -44,15 +45,17 @@ angular.module('librecmsApp')
       });
 
       var role = userRoles.hasOwnProperty(sRole) ?
-        userRoles[sRole] : userRoles.public;
+        userRoles[sRole] : userRoles['public'];
 
-      return _authenticate(role, masks);
+      return _authorize(role, masks);
     }
 
     return {
       roles: userRoles,
       masks: roleMasks,
-      authenticate: authenticate,
-      _authenticate: _authenticate
+      defaultMask: 'everybody',
+      defaultRole: 'public',
+      authorize: authorize,
+      _authorize: _authorize
     };
   });
