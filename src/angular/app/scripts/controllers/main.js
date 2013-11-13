@@ -7,8 +7,8 @@ angular.module('librecmsApp')
     console.log('hello from mainctrl');
     // Gather initial user from UserService
     $scope.user = UserService.getUser();
-    $rootScope.$on('UserService.update', function() {
-      $rootScope.user = UserService.getUser();
+    $scope.$on('UserService.update', function() {
+      $scope.user = UserService.getUser();
     });
 
     // Listen to changes to the course object
