@@ -32,20 +32,20 @@ angular.module('librecmsApp')
     }
 
     // Translate role and mask strings into role/mask Numbers
+    // @pram sRole a string representation of their role ('student'), etc.
+    // @param sMashs an array of string representations of masks
+    // Default mask to 'nobody' and role to 'public'
+    // Finally run _authenticate based Nuerical role / masks
     function authenticate(sRole, sMasks) {
       sMasks = Array.isArray(sMasks) ? sMasks : [sMasks];
-      // Translate string masks into Numerical masks
       var masks = sMasks.map(function(sMask) {
-        // Default to 'nobody' if can't find role mask
         return roleMasks.hasOwnProperty(sMask) ?
           roleMasks[sMask] : roleMasks.nobody;
       });
-      // Translate string role into Numberical role
-      // Defaulting to public
+
       var role = userRoles.hasOwnProperty(sRole) ?
         userRoles[sRole] : userRoles.public;
 
-      // Authenticate based on translated role / masks
       return _authenticate(role, masks);
     }
 

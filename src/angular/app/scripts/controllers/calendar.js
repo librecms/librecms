@@ -22,7 +22,7 @@ angular.module('librecmsApp')
   $scope.events = [];
   $scope.eventSources = $scope.events;
 
-  if ($scope.user.initialized) {
+  if ($scope.user && $scope.user._id) {
     getUserEvents();
   }
 
