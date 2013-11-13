@@ -4,15 +4,19 @@ angular.module('librecmsApp')
   .controller('AssignmentListCtrl', function($scope, $stateParams, UserService, Restangular, $log) {
     console.log('hello from AssignmentListCtrl');
 
+    //Get courseId
     var courseId = $stateParams.courseId;
-    
 
+    //Get API route
+    if(courseId) {
+      Restangular.one('courses', courseId).get().then(function(newAssignment) {
+        $scope.newAssignment = newAssignment;
+      });
+    }
+
+    //Set itemType
     $scope.itemType = "assignment";
     
-    //Check if Instructor
-    //if (UserService.isInstructor() == true) {
-    //  $scope.instructorview = true;
-    //}
     $scope.instructorView = true;
    
     if ($scope.course && $scope.course.assignments) {
@@ -24,6 +28,7 @@ angular.module('librecmsApp')
       $scope.contentList = $scope.course.assignments;
     });
 
+    //Temporary: Set static due time
     $scope.newMaterialTime = new Date(0,0,0,8,4,2);
     //POST new content
     $scope.Submit = function() {
@@ -32,6 +37,8 @@ angular.module('librecmsApp')
       moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
       moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
       console.log("Date is : " + $scope.newMaterialDueDate); 
+
+      //Make API call
       $scope.assignment.post({
         userId : UserService.getUser(),
         title: $scope.newMaterialTitle,
@@ -53,6 +60,7 @@ angular.module('librecmsApp')
       moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
       moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
 
+      //Make API call
       $scope.assignment.put({
         userId : UserService.getUser(),
         title: $scope.editMaterial.title,
