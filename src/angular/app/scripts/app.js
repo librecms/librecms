@@ -1,9 +1,38 @@
 'use strict';
 
-angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date'])
+var dependencies = ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date'];
+angular.module('librecmsApp', dependencies)
   .config(function (RestangularProvider, $stateProvider) {
 
-    $stateProvider.state('main', {
+    // constant / reusable widget declarations
+    var AUTH_WIDGET = {
+      templateUrl: 'views/widgets/auth.html',
+      controller: 'AuthWidgetCtrl'
+    };
+
+    
+
+    // state declarations
+    $stateProvider
+    .state('splash', {
+      url: '/',
+      views: {
+        '@': {
+          templateUrl: 'views/splash.html'
+        },
+        'auth@splash': AUTH_WIDGET
+      }
+    })
+    .state('login', {
+      url: '/login',
+      views: {
+        '@': {
+          templateUrl: 'views/login.html'
+        },
+        'auth@login': AUTH_WIDGET
+      }
+    })
+    .state('main', {
       abstract: true,
       templateUrl: 'views/main.html',
       controller: 'MainCtrl'
@@ -75,6 +104,7 @@ angular.module('librecmsApp', ['restangular', 'ui.router', 'ui.calendar', 'infin
       controller: 'GradesCtrl'
     });
 
+    // Restangular configuration
     RestangularProvider.setBaseUrl('/api');
     RestangularProvider.setRestangularFields({ id: '_id' });
   });

@@ -19,13 +19,16 @@
         <link rel="stylesheet" href="styles/grades.css">
         <link rel="stylesheet" href="styles/todo.css">
         <link rel="stylesheet" href="styles/timeline.css">
+        <link rel="stylesheet" href="styles/auth.css">
+        <link rel="stylesheet" href="styles/splash.css">
         <!-- endbuild -->
 
     <!-- Font family -->
     <!-- <link href='http://fonts.googleapis.com/css?family=Advent+Pro:100,300' rel='stylesheet' type='text/css'> -->
   </head>
-  <body class="palette palette-clouds">
-    <div ui-view id="main-container" class="palette palette-clouds container"></div>
+  <body>
+    <!-- base state content inserted into this unnamed ui-view -->
+    <div ui-view></div>
 
   <script src="bower_components/jquery/jquery.min.js"></script>
   <script src="bower_components/jquery-ui/ui/minified/jquery-ui.min.js"></script>
@@ -62,6 +65,8 @@
     <script src="scripts/controllers/eventbar.js"></script>
     <script src="scripts/controllers/note.js"></script>
     <script src="scripts/controllers/grades.js"></script>
+    <script src="scripts/services/AuthService.js.js"></script>
+    <script src="scripts/services/AuthService.js"></script>
     <!-- endbuild -->
 </body>
 </html>
