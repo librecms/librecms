@@ -60,15 +60,21 @@
       </div>
       <div class="modal-body">
         <div class="row">
-	  <div class="col-lg-3">Name:</div><div class="col-lg-6"><input type="text" name="title" ng-model="newMaterialTitle" ng-required="true"></div>
+	  <div class="col-lg-3">Name:</div>
+          <div class="col-lg-6">
+            <input type="text" name="title" ng-model="newMaterialTitle" ng-required="true">
+          </div>
 	</div>
 	<div class="row">
-	  <div class="col-lg-3">Due Date:</div><div class="col-lg-6"><input ui-date="dateOptions" ng-model="newMaterialDueDate" name="due"></div>
+	  <div class="col-lg-3">Due Date:</div>
+          <div class="col-lg-6">
+            <input ui-date="dateOptions" ng-model="newMaterialDueDate" name="due">
+          </div>
 	</div>
         <div class="row">
           <div class="col-lg-3">Time Due:</div>
           <div ng-model="dueTime" class="col-lg-6">
-            <timepicker show-meridian="true" ng-model="newMaterialTime"></timepicker>
+            <input ng-model="newMaterialTime" name="due">
           </div>
         </div>
         <div class="row">
@@ -104,15 +110,21 @@
       </div>
       <div class="modal-body">
         <div class="row">
-	  <div class="col-lg-3">Name:</div><div class="col-lg-6"><input type="text" name="title" ng-model="editMaterial.title" ng-required="true"></div>
+	  <div class="col-lg-3">Name:</div>
+          <div class="col-lg-6">
+            <input type="text" name="title" ng-model="editMaterial.title" ng-required="true">
+          </div>
 	</div>
 	<div class="row">
-	  <div class="col-lg-3">Due Date:</div><div class="col-lg-6"><input ui-date="dateOptions"  placeholder="{{editMaterial.due | date:'shortDate'}}" ng-model="editMaterial.due" name="due"></div>
+	  <div class="col-lg-3">Due Date:</div>
+          <div class="col-lg-6">
+            <input ui-date="dateOptions"  placeholder="{{editMaterial.due | date:'shortDate'}}" ng-model="editMaterial.due" name="due">
+          </div>
 	</div>
         <div class="row">
           <div class="col-lg-3">Time Due:</div>
-          <div ng-model="dueTime" class="col-lg-6">
-            <timepicker show-meridian="true" ng-model="editMaterial.time"></timepicker>
+          <div class="col-lg-6">
+            <input ng-model="editMaterial.time">
           </div>
         </div>
         <div class="row">

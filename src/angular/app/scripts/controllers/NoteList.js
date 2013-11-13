@@ -23,13 +23,19 @@ angular.module('librecmsApp')
       $scope.contentList = $scope.course.notes;
     });
 
+    $scope.newMaterialTime = new Date(0,0,0,8,4,2);
+
     //POST new content
     $scope.submit = function() {
+      //Concatenate time due object onto due date object
+      moment($scope.newMaterialDueDate).add('hours', $scope.newMaterialTime.getHours());
+      moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
+      moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
+
       $scope.note.post({
         userId : UserService.getUser(),
         title: $scope.newMaterialTitle,
         due : $scope.newMaterialDueDate,
-        time : $scope.newMaterialTime,
         description : $scope.newMaterialDescription,
         attachments : $scope.newMaterialAttachments
       });
@@ -42,11 +48,15 @@ angular.module('librecmsApp')
 
     //Update Content Being edited
     $scope.updateContent = function() {
+      //Concatenate time due object onto due date object
+      moment($scope.newMaterialDueDate).add('hours', $scope.newMaterialTime.getHours());
+      moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
+      moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
+
       $scope.note.put({
         userId : UserService.getUser(),
         title: $scope.editMaterialTitle,
         due: $scope.editMaterialDueDate,
-        time: $scope.editMaterialTime,
         attachments: $scope.editMaterialAttachments,
         description: $scope.editMaterialDescription
       });

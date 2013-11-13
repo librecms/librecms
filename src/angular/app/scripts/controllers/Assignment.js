@@ -49,12 +49,12 @@ angular.module('librecmsApp')
       $scope.hideCollabs = $scope.hideCollabs === false ? true : false;
     };
 
+    $scope.submissionCollaborators = [];
+
     // Adding Collaborator Tag
     $scope.addTag = function(collabName,collabId) {
-
       //Add collaborator to list of collaborators
       $scope.submissionCollaborators.push({name: collabName, _id: collabId});
-      console.log($scope.submissionCollaborators);
     };
     
     // Removing Collaborator Tag
