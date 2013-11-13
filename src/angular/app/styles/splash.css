@@ -1,0 +1,23 @@
+#splash {
+  height: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  #splash-auth-container {
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #splash-auth-container {
+    margin-top: 10px;
+  }
+}
+
+#splash-auth-container {
+  color: #555;
+}
+
+#splash-auth-container h3 {
+  text-align: center;
+}

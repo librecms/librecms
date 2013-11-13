@@ -159,8 +159,11 @@
 }
 
 .submission-collaborator-remove {
-  float: right;
-  padding-top:8px;
+  cursor:pointer;
+}
+
+.submission-collaborator-add {
+  cursor:pointer;
 }
 
 #collaborator-search {

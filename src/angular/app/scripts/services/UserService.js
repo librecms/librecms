@@ -5,7 +5,9 @@ angular.module('librecmsApp')
     // Service logic, declarations, etc.
     // ...
     var Users = Restangular.all('users');
-    var user = { };
+    var user = { 
+      initialized: false
+    };
 
     function setUser(newUser) {
       user = newUser;

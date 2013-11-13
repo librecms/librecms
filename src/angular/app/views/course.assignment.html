@@ -85,7 +85,7 @@
           </div>
           <ul class="collaborator-search" ng-style="{visibility: query || 'hidden'}">
             <li ng-repeat="person in roster | filter:query" class="searched-collaborator col-lg-3 col-md-3 col-sm-4 col-xs-4">
-               {{person.name}} <i class="fa fa-plus fa-md" ng-click="addTag(person.name,person._id)"></i>
+               {{person.name}} <i class="submission-collaborator-add fa fa-plus fa-md" ng-click="addTag(person.name,person._id)"></i>
             </li>
           </ul>   
         </div>
