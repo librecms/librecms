@@ -1,23 +1,31 @@
 'use strict';
 
 angular.module('librecmsApp')
-.controller('EventbarCtrl', function($scope) {
+.controller('EventbarCtrl', function($scope, Restangular) {
+console.log('hello from eventbar.js');
+  
 
-  var date = new Date();
-  var d = date.getDate();
-  var m = date.getMonth();
-  var y = date.getFullYear();
+  function getUserEvents() {
+    var startOfThisMonth = moment(new Date()).startOf('month').toDate().getTime();
+    Restangular.one('users', $scope.user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
+      // Gather events from API and reformat their
+      // start and end components into Javascript Date objects
+      $scope.events = events;
+      $scope.events.map(function(event) {
+        event.start = new Date(event.start);
+        event.end = new Date(event.end);
+      });
+    });
+  }
 
-  $scope.events = [
-  {title: 'Homework Click here!',start: new Date(y, m, 1), url: 'http://localhost/#/course//assignment/1'},
-  {title: 'really upcomming',start: new Date(y, m, d+1), url: 'http://localhost/#/course//assignment/1'},
-  {title: 'Homework Click here!',start: new Date(y, m, 1), url: 'http://localhost/#/course//assignment/1'},
-  {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-  {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-  {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-  {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-  {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-  ];
+  $scope.events = [];
+
+
+  if ($scope.user) {
+    getUserEvents();
+  }
+
+  $scope.$on('UserService.update', getUserEvents);
 
   /* event sources array */
   $scope.test = [$scope.events];
@@ -25,9 +33,6 @@ angular.module('librecmsApp')
   $scope.predicate = 'start';
   $scope.quantity = 5;
 
-  $scope.getEvents = function() {
-  EventbarService.getEvents();
-  }
 });
 
 angular.module('librecmsApp').filter('upcoming', function() {
