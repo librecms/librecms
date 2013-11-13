@@ -52,6 +52,10 @@ angular.module('librecmsApp', dependencies)
         },
         '@main.course': {
           templateUrl: 'views/course.home.html'
+        },
+        'upcoming@main.course.home': {
+          templateUrl: 'views/widgets/eventbar.html',
+          controller: 'EventbarCtrl'
         }
       }
     })

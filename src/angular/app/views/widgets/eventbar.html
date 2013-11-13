@@ -1,4 +1,4 @@
-<div class="containter col-md-12 col-lg-3" ng-controller="EventbarCtrl">
+<div ng-controller="EventbarCtrl">
         <div align="center"><h4>Upcoming Events</h4>
         <div ng-repeat="e in events | orderBy:predicate | upcoming | limitTo:quantity " >
             <div ng-class="{strike:strike}">
