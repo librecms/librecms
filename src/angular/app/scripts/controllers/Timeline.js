@@ -6,6 +6,9 @@ angular.module('librecmsApp')
 
     // Listen to changes to the course object
     $scope.$on('CourseService.courseUpdated', function() {
+
+      $scope.courseName = $scope.course.name;
+
       // Get first 20 posts
       $scope.visiblePosts = $scope.course.posts.slice(-2);
 
