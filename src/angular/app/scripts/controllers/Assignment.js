@@ -53,8 +53,18 @@ angular.module('librecmsApp')
 
     // Adding Collaborator Tag
     $scope.addTag = function(collabName,collabId) {
-      //Add collaborator to list of collaborators
-      $scope.submissionCollaborators.push({name: collabName, _id: collabId});
+      // Add collaborator to list of collaborators after checking
+      // to make sure the user has not already been added
+      var exists = 0;
+      for(var i = 0; i < $scope.submissionCollaborators.length; i++) {
+        if($scope.submissionCollaborators[i]._id == collabId) {
+          exists = 1;
+          break;
+        }
+      }
+      if(exists == 0) {
+        $scope.submissionCollaborators.push({name: collabName, _id: collabId});
+      }
     };
     
     // Removing Collaborator Tag
