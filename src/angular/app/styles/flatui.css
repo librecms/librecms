@@ -2012,8 +2012,7 @@ fieldset[disabled] .form-control + .input-icon,
   background-color: #c0392b;
 }
 .palette-clouds {
-  /*background-color: #ecf0f1;*/
-  background-color: #D4D8D9;
+  background-color: #ecf0f1;
 }
 .palette-silver {
   background-color: #bdc3c7;
