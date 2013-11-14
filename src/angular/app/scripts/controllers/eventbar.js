@@ -2,8 +2,6 @@
 
 angular.module('librecmsApp')
 .controller('EventbarCtrl', function($scope, Restangular) {
-console.log('hello from eventbar.js');
-  
 
   function getUserEvents() {
     if($scope.user) {

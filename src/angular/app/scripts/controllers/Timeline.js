@@ -2,7 +2,6 @@
 
 angular.module('librecmsApp')
   .controller('TimelineCtrl', function ($scope, CourseService) {
-    console.log('hello from TimelineCtrl');
 
     // Listen to changes to the course object
     $scope.$on('CourseService.courseUpdated', function() {

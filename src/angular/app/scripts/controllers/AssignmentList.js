@@ -2,7 +2,6 @@
 
 angular.module('librecmsApp')
   .controller('AssignmentListCtrl', function($scope, $stateParams, UserService, Restangular, $log) {
-    console.log('hello from AssignmentListCtrl');
 
     //Get courseId
     var courseId = $stateParams.courseId;

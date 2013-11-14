@@ -2,7 +2,6 @@
 
 angular.module('librecmsApp')
 .controller('CalendarCtrl', function($scope, Restangular) {
-  console.log('hello from Calendar.js');
 
   function getUserEvents() {
     console.log('getUserEvents = ' + JSON.stringify($scope.user));

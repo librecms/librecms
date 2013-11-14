@@ -2,7 +2,6 @@
 
 angular.module('librecmsApp')
   .controller('GradesCtrl', function($scope,$stateParams,UserService) {
-
   
   var attendance = [
     {

@@ -2,7 +2,6 @@
 
 angular.module('librecmsApp')
   .controller('NoteListCtrl', function($scope) {
-    console.log('hello from NoteListCtrl');
 
     var courseId = $stateParams.courseId;
 

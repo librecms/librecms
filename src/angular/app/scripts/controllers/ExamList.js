@@ -2,7 +2,6 @@
 
 angular.module('librecmsApp')
   .controller('ExamListCtrl', function($scope) {
-    console.log('hello from ExamListCtrl');
 
     $scope.itemType = "exam";
 
