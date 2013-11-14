@@ -20,6 +20,10 @@
 }
 
 /************************ Timeline Style *********************/
+#timeline-widget {
+  border-left: 3px solid #3498DB;
+}
+
 .timeline {
   position: relative;
   padding: 30px 0 50px 0;
