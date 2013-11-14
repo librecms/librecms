@@ -37,6 +37,27 @@ angular.module('librecmsApp', dependencies)
       templateUrl: 'views/main.html',
       controller: 'MainCtrl'
     })
+    .state('main.user', {
+      abstract: true,
+      templateUrl: 'views/user.html',
+      controller: 'UserCtrl'
+    })
+    .state('main.user.home', {
+      url: '/home',
+      views: {
+        'timeline@main.user.home': {
+          templateUrl: 'views/widgets/timeline.html',
+          controller: 'TimelineCtrl' // have to create different controller for this view
+        },
+        '@main.user': {
+          templateUrl: 'views/user.home.html'
+        },
+        'upcoming@main.user.home': {
+          templateUrl: 'views/widgets/eventbar.html',
+          controller: 'EventbarCtrl' // have to create different controller for this view
+        }
+      }
+    })
     .state('main.course', {
       abstract: true,
       url: '/course/{courseId}',
