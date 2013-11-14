@@ -216,6 +216,11 @@
 }
 
 @media only screen and (max-width: 992px) {
+
+  #timeline-widget {
+    border-left: none;
+  }
+
   .date {
     width: 100%;
     margin-left: 0;
