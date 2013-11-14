@@ -6,16 +6,18 @@ console.log('hello from eventbar.js');
   
 
   function getUserEvents() {
-    var startOfThisMonth = moment(new Date()).startOf('month').toDate().getTime();
-    Restangular.one('users', $scope.user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
-      // Gather events from API and reformat their
-      // start and end components into Javascript Date objects
-      $scope.events = events;
-      $scope.events.map(function(event) {
-        event.start = new Date(event.start);
-        event.end = new Date(event.end);
+    if($scope.user) {
+      var startOfThisMonth = moment(new Date()).startOf('month').toDate().getTime();
+      Restangular.one('users', $scope.user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
+        // Gather events from API and reformat their
+        // start and end components into Javascript Date objects
+        $scope.events = events;
+        $scope.events.map(function(event) {
+          event.start = new Date(event.start);
+          event.end = new Date(event.end);
+        });
       });
-    });
+    } 
   }
 
   $scope.events = [];
