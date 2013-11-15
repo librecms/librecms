@@ -1,8 +1,8 @@
 'use strict';
 
 var dependencies = ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date', 'ngCookies'];
-angular.module('librecmsApp', dependencies)
-  .config(function (RestangularProvider, $stateProvider, $urlRouterProvider) {
+angular.module('librecmsApp', dependencies).config(
+  function (RestangularProvider, $stateProvider, $urlRouterProvider) {
 
     // constant / reusable widget declarations
     var AUTH_WIDGET = {
@@ -20,6 +20,10 @@ angular.module('librecmsApp', dependencies)
           templateUrl: 'views/splash.html'
         },
         'auth@splash': AUTH_WIDGET
+      },
+      data: {
+        mask: 'public',
+        redirect: 'main.user.home'
       }
     };
     states.push(splashState);
@@ -34,6 +38,10 @@ angular.module('librecmsApp', dependencies)
           templateUrl: 'views/login.html'
         },
         'auth@login': AUTH_WIDGET
+      },
+      data: {
+        mask: 'public',
+        redirect: 'main.user.home'
       }
     };
     states.push(loginState);
@@ -193,8 +201,6 @@ angular.module('librecmsApp', dependencies)
     states.push(error404State);
 
     states.forEach(function(state) {
-      state.data = state.data || { };
-      state.data.auth = state.data.auth || 'public';
       $stateProvider.state(state);
     });
 
@@ -205,10 +211,22 @@ angular.module('librecmsApp', dependencies)
     RestangularProvider.setBaseUrl('/api');
     RestangularProvider.setRestangularFields({ id: '_id' });
   })
-  .run(function($rootScope, $state) {
+  .run(function($rootScope, $state, $log, UserService, AuthService) {
     $rootScope.$on('$stateChangeStart',
-      function() {
+      function(event, toState) {
         // @TODO make sure user authorized to go to the next state
+        toState.data = toState.data || { };
+        toState.data.mask = toState.data.mask || AuthService.defaultMask;
+        toState.data.redirect =
+          toState.data.redirect || AuthService.defaultAuthRedirect;
+        var mask = toState.data.mask;
+        var redirect = toState.data.redirect;
+        var role = UserService.getRole();
+        var isAuthorized = AuthService.authorize(role, mask);
+        if (!isAuthorized) {
+          event.preventDefault();
+          $state.go(redirect);
+        }
       });
     $rootScope.$on('$stateNotFound', function() {
       $state.go('404');
