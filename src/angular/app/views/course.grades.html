@@ -2,17 +2,41 @@
   <div class="row">
     <div class="col-lg-6">
       <h6>Course Grade:</h6>
-      {{grade}}
+      {{courseGrade}}
     </div>
     <div class="col-lg-6">
-      <div class="categories-overall-averages">Homework</div><div>{{grades.homework}}
-      </div><br>
-      <div class="categories-overall-averages">Quizzes</div><div>{{grades.quizzes}}
-      </div><br>
-      <div class="categories-overall-averages">Exams</div><div>{{grades.exams}}
-      </div><br>
-      <div class="categories-overall-averages">Other</div><div>{{grades.other}}
-      </div><br>
+      <div class="row">
+        <div class="categories-overall-averages col-lg-2">
+          <b>Homework</b>
+        </div>
+        <div class="col-lg-1">
+          {{homeworkAverage}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="categories-overall-averages col-lg-2">
+          <b>Quizzes</b>
+        </div>
+        <div class="col-lg-1">
+          {{quizAverage}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="categories-overall-averages col-lg-2">
+          <b>Exams</b>
+        </div>
+        <div class="col-lg-1">
+          {{examAverage}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="categories-overall-averages col-lg-2">
+          <b>Other</b>
+        </div>
+        <div class="col-lg-1">
+          {{grades.other}}
+        </div>
+      </div>
     </div>
   </div>
   <div class="row grade-selection-tabs">
