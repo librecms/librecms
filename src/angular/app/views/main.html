@@ -14,7 +14,7 @@
             </div>
 
             <div class="row">
-              <h6>{{ user.name.first }} {{ user.name.last }}</h6>
+              <h6>{{ user.firstName }} {{ user.lastName }}</h6>
             </div>
 
           </div>
@@ -38,6 +38,10 @@
 
           </div>
         </div> 
+
+        <div class="row navbar-section">
+          <button class="btn btn-sm btn-danger" ng-click="logout()" type="button">Logout</button>
+        </div>
       </div>
 
     </div>
