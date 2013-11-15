@@ -63,6 +63,9 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
+              <li ng-class="{ active: $state.is('main.course.home') }">
+                <a ui-sref="main.course.home({courseId: course._id})">Home</a>
+              </li>
               <li ng-class="{ active: $state.is('main.course.grades') }">
                 <a ui-sref="main.course.grades({courseId: course._id})">Grades</a>
               </li>
