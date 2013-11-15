@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .service('AuthService', function Authservice() {
+  .service('AuthService',
+    function Authservice(Restangular, UserService, $log, $state) {
     // https://github.com/librecms/librecms/wiki/Authentication#user-roles 
     // for an explanation of userRoles and userMasks
     // User Role and Role Mask definitions.
@@ -15,12 +16,23 @@ angular.module('librecmsApp')
     };
 
     var userRoles = {
-      'public': 1,
+      public: 1,
       student: 3,
       instructor: 5,
       admin: 9
     };
 
+    // What constitutes a user being 'logged in'?
+    var loggedInRoles = [
+      userRoles.student, userRoles.instructor, userRoles.admin
+    ];
+
+    function isLoggedIn() {
+      var user = UserService.getUser();
+      if (!user) return false;
+      if (!user.role) return false;
+      return (loggedInRoles.indexOf(user.role) > -1);
+    }
 
     // Authorization methods
     // @param role is user's role
@@ -50,12 +62,33 @@ angular.module('librecmsApp')
       return _authorize(role, masks);
     }
 
+    function login(parameters) {
+      Restangular.all('auth').all('login').post(parameters)
+        .then(function(user) {
+          UserService.setUser(user);
+          $state.go('main.user.home');
+        }, function() {
+          $log.error('error logging in');
+        });
+    }
+
+    function logout() {
+      Restangular.all('auth').all('logout').post()
+        .then(function() {
+          UserService.clearUser();
+          $state.go('splash');
+        });
+    }
+
     return {
       roles: userRoles,
       masks: roleMasks,
       defaultMask: 'everybody',
       defaultRole: 'public',
       authorize: authorize,
-      _authorize: _authorize
+      _authorize: _authorize,
+      login: login,
+      logout: logout,
+      isLoggedIn: isLoggedIn
     };
   });

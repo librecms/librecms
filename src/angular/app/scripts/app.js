@@ -1,20 +1,19 @@
 'use strict';
 
-var dependencies = ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date'];
+var dependencies = ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date', 'ngCookies'];
 angular.module('librecmsApp', dependencies)
-  .config(function (RestangularProvider, $stateProvider) {
+  .config(function (RestangularProvider, $stateProvider, $urlRouterProvider) {
 
     // constant / reusable widget declarations
     var AUTH_WIDGET = {
       templateUrl: 'views/widgets/auth.html',
-      controller: ''
+      controller: 'AuthWidgetCtrl'
     };
 
-    
-
     // state declarations
-    $stateProvider
-    .state('splash', {
+    var states = [];
+    var splashState = {
+      name: 'splash',
       url: '/',
       views: {
         '@': {
@@ -22,8 +21,13 @@ angular.module('librecmsApp', dependencies)
         },
         'auth@splash': AUTH_WIDGET
       }
-    })
-    .state('login', {
+    };
+    states.push(splashState);
+    // @TODO add the rest of these and append authentication data
+    // to them.
+
+    var loginState = {
+      name: 'login',
       url: '/login',
       views: {
         '@': {
@@ -31,18 +35,29 @@ angular.module('librecmsApp', dependencies)
         },
         'auth@login': AUTH_WIDGET
       }
-    })
-    .state('main', {
+    };
+    states.push(loginState);
+
+    var mainState = {
+      name: 'main',
       abstract: true,
       templateUrl: 'views/main.html',
       controller: 'MainCtrl'
-    })
-    .state('main.user', {
+    };
+    states.push(mainState);
+
+    var userState = {
+      name: 'main.user',
+      parent: mainState,
       abstract: true,
       templateUrl: 'views/user.html',
       controller: 'UserCtrl'
-    })
-    .state('main.user.home', {
+    };
+    states.push(userState);
+
+    var userHomeState = {
+      name: 'main.user.home',
+      parent: userState,
       url: '/home',
       views: {
         'timeline@main.user.home': {
@@ -57,14 +72,22 @@ angular.module('librecmsApp', dependencies)
           controller: 'EventbarCtrl' // have to create different controller for this view
         }
       }
-    })
-    .state('main.course', {
+    };
+    states.push(userHomeState);
+
+    var courseState = {
+      name: 'main.course',
+      parent: mainState,
       abstract: true,
       url: '/course/{courseId}',
       templateUrl: 'views/course.html',
       controller: 'CourseCtrl'
-    })
-    .state('main.course.home', {
+    };
+    states.push(courseState);
+
+    var courseHomeState = {
+      name: 'main.course.home',
+      parent: courseState,
       url: '',
       views: {
         'timeline@main.course.home': {
@@ -79,8 +102,12 @@ angular.module('librecmsApp', dependencies)
           controller: 'EventbarCtrl'
         }
       }
-    })
-    .state('main.calendar', {
+    };
+    states.push(courseHomeState);
+
+    var calendarState = {
+      name: 'main.calendar',
+      parent: mainState,
       url: '/calendar',
       views: {
         '@main': {
@@ -92,44 +119,99 @@ angular.module('librecmsApp', dependencies)
           controller: 'EventbarCtrl'
         }
       }
-    })
-    .state('main.course.assignments', {
+    };
+    states.push(calendarState);
+
+    var courseAssignmentsState = {
+      name: 'main.course.assignments',
+      parent: courseState,
       url: '/assignments',
       templateUrl: 'views/course.item.list.html',
       controller: 'AssignmentListCtrl'
-    })
-    .state('main.course.assignment', {
+    };
+    states.push(courseAssignmentsState);
+
+    var courseAssignmentState = {
+      name: 'main.course.assignment',
+      parent: courseState,
       url: '/assignment/{assignmentId}',
       templateUrl: 'views/course.assignment.html',
       controller: 'AssignmentCtrl'
-    })
-    .state('main.course.quiz', {
+    };
+    states.push(courseAssignmentState);
+
+    var courseQuizState = {
+      name: 'main.course.quiz',
+      parent: courseState,
       url: '/quiz/{quizId}',
       templateUrl: 'views/course.item.html',
       controller: 'QuizCtrl'
-    })
-    .state('main.course.quizzes', {
+    };
+    states.push(courseQuizState);
+
+    var courseQuizzesState = {
+      name: 'main.course.quizzes',
+      parent: courseState,
       url: '/quizzes',
       templateUrl: 'views/course.item.list.html',
       controller: 'QuizListCtrl'
-    })
-    .state('main.course.exam', {
+    };
+    states.push(courseQuizzesState);
+
+    var courseExamState = {
+      name: 'main.course.exam',
+      parent: courseState,
       url: '/exam/{examId}',
       templateUrl: 'views/course.item.html',
       controller: 'ExamCtrl'
-    })
-    .state('main.course.examList', {
+    };
+    states.push(courseExamState);
+
+    var courseExamsState = {
+      name: 'main.course.exams',
+      parent: courseState,
       url: '/exams',
       templateUrl: 'views/course.item.list.html',
       controller: 'ExamListCtrl'
-    })
-    .state('main.course.grades', {
+    };
+    states.push(courseExamsState);
+
+    var courseGradesState = {
+      name: 'main.course.grades',
+      parent: courseState,
       url: '/grades',
       templateUrl: 'views/course.grades.html',
       controller: 'GradesCtrl'
+    };
+    states.push(courseGradesState);
+
+    var error404State = {
+      name: '404',
+      url: '/404',
+      templateUrl: 'views/404.html'
+    };
+    states.push(error404State);
+
+    states.forEach(function(state) {
+      state.data = state.data || { };
+      state.data.auth = state.data.auth || 'public';
+      $stateProvider.state(state);
     });
+
+    $urlRouterProvider.otherwise('/404');
+
 
     // Restangular configuration
     RestangularProvider.setBaseUrl('/api');
     RestangularProvider.setRestangularFields({ id: '_id' });
+  })
+  .run(function($rootScope, $state) {
+    $rootScope.$on('$stateChangeStart',
+      function() {
+        // @TODO make sure user authorized to go to the next state
+      });
+    $rootScope.$on('$stateNotFound', function() {
+      $state.go('404');
+    });
   });
+

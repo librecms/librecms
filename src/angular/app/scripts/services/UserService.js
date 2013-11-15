@@ -1,13 +1,10 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .factory('UserService', function ($rootScope, Restangular) {
-    // Service logic, declarations, etc.
-    // ...
-    var Users = Restangular.all('users');
-    var user = {
-      initialized: false,
-      role: 'public'
+  .factory('UserService', function ($rootScope, Restangular, $cookieStore) {
+    var clearedUser = {
+      role: 'public',
+      initialized: false
     };
 
     function setUser(newUser) {
@@ -21,22 +18,26 @@ angular.module('librecmsApp')
 
     function setUserById(userId) {
       Users.get(userId).then(function(newUser) {
-        newUser.getList('courses').then(function(courses) {
-          newUser.courses = courses;
-          setUser(newUser);
-        });
+        setUser(newUser);
       });
     }
 
-    // If using local database, use this:
-    //setUserById('527561723e4889199063e34b');
+    function clearUser() {
+      $cookieStore.remove('user');
+      setUser(clearedUser);
+    }
 
-    // If using remote database, use this:
-    setUserById('527840d3123657810a000007');
+    // Restangular collection
+    var Users = Restangular.all('users');
+
+    // Get user from cookie or fall back to 'unknown' user
+    var user = $cookieStore.get('user') || clearedUser;
 
     // Public API here
     return {
       getUser: getUser,
-      setUser: setUser
+      setUser: setUser,
+      setUserById: setUserById,
+      clearUser: clearUser
     };
   });

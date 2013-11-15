@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('MainCtrl', function ($scope, UserService, CourseService,
-                                    $stateParams, $state, $rootScope) {
+  .controller('MainCtrl',
+    function ($scope, UserService, CourseService,
+              $stateParams, $state, $rootScope, AuthService) {
+
+    $scope.logout = AuthService.logout;
     $rootScope.$state = $state;
     // Gather initial user from UserService
     $scope.user = UserService.getUser();
