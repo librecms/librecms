@@ -32,7 +32,7 @@ angular.module('librecmsApp')
     setUserById('527561723e4889199063e34b');
 
     // If using remote database, use this:
-    //setUserById('527840d3123657810a000007');
+    //setUserById('5285371a138793a350000008');
 
     // Public API here
     return {
