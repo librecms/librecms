@@ -29,7 +29,7 @@
 
             <div id="left-navbar-courses-list-container" class="row">
               <ul id="left-navbar-courses-list" class="list-unstyled">
-                <li ng-class="{active: course._id === courseList._id}"
+                <li ng-class="{ active: !$state.is('main.user.home') && course._id === courseList._id}"
                   ng-repeat="courseList in user.courses | orderBy:'name':false">
                   <a ui-sref="main.course.home({ courseId: courseList._id })">{{ courseList.name }}</a>
                 </li>
