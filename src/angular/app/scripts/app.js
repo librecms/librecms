@@ -2,7 +2,7 @@
 
 var dependencies = ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date', 'ngCookies', 'truncate'];
 angular.module('librecmsApp', dependencies).config(
-  function (RestangularProvider, $stateProvider, $urlRouterProvider) {
+  function (RestangularProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
 
     // constant / reusable widget declarations
     var AUTH_WIDGET = {
@@ -210,11 +210,30 @@ angular.module('librecmsApp', dependencies).config(
     // Restangular configuration
     RestangularProvider.setBaseUrl('/api');
     RestangularProvider.setRestangularFields({ id: '_id' });
+
+    // Intercept HTTP 401 and 404 errors and direct to appropriate paths
+    $httpProvider.responseInterceptors.push(function($location, $q) {
+      function success(res) {
+        return res;
+      }
+      function error(res) {
+        if (res.status === 401) {
+          $location.path(loginState.url);
+        } else if (res.status === 404) {
+          $location.path(error404State.url);
+        }
+        return $q.reject(res);
+      }
+      return function(promise) {
+        return promise.then(success, error);
+      };
+    });
   })
+  /* Intercept state changes to determine if the current user is 
+   *   authorized to transisition to requested state */
   .run(function($rootScope, $state, $log, UserService, AuthService) {
     $rootScope.$on('$stateChangeStart',
       function(event, toState) {
-        // @TODO make sure user authorized to go to the next state
         toState.data = toState.data || { };
         toState.data.mask = toState.data.mask || AuthService.defaultMask;
         toState.data.redirect =
@@ -222,6 +241,8 @@ angular.module('librecmsApp', dependencies).config(
         var mask = toState.data.mask;
         var redirect = toState.data.redirect;
         var role = UserService.getRole();
+
+        // Is the current user authorized to view this state?
         var isAuthorized = AuthService.authorize(role, mask);
         if (!isAuthorized) {
           event.preventDefault();

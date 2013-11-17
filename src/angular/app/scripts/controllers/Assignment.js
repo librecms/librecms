@@ -16,36 +16,13 @@ angular.module('librecmsApp')
       });
     }
 
-    $scope.roster = [
-      {
-        name: 'Nick',
-        _id: '123'
-      },
-      {
-        name: 'Marius',
-        _id: '945'
-      },
-      {
-        name: 'Zach',
-        _id: '425'
-      },
-      {
-        name: 'Jessie',
-        _id: '657'
-      },
-      {
-        name: 'Mike',
-        _id: '838'
-      },
-      {
-        name: 'Shawn',
-        _id: '454'
-      },
-      {
-        name: 'Tiffany',
-        _id: '324'
-      }
-    ];
+    Course.getList('students')
+      .then(function(students) {
+        $scope.roster = students.map(function(student) {
+          student.name = student.firstName + ' ' + student.lastName;
+          return student;
+        });
+      });
 
     $scope.toggleCollabs = function() {
       $scope.hideCollabs = $scope.hideCollabs === false ? true : false;
