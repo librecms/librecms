@@ -1,6 +1,6 @@
 'use strict';
 
-var dependencies = ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date', 'ngCookies'];
+var dependencies = ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date', 'ngCookies', 'truncate'];
 angular.module('librecmsApp', dependencies).config(
   function (RestangularProvider, $stateProvider, $urlRouterProvider) {
 

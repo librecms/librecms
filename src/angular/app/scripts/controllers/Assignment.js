@@ -47,8 +47,6 @@ angular.module('librecmsApp')
       }
     ];
 
-    $scope.showSubmit = true;
-    $scope.hideCollabs = true;
     $scope.toggleCollabs = function() {
       $scope.hideCollabs = $scope.hideCollabs === false ? true : false;
     };
@@ -93,13 +91,15 @@ angular.module('librecmsApp')
         $log.error('attempting to submit to invalid user');
       }
       var studentId = UserService.getUser()._id;
-      $log.info('studentId = ' + studentId);
-      var submission = {
+      var newSubmission = {
         studentId : studentId,
         description: $scope.submissionDescription,
         attachments: $scope.submissionAttachments,
         collaborators: $scope.submissionCollaborators
       };
-      Assignment.post('submit', submission);
+      Assignment.post('submit', newSubmission)
+        .then(function(submission) {
+          $log.info('submission complete. ' + JSON.stringify(submission));
+        });
     };
   });
