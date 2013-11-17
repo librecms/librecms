@@ -67,11 +67,9 @@ angular.module('librecmsApp')
     }
 
     function logout() {
-      Restangular.all('auth').all('logout').post()
-        .then(function() {
-          UserService.clearUser();
-          $state.go('splash');
-        });
+      UserService.clearUser();
+      $state.go('splash');
+      Restangular.all('auth').all('logout').post();
     }
 
     function isLoggedIn() {
