@@ -25,7 +25,7 @@
           <button data-toggle="modal" data-target="#submit-modal" class="btn btn-block btn-sm btn-info">Submit</button>
           <div>
             <ul class="list-unstyled">
-              <li ng-repeat="submission in assignment.submissions">
+              <li ng-repeat="submission in assignment.submissions | orderBy:'posted':true">
                 <a>{{ submission._id | characters:10 }}</a>
               </li>
             </ul>
