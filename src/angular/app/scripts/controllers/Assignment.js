@@ -6,6 +6,10 @@ angular.module('librecmsApp')
                         Restangular, $stateParams, $log) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
+
+    var Course = Restangular.one('courses', courseId);
+    var Assignment = Course.one('assignments', assignmentId);
+
     if (courseId && assignmentId) {
       Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(function(assignment) {
         $scope.assignment = assignment;
@@ -57,19 +61,18 @@ angular.module('librecmsApp')
       // to make sure the user has not already been added
       var exists = 0;
       for(var i = 0; i < $scope.submissionCollaborators.length; i++) {
-        if($scope.submissionCollaborators[i]._id == collabId) {
+        if($scope.submissionCollaborators[i]._id === collabId) {
           exists = 1;
           break;
         }
       }
-      if(exists == 0) {
+      if(exists === 0) {
         $scope.submissionCollaborators.push({name: collabName, _id: collabId});
       }
     };
     
     // Removing Collaborator Tag
     $scope.removeTag = function(collabName, collabId) {
-
       //Remove collaborator from list of collaborators
       for(var i=0;i < $scope.submissionCollaborators.length;i++) {
         if($scope.submissionCollaborators[i]._id === collabId) {
@@ -82,14 +85,21 @@ angular.module('librecmsApp')
     // POST user submission
     $scope.submit = function() {
       if (!$scope.assignment) {
-        $log.warn('attempting to submit to invalid $scope.assignment.');
+        $log.error('attempting to submit to invalid $scope.assignment.');
         return;
       }
-      $scope.assignment.post({
-        userId : UserService.getUser(),
+      if (!UserService.getUser() ||
+          !UserService.getUser()._id) {
+        $log.error('attempting to submit to invalid user');
+      }
+      var studentId = UserService.getUser()._id;
+      $log.info('studentId = ' + studentId);
+      var submission = {
+        studentId : studentId,
         description: $scope.submissionDescription,
         attachments: $scope.submissionAttachments,
         collaborators: $scope.submissionCollaborators
-      });
+      };
+      Assignment.post('submit', submission);
     };
   });
