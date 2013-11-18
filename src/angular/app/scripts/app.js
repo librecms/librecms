@@ -1,8 +1,14 @@
 'use strict';
 
-var dependencies = ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date', 'ngCookies', 'truncate'];
+var dependencies =
+  ['restangular', 'ui.router', 'ui.calendar',
+  'infinite-scroll', 'ui.date', 'ngCookies', 'truncate',
+  'ngProgressLite'];
 angular.module('librecmsApp', dependencies).config(
-  function (RestangularProvider, $stateProvider, $urlRouterProvider, $httpProvider) {
+  function (RestangularProvider, $stateProvider,
+            $urlRouterProvider, $httpProvider, ngProgressLiteProvider) {
+
+    ngProgressLiteProvider.settings.speed = 500;
 
     // constant / reusable widget declarations
     var AUTH_WIDGET = {
@@ -231,7 +237,8 @@ angular.module('librecmsApp', dependencies).config(
   })
   /* Intercept state changes to determine if the current user is 
    *   authorized to transisition to requested state */
-  .run(function($rootScope, $state, $log, UserService, AuthService) {
+  .run(function($rootScope, $state, $log, UserService, AuthService,
+                ngProgressLite, $timeout) {
     $rootScope.$on('$stateChangeStart',
       function(event, toState) {
         toState.data = toState.data || { };
@@ -251,6 +258,12 @@ angular.module('librecmsApp', dependencies).config(
       });
     $rootScope.$on('$stateNotFound', function() {
       $state.go('404');
+    });
+
+    // Progress bar event listeners 
+    $rootScope.$on('$stateChangeStart', function() { ngProgressLite.start(); } );
+    $rootScope.$on('$stateChangeSuccess', function() {
+      ngProgressLite.done();
     });
   });
 
