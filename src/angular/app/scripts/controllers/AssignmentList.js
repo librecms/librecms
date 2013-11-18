@@ -5,6 +5,7 @@ angular.module('librecmsApp')
 
     //Get courseId
     var courseId = $stateParams.courseId;
+    var Course = Restangular.one('courses', courseId);
 
     //Get API route
     if(courseId) {
@@ -29,22 +30,31 @@ angular.module('librecmsApp')
 
     //Temporary: Set static due time
     $scope.newMaterialTime = new Date(0,0,0,8,4,2);
+    $scope.newMaterialDueDate = new Date();
     //POST new content
     $scope.Submit = function() {
       //Concatenate time due object onto due date object
       moment($scope.newMaterialDueDate).add('hours', $scope.newMaterialTime.getHours());
       moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
       moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
-      console.log("Date is : " + $scope.newMaterialDueDate); 
+      console.log("Date is : " + $scope.newMaterialDueDate);
 
       //Make API call
-      $scope.assignment.post({
+      var newAssignment = {
         userId : UserService.getUser(),
         title: $scope.newMaterialTitle,
-        due : $scope.newMaterialDueDate,
+        due : $scope.newMaterialDueDate.getTime(),
         description : $scope.newMaterialDescription,
         attachments : $scope.newMaterialAttachments
-      });
+      };
+
+      // @TODO what happens on 401 or 404 or 500 or 502?
+      Restangular.one('courses', courseId)
+        .post('assignments', newAssignment)
+        .then(function(assignment) {
+          $scope.contentList.push(assignment);
+          $('#new-assignment-submit-modal').modal('hide');
+        });
     };
 
     //Save content for editing when selected for modal use
