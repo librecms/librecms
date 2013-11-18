@@ -44,7 +44,7 @@
     <div id="" class="content-item col-lg-4 col-md-4 col-sm-4 col-xs-12  well" ng-repeat="content in contentList | orderBy:contentSort">
       <h6><a href="/#/course/{{ course._id }}/{{ itemType }}/{{ content._id }}" class="content-list-name">{{ content.title }}</a></h6>
       <b>Posted:</b> {{content.posted | date:'shortDate'}} <b>Due:</b> {{content.due | date:'shortDate'}}<br>
-      <a data-toggle="modal" data-target="#edit-modal" class="col-lg-2 material-instructor-links" ng-click="editModal({{content}})"><small>Edit</small></a>
+      <a data-toggle="modal" data-target="#edit-assignment-modal" class="col-lg-2 material-instructor-links" ng-click="editModal({{content}})"><small>Edit</small></a>
       <a data-toggle="modal" data-target="#remove-modal" class="col-lg-2 material-instructor-links" ng-click="editModal({{content}})"><small>Remove</small></a>
     </div>
   </div>
@@ -101,7 +101,7 @@
 </div><!-- /.modal -->
 
 <!-- Edit Modal -->
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="new-assignment-submit-modal" aria-hidden="true">
+<div class="modal fade" id="edit-assignment-modal" tabindex="-1" role="dialog" aria-labelledby="new-assignment-submit-modal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -144,7 +144,7 @@
                 <span><i class="fa fa-paperclip fa-lg"></i></span>
                 <input type="file"/>
               </div>
-        <button type="button" class="btn btn-primary" ng-click="updateContent()">Submit</button>
+        <button type="button" class="btn btn-primary" ng-click="updateContent(editMaterial._id)">Submit</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

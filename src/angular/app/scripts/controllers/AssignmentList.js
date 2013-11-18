@@ -7,7 +7,7 @@ angular.module('librecmsApp')
     var courseId = $stateParams.courseId;
     var Course = Restangular.one('courses', courseId);
 
-    //Get API route
+    //Get API route for posting new assignment
     if(courseId) {
       Restangular.one('courses', courseId).get().then(function(newAssignment) {
         $scope.newAssignment = newAssignment;
@@ -63,20 +63,29 @@ angular.module('librecmsApp')
     };
 
     //Update Content Being edited
-    $scope.updateContent = function() {
+    $scope.updateContent = function(assignmentId) {
       //Concatenate time due object onto due date object
       moment($scope.newMaterialDueDate).add('hours', $scope.newMaterialTime.getHours());
       moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
       moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
 
-      //Make API call
-      $scope.assignment.put({
+      //Get Assignment Route
+      var assignment = Course.one('assignments', assignmentId);  
+
+      //Set new information from edit
+      var updateAssignment = {
         userId : UserService.getUser(),
         title: $scope.editMaterial.title,
         due: $scope.editMaterial.due,
         attachments: $scope.editMaterial.attachments,
         description: $scope.editMaterial.description
-      });
+      };
+      
+      //Make API call to update
+      assignment.put('assignments', updateAssignment)
+        .then(function(assignment) {
+          $('#edit-assignment-modal').modal('hide');
+        });
     };
 
     //Remove Content
