@@ -81,9 +81,15 @@ angular.module('librecmsApp')
 
     //Remove Content
     $scope.removeContent = function() {
-      $scope.assignment.del({
-        userId : UserService.getUser()
-      });
+      $log.info(JSON.stringify($scope.editMaterial, null, 4));
+      if (!$scope.editMaterial || !$scope.editMaterial._id) {
+        $log.error('attempt to edit material without setting editMaterial');
+        return;
+      }
+      Course.one('assignments', $scope.editMaterial._id)
+        .remove().then(function() {
+          $('#remove-modal').modal('hide');
+        });
     };
 
   });
