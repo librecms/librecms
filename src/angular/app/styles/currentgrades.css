@@ -1,7 +1,19 @@
+.current-grades-title {
+	color: #3498DB;
+	text-align: center;
+	font-family: 'Advent Pro', sans-serif;
+  	font-weight: 300;
+}
+
 .grades-list {
 	list-style-type: none;
 	padding: 0;
 	background-color: #3498DB;
+	border-radius: 5px;
+}
+
+.course-grade-item {
+	padding: 10px 0;
 }
 
 .course-name {

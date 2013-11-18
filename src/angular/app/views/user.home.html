@@ -3,11 +3,13 @@
 		<br/>
 		<button ng-click="setNewUser()">Call setNewUser</button>
 	</div>
-	<div class="row">
-		<div ui-view="upcoming" class="col-md-6"></div>
-		<div id="timeline-widget" ui-view="timeline" class="col-xs-12 col-md-6"></div>
+	<div id="home-left-container" class="col-xs-12 col-md-7">
+		<div ui-view="upcoming" class="col-xs-12 col-sm-6 col-md-12"></div>
+		<div class="row">
+			<div id="current-grades" ui-view="currentgrades" class="col-sm-6"></div>
+		</div>
 	</div>
-	<div class="row">
-		<div id="current-grades" ui-view="currentgrades" class="col-md-3"></div>
+	<div id="home-right-container" class="col-xs-12 col-md-5">
+		<div id="timeline-widget" ui-view="timeline" class="col-xs-12"></div>
 	</div>
 </div>

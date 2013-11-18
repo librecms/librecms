@@ -109,3 +109,14 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   text-decoration: underline;
   font-weight: bold;
 }
+
+#home-left-container {
+  border-right: 3px solid #3498DB;
+}
+
+
+@media (max-width: 991px) {
+  #home-left-container {
+    border-right: none;
+  } 
+}
