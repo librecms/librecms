@@ -1,0 +1,13 @@
+.grades-list {
+	list-style-type: none;
+	padding: 0;
+	background-color: #3498DB;
+}
+
+.course-name {
+	color: #34495E;
+}
+
+.grade {
+	color: #fff;
+}
