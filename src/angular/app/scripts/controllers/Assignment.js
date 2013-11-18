@@ -6,45 +6,24 @@ angular.module('librecmsApp')
                         Restangular, $stateParams, $log) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
+
+    var Course = Restangular.one('courses', courseId);
+    var Assignment = Course.one('assignments', assignmentId);
+
     if (courseId && assignmentId) {
       Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(function(assignment) {
         $scope.assignment = assignment;
       });
     }
 
-    $scope.roster = [
-      {
-        name: 'Nick',
-        _id: '123'
-      },
-      {
-        name: 'Marius',
-        _id: '945'
-      },
-      {
-        name: 'Zach',
-        _id: '425'
-      },
-      {
-        name: 'Jessie',
-        _id: '657'
-      },
-      {
-        name: 'Mike',
-        _id: '838'
-      },
-      {
-        name: 'Shawn',
-        _id: '454'
-      },
-      {
-        name: 'Tiffany',
-        _id: '324'
-      }
-    ];
+    Course.getList('students')
+      .then(function(students) {
+        $scope.roster = students.map(function(student) {
+          student.name = student.firstName + ' ' + student.lastName;
+          return student;
+        });
+      });
 
-    $scope.showSubmit = true;
-    $scope.hideCollabs = true;
     $scope.toggleCollabs = function() {
       $scope.hideCollabs = $scope.hideCollabs === false ? true : false;
     };
@@ -57,19 +36,18 @@ angular.module('librecmsApp')
       // to make sure the user has not already been added
       var exists = 0;
       for(var i = 0; i < $scope.submissionCollaborators.length; i++) {
-        if($scope.submissionCollaborators[i]._id == collabId) {
+        if($scope.submissionCollaborators[i]._id === collabId) {
           exists = 1;
           break;
         }
       }
-      if(exists == 0) {
+      if(exists === 0) {
         $scope.submissionCollaborators.push({name: collabName, _id: collabId});
       }
     };
     
     // Removing Collaborator Tag
     $scope.removeTag = function(collabName, collabId) {
-
       //Remove collaborator from list of collaborators
       for(var i=0;i < $scope.submissionCollaborators.length;i++) {
         if($scope.submissionCollaborators[i]._id === collabId) {
@@ -82,14 +60,25 @@ angular.module('librecmsApp')
     // POST user submission
     $scope.submit = function() {
       if (!$scope.assignment) {
-        $log.warn('attempting to submit to invalid $scope.assignment.');
+        $log.error('attempting to submit to invalid $scope.assignment.');
         return;
       }
-      $scope.assignment.post({
-        userId : UserService.getUser(),
+      if (!UserService.getUser() ||
+          !UserService.getUser()._id) {
+        $log.error('attempting to submit to invalid user');
+      }
+      var studentId = UserService.getUser()._id;
+      var newSubmission = {
+        studentId : studentId,
         description: $scope.submissionDescription,
         attachments: $scope.submissionAttachments,
         collaborators: $scope.submissionCollaborators
-      });
+      };
+      Assignment.post('submit', newSubmission)
+        .then(function(submission) {
+          $scope.assignment.submissions = $scope.assignment.submissions || [];
+          $scope.assignment.submissions.push(submission);
+          $('#submit-modal').modal('hide');
+        });
     };
   });

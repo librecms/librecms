@@ -31,22 +31,18 @@
 }
 
 #assignment-submission-dropbox {
-  height: 75px;
-  margin-bottom: 25px;
 }
 
 #assignment-submission-attachment {
   height: 100px;
 }
 
-#assignment-submission-comments{
+#assignment-submission-comments {
   padding-top:20px;
 }
 
 #assignment-submission-widget, #assignment-attachments-widget {
-  min-height: 80px;
-  max-height: 200px;
-  height: 100%;
+  overflow: hidden;
 }
 
 #submit-modal .btn i {

@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .factory('UserService', function ($rootScope, Restangular, $cookieStore) {
+  .factory('UserService',
+    function ($rootScope, Restangular, $cookieStore) {
     var clearedUser = {
       role: 'public',
       initialized: false
@@ -13,7 +14,11 @@ angular.module('librecmsApp')
     }
 
     function getUser() {
-      return user;
+      return user || clearedUser;
+    }
+
+    function getRole() {
+      return user.role ? user.role : clearedUser.role;
     }
 
     function setUserById(userId) {
@@ -36,6 +41,7 @@ angular.module('librecmsApp')
     // Public API here
     return {
       getUser: getUser,
+      getRole: getRole,
       setUser: setUser,
       setUserById: setUserById,
       clearUser: clearUser

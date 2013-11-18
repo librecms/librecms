@@ -15,7 +15,9 @@
     "ngInfiniteScroll": "1.0.0",
     "angular-ui-date": "~0.0.3",
     "momentjs": "~2.4.0",
-    "angular-cookies": "~1.2.0"
+    "angular-cookies": "~1.2.0",
+    "angular-truncate": "*",
+    "ngprogress-lite": "~1.0.3"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",

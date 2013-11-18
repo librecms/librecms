@@ -17,9 +17,9 @@ angular.module('librecmsApp')
 
     var userRoles = {
       public: 1,
-      student: 3,
-      instructor: 5,
-      admin: 9
+      student: 2,
+      instructor: 4,
+      admin: 8
     };
 
     // What constitutes a user being 'logged in'?
@@ -27,21 +27,15 @@ angular.module('librecmsApp')
       userRoles.student, userRoles.instructor, userRoles.admin
     ];
 
-    function isLoggedIn() {
-      var user = UserService.getUser();
-      if (!user) return false;
-      if (!user.role) return false;
-      return (loggedInRoles.indexOf(user.role) > -1);
-    }
-
     // Authorization methods
     // @param role is user's role
     // @param masks is an array of (or single) user mask
     function _authorize(role, masks) {
       masks = Array.isArray(masks) ? masks : [masks];
-      return masks.some(function(mask) {
+      var isAuthorized = masks.some(function(mask) {
         return role & mask;
       });
+      return isAuthorized;
     }
 
     // Translate role and mask strings into role/mask Numbers
@@ -73,18 +67,24 @@ angular.module('librecmsApp')
     }
 
     function logout() {
-      Restangular.all('auth').all('logout').post()
-        .then(function() {
-          UserService.clearUser();
-          $state.go('splash');
-        });
+      UserService.clearUser();
+      $state.go('splash');
+      Restangular.all('auth').all('logout').post();
+    }
+
+    function isLoggedIn() {
+      var user = UserService.getUser();
+      if (!user) return false;
+      if (!user.role) return false;
+      return (loggedInRoles.indexOf(user.role) > -1);
     }
 
     return {
       roles: userRoles,
       masks: roleMasks,
-      defaultMask: 'everybody',
+      defaultMask: ['student', 'instructor'],
       defaultRole: 'public',
+      defaultAuthRedirect: 'login',
       authorize: authorize,
       _authorize: _authorize,
       login: login,

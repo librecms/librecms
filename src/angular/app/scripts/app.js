@@ -1,8 +1,14 @@
 'use strict';
 
-var dependencies = ['restangular', 'ui.router', 'ui.calendar', 'infinite-scroll', 'ui.date', 'ngCookies'];
-angular.module('librecmsApp', dependencies)
-  .config(function (RestangularProvider, $stateProvider, $urlRouterProvider) {
+var dependencies =
+  ['restangular', 'ui.router', 'ui.calendar',
+  'infinite-scroll', 'ui.date', 'ngCookies', 'truncate',
+  'ngProgressLite'];
+angular.module('librecmsApp', dependencies).config(
+  function (RestangularProvider, $stateProvider,
+            $urlRouterProvider, $httpProvider, ngProgressLiteProvider) {
+
+    ngProgressLiteProvider.settings.speed = 500;
 
     // constant / reusable widget declarations
     var AUTH_WIDGET = {
@@ -20,6 +26,10 @@ angular.module('librecmsApp', dependencies)
           templateUrl: 'views/splash.html'
         },
         'auth@splash': AUTH_WIDGET
+      },
+      data: {
+        mask: 'public',
+        redirect: 'main.user.home'
       }
     };
     states.push(splashState);
@@ -34,6 +44,10 @@ angular.module('librecmsApp', dependencies)
           templateUrl: 'views/login.html'
         },
         'auth@login': AUTH_WIDGET
+      },
+      data: {
+        mask: 'public',
+        redirect: 'main.user.home'
       }
     };
     states.push(loginState);
@@ -193,8 +207,6 @@ angular.module('librecmsApp', dependencies)
     states.push(error404State);
 
     states.forEach(function(state) {
-      state.data = state.data || { };
-      state.data.auth = state.data.auth || 'public';
       $stateProvider.state(state);
     });
 
@@ -204,14 +216,54 @@ angular.module('librecmsApp', dependencies)
     // Restangular configuration
     RestangularProvider.setBaseUrl('/api');
     RestangularProvider.setRestangularFields({ id: '_id' });
+
+    // Intercept HTTP 401 and 404 errors and direct to appropriate paths
+    $httpProvider.responseInterceptors.push(function($location, $q) {
+      function success(res) {
+        return res;
+      }
+      function error(res) {
+        if (res.status === 401) {
+          $location.path(loginState.url);
+        } else if (res.status === 404) {
+          $location.path(error404State.url);
+        }
+        return $q.reject(res);
+      }
+      return function(promise) {
+        return promise.then(success, error);
+      };
+    });
   })
-  .run(function($rootScope, $state) {
+  /* Intercept state changes to determine if the current user is 
+   *   authorized to transisition to requested state */
+  .run(function($rootScope, $state, $log, UserService, AuthService,
+                ngProgressLite) {
     $rootScope.$on('$stateChangeStart',
-      function() {
-        // @TODO make sure user authorized to go to the next state
+      function(event, toState) {
+        toState.data = toState.data || { };
+        toState.data.mask = toState.data.mask || AuthService.defaultMask;
+        toState.data.redirect =
+          toState.data.redirect || AuthService.defaultAuthRedirect;
+        var mask = toState.data.mask;
+        var redirect = toState.data.redirect;
+        var role = UserService.getRole();
+
+        // Is the current user authorized to view this state?
+        var isAuthorized = AuthService.authorize(role, mask);
+        if (!isAuthorized) {
+          event.preventDefault();
+          $state.go(redirect);
+        }
       });
     $rootScope.$on('$stateNotFound', function() {
       $state.go('404');
+    });
+
+    // Progress bar event listeners 
+    $rootScope.$on('$stateChangeStart', function() { ngProgressLite.start(); } );
+    $rootScope.$on('$stateChangeSuccess', function() {
+      ngProgressLite.done();
     });
   });
 

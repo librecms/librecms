@@ -30,9 +30,9 @@ angular.module('librecmsApp')
     }
 
     function getPosts() {
-      Courses.get(course._id).getList('events')
-        .then(function(events) {
-          course.events = events;
+      Courses.get(course._id).getList('posts')
+        .then(function(posts) {
+          course.posts = posts;
           setCourse(course);
         });
     }
