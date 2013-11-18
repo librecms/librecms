@@ -238,7 +238,7 @@ angular.module('librecmsApp', dependencies).config(
   /* Intercept state changes to determine if the current user is 
    *   authorized to transisition to requested state */
   .run(function($rootScope, $state, $log, UserService, AuthService,
-                ngProgressLite, $timeout) {
+                ngProgressLite) {
     $rootScope.$on('$stateChangeStart',
       function(event, toState) {
         toState.data = toState.data || { };

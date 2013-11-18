@@ -78,7 +78,7 @@ angular.module('librecmsApp')
         .then(function(submission) {
           $scope.assignment.submissions = $scope.assignment.submissions || [];
           $scope.assignment.submissions.push(submission);
-          $log.info('submission complete. ' + JSON.stringify(submission));
+          $('#submit-modal').modal('hide');
         });
     };
   });
