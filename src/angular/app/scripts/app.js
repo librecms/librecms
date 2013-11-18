@@ -84,6 +84,10 @@ angular.module('librecmsApp', dependencies).config(
         'upcoming@main.user.home': {
           templateUrl: 'views/widgets/eventbar.html',
           controller: 'EventbarCtrl' // have to create different controller for this view
+        },
+        'currentgrades@main.user.home': {
+          templateUrl: 'views/widgets/currentgrades.html',
+          controller: 'CurrentGradesCtrl'
         }
       }
     };
