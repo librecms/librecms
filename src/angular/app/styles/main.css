@@ -114,6 +114,13 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   border-right: 3px solid #3498DB;
 }
 
+.upcoming-events-title {
+  color: #3498DB;
+  text-align: center;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: 300;
+}
+
 
 @media (max-width: 991px) {
   #home-left-container {

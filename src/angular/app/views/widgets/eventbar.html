@@ -1,5 +1,5 @@
 <div ng-controller="EventbarCtrl">
-        <div align="center"><h4>Upcoming Events</h4>
+        <div align="center"><h4 class="upcoming-events-title">Upcoming Events</h4>
         <div ng-repeat="e in events | orderBy:predicate | limitTo:quantity " >
             <div ng-class="{strike:strike}">
             <div class="alert alert-info">
