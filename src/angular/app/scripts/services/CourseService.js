@@ -45,9 +45,18 @@ angular.module('librecmsApp')
         });
     }
 
+    function createPostByCourseId(newPost, courseId) {
+      Restangular.one('courses', courseId).post('posts', newPost)
+        .then(function(post) {
+          course.posts.push(post);
+          setCourse(course);
+        });
+    }
+
     return {
       setCourse: setCourse,
       setCourseById: setCourseById,
+      createPostByCourseId: createPostByCourseId,
       getCourse: getCourse,
       getPosts: getPosts,
       createPost: createPost
