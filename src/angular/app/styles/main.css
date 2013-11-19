@@ -110,15 +110,8 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
   font-weight: bold;
 }
 
-#home-left-container {
+#home-left-container, #course-left-container {
   border-right: 3px solid #3498DB;
-}
-
-.upcoming-events-title {
-  color: #3498DB;
-  text-align: center;
-  font-family: 'Advent Pro', sans-serif;
-  font-weight: 300;
 }
 
 
