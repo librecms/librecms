@@ -3,6 +3,10 @@
 		<br/>
 		<button ng-click="setNewUser()">Call setNewUser</button>
 	</div>
-	<div ui-view="upcoming" id="upcoming-events" class="col-md-6"></div>
-	<div id="timeline-widget" ui-view="timeline" class="col-xs-12 col-md-6"></div>
+	<div id="course-left-container" class="col-xs-12 col-md-7">
+		<div ui-view="upcoming" id="upcoming-events" class="col-xs-12"></div>
+	</div>
+	<div id="course-right-container" class="col-xs-12 col-md-5">
+		<div id="timeline-widget" ui-view="timeline" class="col-xs-12"></div>
+	</div>
 </div>
