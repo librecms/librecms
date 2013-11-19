@@ -30,6 +30,10 @@
   	font-weight: 100;
 }
 
+.upcoming-event-month {
+	font-weight: 200;
+}
+
 .upcoming-events-month {
 	text-align: center;
 	color: #3498DB;
