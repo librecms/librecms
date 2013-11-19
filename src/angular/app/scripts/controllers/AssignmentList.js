@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('AssignmentListCtrl', function($scope, $stateParams, UserService, Restangular, $log) {
+  .controller('AssignmentListCtrl',
+    function($scope, $stateParams, UserService,
+             Restangular, $log, CourseService) {
 
     //Get courseId
     var courseId = $stateParams.courseId;
@@ -96,7 +98,11 @@ angular.module('librecmsApp')
         return;
       }
       Course.one('assignments', $scope.editMaterial._id)
-        .remove().then(function() {
+        .remove().then(function(assignments) {
+          $scope.editMaterial = {};
+          var newCourse = $scope.course || {};
+          newCourse.assignments = assignments;
+          CourseService.setCourse(newCourse);
           $('#remove-modal').modal('hide');
         });
     };
