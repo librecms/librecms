@@ -65,9 +65,13 @@
   background-color: inherit;
   overflow-y: auto;
   overflow-x: hidden;
-  border: 0; 
-  margin: 0;
+  border: none; 
+  margin: 10px 0;
   padding: 3px;
+}
+
+#submission-description:focus {
+  outline: none;
 }
 
 #submission-attachment-list {
