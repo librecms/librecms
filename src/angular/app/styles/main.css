@@ -120,3 +120,8 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
     border-right: none;
   } 
 }
+
+@media (max-width :767px) {
+  #main > div {
+  min-height: initial;
+}
