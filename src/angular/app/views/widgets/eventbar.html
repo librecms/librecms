@@ -1,8 +1,8 @@
 <div ng-controller="EventbarCtrl">
         <div align="center"><h4 class="upcoming-events-title">Upcoming Events</h4>
         <div class="upcoming-events-container">
-        	<h6 class="upcoming-events-month">{{ events[0].start | date:"MMMM" }}</h6>
-        	<div ng-repeat="e in events | orderBy:predicate | limitTo:quantity" class="row">
+        	<h5 class="upcoming-events-month">{{ events[0].start | date:"MMMM" }}</h5>
+        	<div ng-repeat="e in events | orderBy:predicate | limitTo:quantity" class="row upcoming-event">
 	            <div class="alert alert-info">
 	                <input type="checkbox" ng-model="strike">
 	                	<div class="col-xs-3 col-sm-3 col-md-2">

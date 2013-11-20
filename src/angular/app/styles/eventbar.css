@@ -11,6 +11,14 @@
 	margin: 20px 0;
 }
 
+.upcoming-event {
+	border-bottom: 1px dashed #ddd;
+}
+
+.upcoming-event:nth-last-of-type(1){
+	border-bottom: none;
+}
+
 .upcoming-events-container .alert-info {
 	background-color: #fff;
 	border-color: #fff;
@@ -37,10 +45,13 @@
 
 .upcoming-events-month {
 	text-align: center;
-	color: #3498DB;
+	color: #fff;
 	font-family: 'Advent Pro', sans-serif;
   	font-weight: 100;
-  	padding: 10px 0 0 0;
+  	padding: 10px 0;
+  	background-color: #555;
+  	border-top-left-radius: 5px;
+  	border-top-right-radius: 5px;
 }
 
 .upcoming-events-description {
