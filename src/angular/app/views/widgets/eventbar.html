@@ -1,6 +1,6 @@
 <div ng-controller="EventbarCtrl">
     <h4 class="upcoming-events-title">Upcoming Events</h4>
-    <div ng-show="!events.length" class="no-upcoming-events">No Upcoming Events</div>
+    <div ng-show="!events.length" class="alert alert-danger">No Upcoming Events</div>
     <div ng-show="events.length" class="upcoming-events-container">
     	<h5 class="upcoming-events-month">{{ events[0].start | date:"MMMM" }}</h5>
     	<div ng-repeat="e in events | orderBy:predicate | limitTo:quantity" class="row upcoming-event">
