@@ -72,7 +72,7 @@ angular.module('librecmsApp')
       moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
 
       //Get Assignment Route
-      var assignment = Course.one('assignments', assignmentId);  
+      var assignment = Course.one('assignments', $scope.editMaterial._id);  
 
       //Set new information from edit
       var updateAssignment = {
