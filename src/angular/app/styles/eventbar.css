@@ -5,6 +5,14 @@
   font-weight: 300;
 }
 
+.no-upcoming-events {
+	text-align: center;
+	color: #fff;
+  	padding: 10px 0;
+  	background-color: #555;
+  	border-radius: 5px;
+}
+
 .upcoming-events-container {
 	background-color: #fff;
 	border-radius: 5px;
