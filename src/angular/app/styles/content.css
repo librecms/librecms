@@ -1,3 +1,8 @@
+@media(min-width:992px){
+  .lg-float-right{
+    float:right;
+  }
+}
 .content-item {
   min-height: 128px;
 }
