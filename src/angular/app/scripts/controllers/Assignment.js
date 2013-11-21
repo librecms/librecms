@@ -28,6 +28,18 @@ angular.module('librecmsApp')
       $scope.hideCollabs = $scope.hideCollabs === false ? true : false;
     };
 
+    
+    // Cancel/Discard Submission
+    $scope.discardSubmission = function(){
+      $scope.submissionDescription = '';  
+      $scope.query = '';
+      $scope.hideCollabs = true;
+      for(var i=0;i < $scope.submissionCollaborators.length;i++) {
+         $scope.submissionCollaborators.splice(i,$scope.submissionCollaborators.length);
+      }
+      //remove attachments 
+    }
+     
     $scope.submissionCollaborators = [];
 
     // Adding Collaborator Tag
