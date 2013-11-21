@@ -1,17 +1,21 @@
-<div ng-controller="EventbarCtrl">
-    <h4 class="upcoming-events-title">Upcoming Events</h4>
-    <div ng-show="!events.length" class="alert alert-danger">No Upcoming Events</div>
-    <div ng-show="events.length" class="upcoming-events-container">
-    	<h5 class="upcoming-events-month">{{ events[0].start | date:"MMMM" }}</h5>
-    	<div ng-repeat="e in events | orderBy:predicate | limitTo:quantity" class="row upcoming-event">
-            <div class="alert alert-info">
-                <input type="checkbox" ng-model="strike">
-                	<div class="col-xs-3 col-sm-3 col-md-2">
-                		<h6 class="upcoming-event-day">{{e.start | date:"dd" }}</h6>
-                		<h6 class="upcoming-event-month">{{e.start | date:"EEE" }}<h6>
-                	</div>
-                <div ng-class="{strike:strike}" class="col-xs-9 col-sm-9 col-md-10">{{e.title}}</div>
-            </div>
+<div>
+  <h4 class="upcoming-events-title">Upcoming Events</h4>
+  <div ng-show="!events.length" class="alert alert-danger">
+    No Upcoming Events
+  </div>
+  <div ng-show="events.length" class="upcoming-events-container">
+    <h5 class="upcoming-events-month">{{ events[0].start | date:"MMMM" }}</h5>
+    <div ng-repeat="e in events | orderBy:predicate | limitTo:quantity" class="row upcoming-event">
+      <div class="alert alert-info">
+        <input type="checkbox" ng-model="strike"></input>
+        <div class="col-xs-3 col-sm-3 col-md-2">
+          <h6 class="upcoming-event-day">{{e.start | date:"dd" }}</h6>
+          <h6 class="upcoming-event-month">{{e.start | date:"EEE" }}<h6>
         </div>
+        <div ng-class="{strike:strike}" class="col-xs-9 col-sm-9 col-md-10">
+          {{e.title}}
+        </div>
+      </div>
     </div>
+  </div>
 </div>
