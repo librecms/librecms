@@ -34,9 +34,6 @@
 
 .grade-selection-container-title {
   /*border-bottom:1px solid black;*/
-  height:30px;
-  max-height:30px;
-  overflow-y:auto;
   overflow-x:none;
   padding-top:5px;
 }
