@@ -95,7 +95,7 @@ angular.module('librecmsApp')
     $scope.onFileSelect = function($files) {
       $files.forEach(function($file) {
         $scope.upload = $upload.upload({
-          url: '/api/upload',
+          url: '/api/uploads',
           file: $file
         }).success(function(data) {
           $log.info('upload success data = ' + JSON.stringify(data));
