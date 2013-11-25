@@ -42,10 +42,6 @@
   height: 100px;
 }
 
-#assignment-submission-comments {
-  padding-top:20px;
-}
-
 #assignment-submission-widget, #assignment-attachments-widget {
   overflow: hidden;
 }
