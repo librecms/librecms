@@ -2,8 +2,7 @@
 
 angular.module('librecmsApp')
   .controller('AssignmentCtrl',
-              function ($scope, $state, UserService,
-                        Restangular, $stateParams, $log) {
+    function ($scope, $state, UserService, Restangular, $stateParams, $log, $upload) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
 
@@ -31,14 +30,14 @@ angular.module('librecmsApp')
     
     // Cancel/Discard Submission
     $scope.discardSubmission = function(){
-      $scope.submissionDescription = '';  
+      $scope.submissionDescription = '';
       $scope.query = '';
       $scope.hideCollabs = true;
       for(var i=0;i < $scope.submissionCollaborators.length;i++) {
-         $scope.submissionCollaborators.splice(i,$scope.submissionCollaborators.length);
+        $scope.submissionCollaborators.splice(i,$scope.submissionCollaborators.length);
       }
-      //remove attachments 
-    }
+      $scope.submissionAttachments = [];
+    };
      
     $scope.submissionCollaborators = [];
 
@@ -90,5 +89,19 @@ angular.module('librecmsApp')
           $scope.assignment.submissions.push(submission);
           $('#submit-modal').modal('hide');
         });
+    };
+
+    // Borrowed from https://github.com/danialfarid/angular-file-upload, more or less
+    $scope.onFileSelect = function($files) {
+      $files.forEach(function($file) {
+        $scope.upload = $upload.upload({
+          url: '/api/upload',
+          file: $file
+        }).success(function(data) {
+          $log.info('upload success data = ' + JSON.stringify(data));
+        }).error(function(data) {
+          $log.info('upload error data = ' + JSON.stringify(data));
+        });
+      });
     };
   });

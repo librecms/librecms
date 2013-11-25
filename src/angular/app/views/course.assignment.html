@@ -38,7 +38,7 @@
         <div id="assignment-attachments-widget" class="well">
           <ul class="list-unstyled">
             <li data-ng-repeat="attachment in assignment.attachments">
-            <a>{{ attachment.title }}</a>
+            <a>{{ attachment.filename }}</a>
             </li>
           </ul>
         </div>
@@ -64,12 +64,8 @@
             </div> 
             <div id="submission-attachments" class="row col-sm-12 col-xs-12">
               <ul id="submission-attachment-list" class="list-unstyled">
-                <li class="submission-attachment-box">
-                <span class="submission-attachment-box-left col-xs-12"><small>AnotherHomeworkSubmission.pdf</small></span>
-                <i role="button" class="submission-attachment-box-right fa fa-times"></i>
-                </li>
-                <li class="submission-attachment-box">
-                <span class="submission-attachment-box-left col-xs-12"><small>ZachsHomework.pdf</small></span>
+                <li class="submission-attachment-box" ng-repeat="attachment in submissionAttachments">
+                <span class="submission-attachment-box-left col-xs-12"><small>{{ attachment.filename}}</small></span>
                 <i role="button" class="submission-attachment-box-right fa fa-times"></i>
                 </li>
               </ul>
@@ -78,7 +74,7 @@
 
         </div>
 
-        <div id="collaborator-search" class="row submission-collaborator-search-container" ng-style="{visibility: !hideCollabs || 'hidden'}">
+        <div id="collaborator-search" class="row submission-collaborator-search-container" ng-hide="hideCollabs">
           <div class="collaborator-search-input">
             Search: <input ng-model="query" value="name">
           </div>
@@ -103,7 +99,7 @@
           <button type="button" class="btn btn-large btn-primary col-lg-3 col-md-3 col-sm-4 col-xs-12" ng-click="submit()">Submit</button>
           <div title="Add Attachment" class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button">
             <span><i class="fa fa-paperclip fa-lg"></i></span>
-            <input type="file"/>
+            <input type="file" ng-file-select="onFileSelect($files)" multiple/>
           </div>
           <button class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button" id="submission-collaborator-icon" title="Add Collaborator" ng-click="toggleCollabs()"><i class="fa fa-user fa-lg"></i></button>
           <button class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button lg-float-right" id="submission-discard-icon" data-dismiss="modal" aria-hidden="true" ng-click="discardSubmission()"><i class="fa fa-trash-o fa-lg"></i></button>

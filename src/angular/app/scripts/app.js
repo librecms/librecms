@@ -3,7 +3,7 @@
 var dependencies =
   ['restangular', 'ui.router', 'ui.calendar',
   'infinite-scroll', 'ui.date', 'ngCookies', 'truncate',
-  'ngProgressLite'];
+  'ngProgressLite', 'angularFileUpload'];
 angular.module('librecmsApp', dependencies).config(
   function (RestangularProvider, $stateProvider,
             $urlRouterProvider, $httpProvider, ngProgressLiteProvider) {
