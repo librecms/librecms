@@ -4,7 +4,6 @@ angular.module('librecmsApp')
 .controller('CalendarCtrl', function($scope, Restangular) {
 
   function getUserEvents() {
-    console.log('getUserEvents = ' + JSON.stringify($scope.user));
     var startOfThisMonth = moment(new Date()).startOf('month').toDate().getTime();
     Restangular.one('users', $scope.user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
       // Gather events from API and reformat their
@@ -16,6 +15,7 @@ angular.module('librecmsApp')
       });
       $scope.eventSources.push($scope.events);
     });
+    console.log(JSON.stringify($scope.eventSources));
   }
 
   $scope.events = [];
