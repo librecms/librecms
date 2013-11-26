@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('librecmsApp')
-.controller('EventbarCtrl', function($scope, Restangular, UserService) {
+.controller('EventbarCtrl', function($scope, UserService, Restangular) {
 
   function getUserEvents() {
-    console.log('getUserEvents = ' + JSON.stringify($scope.user));
-    if($scope.user) {
+    var user = UserService.getUser();
+    if(user) {
       var startOfThisMonth = moment(new Date()).startOf('month').toDate().getTime();
-      Restangular.one('users', $scope.user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
+      Restangular.one('users', user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
         // Gather events from API and reformat their
         // start and end components into Javascript Date objects
         $scope.events = events;
@@ -29,9 +29,7 @@ angular.module('librecmsApp')
         });
   }
 
-  $scope.events = [];
-
-  if ($scope.user) {
+  if ($scope.user || $scope.user === undefined) {
     getUserEvents();
   }
 

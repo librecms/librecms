@@ -20,9 +20,6 @@
 }
 
 /************************ Timeline Style *********************/
-#timeline-widget {
-  border-left: 3px solid #3498DB;
-}
 
 .timeline {
   position: relative;
@@ -218,7 +215,7 @@
 @media only screen and (max-width: 992px) {
 
   #timeline-widget {
-    border-left: none;
+    /*border-left: none;*/
   }
 
   .date {

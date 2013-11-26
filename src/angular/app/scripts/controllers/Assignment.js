@@ -2,8 +2,7 @@
 
 angular.module('librecmsApp')
   .controller('AssignmentCtrl',
-              function ($scope, $state, UserService,
-                        Restangular, $stateParams, $log) {
+    function ($scope, $state, UserService, Restangular, $stateParams, $log, $upload) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
 
@@ -28,6 +27,18 @@ angular.module('librecmsApp')
       $scope.hideCollabs = $scope.hideCollabs === false ? true : false;
     };
 
+    
+    // Cancel/Discard Submission
+    $scope.discardSubmission = function(){
+      $scope.submissionDescription = '';
+      $scope.query = '';
+      $scope.hideCollabs = true;
+      for(var i=0;i < $scope.submissionCollaborators.length;i++) {
+        $scope.submissionCollaborators.splice(i,$scope.submissionCollaborators.length);
+      }
+      $scope.submissionAttachments = [];
+    };
+     
     $scope.submissionCollaborators = [];
 
     // Adding Collaborator Tag
@@ -67,9 +78,7 @@ angular.module('librecmsApp')
           !UserService.getUser()._id) {
         $log.error('attempting to submit to invalid user');
       }
-      var studentId = UserService.getUser()._id;
       var newSubmission = {
-        studentId : studentId,
         description: $scope.submissionDescription,
         attachments: $scope.submissionAttachments,
         collaborators: $scope.submissionCollaborators
@@ -78,7 +87,21 @@ angular.module('librecmsApp')
         .then(function(submission) {
           $scope.assignment.submissions = $scope.assignment.submissions || [];
           $scope.assignment.submissions.push(submission);
-          $log.info('submission complete. ' + JSON.stringify(submission));
+          $('#submit-modal').modal('hide');
         });
+    };
+
+    // Borrowed from https://github.com/danialfarid/angular-file-upload, more or less
+    $scope.onFileSelect = function($files) {
+      $files.forEach(function($file) {
+        $scope.upload = $upload.upload({
+          url: '/api/uploads',
+          file: $file
+        }).success(function(data) {
+          $log.info('upload success data = ' + JSON.stringify(data));
+        }).error(function(data) {
+          $log.info('upload error data = ' + JSON.stringify(data));
+        });
+      });
     };
   });

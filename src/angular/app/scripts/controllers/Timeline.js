@@ -21,7 +21,6 @@ angular.module('librecmsApp')
       initializeCourse();
     }
 
-
     // Listen to changes to the course object
     $scope.$on('CourseService.courseUpdated', initializeCourse);
 

@@ -18,11 +18,31 @@ angular.module('librecmsApp')
     console.log(JSON.stringify($scope.eventSources));
   }
 
+  function getCourseAssignments() {
+    //console.log('getCourseAssignments = ' + JSON.stringify($scope.user));
+    var startOfThisMonth = moment(new Date()).startOf('month').toDate().getTime();
+    Restangular.one('courses', $scope.course._id).getList('assignments', {start: startOfThisMonth}).then(function(assignments) {
+      // Gather assignments from API and reformat their
+      // start and end components into Javascript Date objects
+      $scope.assignments = assignments;
+      $scope.assignments.map(function(assignment) {
+        assignment.start = new Date(assignment.posted);
+        assignment.end = new Date(assignment.due);
+        assignment.color = '#e74c3c' //move this somewhere else 
+      });
+      $scope.eventSources.push($scope.assignments);
+    });
+  }
+
   $scope.events = [];
   $scope.eventSources = $scope.events;
 
   if ($scope.user && $scope.user._id) {
     getUserEvents();
+  }
+
+  if ($scope.course){
+    getCourseAssignments();
   }
 
   $scope.$on('UserService.update', getUserEvents);

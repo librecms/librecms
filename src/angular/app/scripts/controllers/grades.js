@@ -2,7 +2,40 @@
 
 angular.module('librecmsApp')
   .controller('GradesCtrl', function($scope,$stateParams,UserService) {
+
+  //Get Grades for the course
+  /*var userId = UserService.getUser();
+  var courseId = $stateParams.courseId;
+ 
+  var userGradeList = Restangular.one('users', userId)
+              .one('courses', courseId)
+              .one('grades').getList();
+  var attendance = [];
+  var homework = [];
+  var quizzes = [];
+  var exams = [];
+  var other = [];
+
+  //Sort Grades
+  for (var i = 0; i < userGradeList.length; i++) {
+    if (userGradeList[i].type === "homework") {
+      homework.push(userGradeList[i]);
+    }
+    else if (userGradeList[i].type === "attendance") {
+      attendance.push(userGradeList[i]);
+    }
+    else if (userGradeList[i].type === "quiz") {
+      quizzes.push(userGradeList[i]);
+    }
+    else if (userGradeList[i].type === "exam") {
+      exams.push(userGradeList[i]);
+    }
+    else {
+      other.push(userGradeList[i]);
+  }
+  var all = userGradeList;*/
   
+  //Static grades
   var attendance = [
     {
       title: 'oct1',

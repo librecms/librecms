@@ -1,14 +1,14 @@
 <!-- Student View -->
-<div class="container" auth="student">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" auth="student">
   <div class="row">
     <div class="col-lg-5">
       Sort By: 
-      <select ng-model="contentSort" ng-init="contentSort='posted'">
+      <select ng-model="contentSort" ng-init="contentSort='-posted'">
         <option value="relevance">Relevance</option>
-        <option value="-posted">Posted (Earliest)</option>
-        <option value="posted">Posted (Latest)</option>
-        <option value="-due">Due date (Earliest)</option>
-        <option value="due">Due Date (Latest)</option>
+        <option value="-posted">Posted (descending)</option>
+        <option value="posted">Posted (ascending)</option>
+        <option value="-due">Due date (descending)</option>
+        <option value="due">Due Date (ascending)</option>
       </select>
     </div>
   </div>
@@ -24,34 +24,34 @@
 </div>
 
 <!-- Instructor View -->
-<div class="container" auth="instructor" >
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" auth="instructor" >
   <div class="row">
     <div class="col-lg-5">
       Sort By: 
-      <select ng-model="contentSort" ng-init="contentSort='posted'">
+      <select ng-model="contentSort" ng-init="contentSort='-posted'">
         <option value="relevance">Relevance</option>
-        <option value="-posted">Posted (Earliest)</option>
-        <option value="posted">Posted (Latest)</option>
-        <option value="-due">Due date (Earliest)</option>
-        <option value="due">Due Date (Latest)</option>
+        <option value="-posted">Posted (descending)</option>
+        <option value="posted">Posted (ascending)</option>
+        <option value="-due">Due date (descending)</option>
+        <option value="due">Due Date (ascending)</option>
       </select>
     </div>
     <div id="create-material-button" class="col-lg-7 ">
-      <button data-toggle="modal" data-target="#submit-modal" class="btn btn-xs btn-primary">New</button>
+      <button data-toggle="modal" data-target="#new-assignment-submit-modal" class="btn btn-xs btn-primary">New</button>
     </div>
   </div>
   <div class="row">
     <div id="" class="content-item col-lg-4 col-md-4 col-sm-4 col-xs-12  well" ng-repeat="content in contentList | orderBy:contentSort">
       <h6><a href="/#/course/{{ course._id }}/{{ itemType }}/{{ content._id }}" class="content-list-name">{{ content.title }}</a></h6>
       <b>Posted:</b> {{content.posted | date:'shortDate'}} <b>Due:</b> {{content.due | date:'shortDate'}}<br>
-      <a data-toggle="modal" data-target="#edit-modal" class="col-lg-2 material-instructor-links" ng-click="editModal({{content}})"><small>Edit</small></a>
+      <a data-toggle="modal" data-target="#edit-assignment-modal" class="col-lg-2 material-instructor-links" ng-click="editModal({{content}})"><small>Edit</small></a>
       <a data-toggle="modal" data-target="#remove-modal" class="col-lg-2 material-instructor-links" ng-click="editModal({{content}})"><small>Remove</small></a>
     </div>
   </div>
 </div>
 
 <!-- New Material Modal -->
-<div class="modal fade" id="submit-modal" tabindex="-1" role="dialog" aria-labelledby="submit-modal" aria-hidden="true">
+<div class="modal fade" id="new-assignment-submit-modal" tabindex="-1" role="dialog" aria-labelledby="new-assignment-submit-modal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -101,7 +101,7 @@
 </div><!-- /.modal -->
 
 <!-- Edit Modal -->
-<div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="submit-modal" aria-hidden="true">
+<div class="modal fade" id="edit-assignment-modal" tabindex="-1" role="dialog" aria-labelledby="new-assignment-submit-modal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -151,7 +151,7 @@
 </div><!-- /.modal -->
 
 <!-- Remove Confirmation Modal -->
-<div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="submit-modal" aria-hidden="true">
+<div class="modal fade" id="remove-modal" tabindex="-1" role="dialog" aria-labelledby="new-assignment-submit-modal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -163,7 +163,7 @@
       </div><!-- /.modal-body -->
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-        <button type="button" class="btn btn-primary" ng-click="updateContent()">Yes</button>
+        <button type="button" class="btn btn-primary" ng-click="removeContent()">Yes</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

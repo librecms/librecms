@@ -1,3 +1,8 @@
+@media(min-width:992px){
+  .lg-float-right{
+    float:right;
+  }
+}
 .content-item {
   min-height: 128px;
 }
@@ -37,10 +42,6 @@
   height: 100px;
 }
 
-#assignment-submission-comments {
-  padding-top:20px;
-}
-
 #assignment-submission-widget, #assignment-attachments-widget {
   overflow: hidden;
 }
@@ -65,9 +66,13 @@
   background-color: inherit;
   overflow-y: auto;
   overflow-x: hidden;
-  border: 0; 
-  margin: 0;
+  border: none; 
+  margin: 10px 0;
   padding: 3px;
+}
+
+#submission-description:focus {
+  outline: none;
 }
 
 #submission-attachment-list {

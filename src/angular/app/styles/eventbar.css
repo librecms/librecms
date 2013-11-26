@@ -1,0 +1,77 @@
+.upcoming-events-title {
+  color: #3498DB;
+  text-align: center;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: 300;
+}
+
+.no-upcoming-events {
+	text-align: center;
+	color: #fff;
+  	padding: 10px 0;
+  	background-color: #555;
+  	border-radius: 5px;
+}
+
+.upcoming-events-container {
+	background-color: #fff;
+	border-radius: 5px;
+	margin: 20px 0;
+}
+
+.upcoming-event {
+	border-bottom: 1px dashed #ddd;
+}
+
+.upcoming-event:nth-last-of-type(1){
+	border-bottom: none;
+}
+
+.upcoming-events-container .alert-info {
+	background-color: #fff;
+	border-color: #fff;
+	text-align: left;
+	color: #bbb;
+}
+
+.upcoming-events-container input[type=checkbox] {
+	float: right;
+}
+
+.upcoming-event-day, .upcoming-event-month {
+	color: #3498DB;
+}
+
+.upcoming-event-day {
+	font-family: 'Advent Pro', sans-serif;
+  	font-weight: 100;
+}
+
+.upcoming-event-month {
+	font-weight: 200;
+}
+
+.upcoming-events-month {
+	text-align: center;
+	color: #fff;
+	font-family: 'Advent Pro', sans-serif;
+  	font-weight: 100;
+  	padding: 10px 0;
+  	background-color: #555;
+  	border-top-left-radius: 5px;
+  	border-top-right-radius: 5px;
+}
+
+.upcoming-events-description {
+	padding-left: 10px;
+}
+
+.strike {
+	color: red;
+}
+
+@media (max-width: 991px) {
+	.upcoming-events-container {
+		margin: 0;
+	}
+}
