@@ -1,22 +1,31 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('GradesCtrl', function($scope,$stateParams,UserService) {
+  .controller('GradesCtrl', function($scope,$stateParams,UserService,Restangular,CourseService,$log) {
 
-  //Get Grades for the course
-  /*var userId = UserService.getUser();
+  //Get courseId
   var courseId = $stateParams.courseId;
+  var Course = Restangular.one('courses',courseId);
+
+  //Get userId
+  var userId = UserService.getUser();
  
-  var userGradeList = Restangular.one('users', userId)
-              .one('courses', courseId)
-              .one('grades').getList();
+  //Get Grades for the course
+  if ($scope.course && $scope.course.grades) {
+    $scope.userGradelist = $scope.course.grades;
+  }
+  Course.one('users', userId).getList('grades')
+    .then(function(grades) {
+       $scope.userGradeList = grades;
+    });
+  
   var attendance = [];
   var homework = [];
   var quizzes = [];
   var exams = [];
   var other = [];
 
-  //Sort Grades
+  //Sort Grade List
   for (var i = 0; i < userGradeList.length; i++) {
     if (userGradeList[i].type === "homework") {
       homework.push(userGradeList[i]);
@@ -33,10 +42,10 @@ angular.module('librecmsApp')
     else {
       other.push(userGradeList[i]);
   }
-  var all = userGradeList;*/
+  var all = userGradeList;
   
   //Static grades
-  var attendance = [
+  /*var attendance = [
     {
       title: 'oct1',
       score: '100'
@@ -84,6 +93,7 @@ angular.module('librecmsApp')
   all.push.apply(all,homework);
   all.push.apply(all,quizzes);
   all.push.apply(all,other);
+  */
 
   // Calculate Homework Average
   var hwAvg = 0;
