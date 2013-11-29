@@ -39,7 +39,26 @@
       </div>
     </div>
   </div>
-    <div class="row grade-selection-tabs">
+<!-- Grades Mobile View: Select --> 
+  <div ng-show="gradeTabMobile">  
+    <select multiple class="form-control" >
+      <option ng-click="changeTab('all')">
+        All</option>
+      <option ng-click="changeTab('attendance')">
+        Attendance</option>
+      <option ng-click="changeTab('exams')">
+        Exams</option>
+      <option ng-click="changeTab('homework')">
+        Homework</option>
+      <option ng-click="changeTab('quizzes')">
+        Quizzes</option>
+      <option ng-click="changeTab('other')">
+        Other</option>
+    </select>
+  </div>
+
+ <!-- Grades Large View: Tabs --> 
+  <div class="row grade-selection-tabs" ng-hide="gradeTabMobile">
     <div ng-class="{active: activeTab=='all'}" class="grade-tab col-lg-2 col-sm-2 col-xs-2" ng-click="changeTab('all')">
       All
     </div>
@@ -58,7 +77,8 @@
     <div ng-class="{active: activeTab=='other'}" class="grade-tab col-lg-2 col-sm-2 col-xs-2" ng-click="changeTab('other')">
       Other
     </div>
-  </div>
+  </div> 
+  
   <div class="row grade-selection-container col-lg-12">
     <div class="row">
       <div class="col-lg-4 col-sm-4 col-xs-4 grade-selection-container-header">

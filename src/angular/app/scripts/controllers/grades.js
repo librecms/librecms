@@ -25,6 +25,26 @@ angular.module('librecmsApp')
   var exams = [];
   var other = [];
 
+  // Change Tabs to Scroll Select on Mobile/Small Views
+  if(window.innerWidth <= 768){
+    $scope.gradeTabMobile = true;
+    $scope.$apply();
+  }
+  else if (window.innerWidth >768){
+    $scope.gradeTabMobile = false;
+    $scope.$apply();
+  }
+  window.onresize = function(){
+    if(window.innerWidth <= 768){
+      $scope.gradeTabMobile = true;
+      $scope.$apply();
+    }
+    else{
+      $scope.gradeTabMobile = false;
+      $scope.$apply();
+    }
+  }
+
   //Sort Grade List
   for (var i = 0; i < userGradeList.length; i++) {
     if (userGradeList[i].type === "homework") {

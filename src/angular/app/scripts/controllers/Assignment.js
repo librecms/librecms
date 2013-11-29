@@ -29,7 +29,7 @@ angular.module('librecmsApp')
       $scope.hideCollabs = $scope.hideCollabs === false ? true : false;
     };
 
-    
+        
     // Cancel/Discard Submission
     $scope.discardSubmission = function(){
       $scope.submissionDescription = '';

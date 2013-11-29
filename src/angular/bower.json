@@ -28,8 +28,7 @@
   "resolutions": {
     "fullcalendar": "7808e352e7b24c296424f05bfa642f08face0ac8",
     "angular": "1.2.0-rc.3",
-    "jquery": "~2.0.3",
-    "bootstrap": "e922ae8c764dcc4e768e6009280c259c3c004ccf"
+    "jquery": "~2.0.3"
   },
   "version": "0.0.0"
 }
