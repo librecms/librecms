@@ -17,8 +17,20 @@ angular.module('librecmsApp')
     $scope.$on('CourseService.courseUpdated', function() {
       $scope.course = CourseService.getCourse();
     });
-
+    
     // Gather course ID from the state (/course/{courseId}) 
     var courseId = $stateParams.courseId;
     CourseService.setCourseById(courseId);
+    
+    
+    // NavBar Visibility: Hidden when course isn't selected
+    $scope.courseSelected = false;
+    $scope.resetNavBar = function() {
+      $scope.courseSelected = false;
+      $scope.course.name = '';
+    };
+    $scope.courseSelect = function() {
+      $scope.courseSelected = true;
+    }; 
+    
   });
