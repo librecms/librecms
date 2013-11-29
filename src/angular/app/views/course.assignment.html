@@ -1,7 +1,7 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
   <div id="assignment-header" class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <h3>{{ assignment.name }}</h3>
+      <h3>{{ assignment.title }}</h3>
       <div>
         Posted: {{ assignment.posted | date:'shortDate' }} 
         Due: {{ assignment.due | date:'shortDate' }}
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
-      <div id="assignment-submission-dropbox" class="row">
+      <div id="assignment-submission-dropbox" class="row" auth="student">
         DROPBOX
         <div id="assignment-submission-widget" class="well">
           <!-- Button trigger modal -->
@@ -45,7 +45,17 @@
       </div> <!-- /.row -->
     </div>
   </div>
-
+  <div auth="instructor">
+    <h6>Student Submissions</h6>
+    <div class="row well" ng-repeat="studentSubmission in submissions">
+      <h3>{{studentSubmission.studentName}}</h3><br> 
+      Collaborators:{{studentSubmission.collaborators}}<br>
+      {{studentSubmission.description}}
+      <div ng-repeat="attachment in studentSubmission.attachments" class="col-lg-4">
+        {{attachment.name}}
+      </div>
+    </div>
+  </div>
 </div> <!-- /.container -->
 
 <!-- Modal -->

@@ -12,6 +12,8 @@ angular.module('librecmsApp')
     if (courseId && assignmentId) {
       Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(function(assignment) {
         $scope.assignment = assignment;
+        // Get all Student Submissions for assignment
+        $scope.submissions = $scope.assignment.submissions;
       });
     }
 
@@ -78,7 +80,9 @@ angular.module('librecmsApp')
           !UserService.getUser()._id) {
         $log.error('attempting to submit to invalid user');
       }
+      console.log("studentName: " + UserService.getUser().firstName);
       var newSubmission = {
+        studentName: UserService.getUser().firstName + ' ' + UserService.getUser().lastName,
         description: $scope.submissionDescription,
         attachments: $scope.submissionAttachments,
         collaborators: $scope.submissionCollaborators

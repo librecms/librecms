@@ -41,6 +41,7 @@ angular.module('librecmsApp')
     }
     else {
       other.push(userGradeList[i]);
+    }
   }
   var all = userGradeList;
   
