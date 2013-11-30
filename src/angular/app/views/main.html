@@ -50,7 +50,7 @@
       <div id="top-widget" class="row">
         <nav id="top-navbar" class="navbar navbar-default" role="navigation">
           <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
+          <div class="navbar-header" ng-style="{visibility: courseSelected || 'hidden'}">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
               <span class="sr-only">Open</span>
               <span class="icon-bar"></span>
@@ -61,8 +61,8 @@
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav" ng-show="courseSelected">
+          <div class="collapse navbar-collapse navbar-ex1-collapse" ng-style="{visibility: courseSelected || 'hidden'}">
+            <ul class="nav navbar-nav" >
               <li ng-class="{ active: $state.is('main.course.home') }">
                 <a ui-sref="main.course.home({courseId: course._id})">Home</a>
               </li>
