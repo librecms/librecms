@@ -80,7 +80,7 @@ angular.module('librecmsApp')
           !UserService.getUser()._id) {
         $log.error('attempting to submit to invalid user');
       }
-      console.log("studentName: " + UserService.getUser().firstName);
+
       var newSubmission = {
         studentName: UserService.getUser().firstName + ' ' + UserService.getUser().lastName,
         description: $scope.submissionDescription,

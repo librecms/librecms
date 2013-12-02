@@ -3,8 +3,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <h3>{{ assignment.title }}</h3>
       <div>
-        Posted: {{ assignment.posted | date:'shortDate' }} 
-        Due: {{ assignment.due | date:'shortDate' }}
+        <b>Posted:</b> {{ assignment.posted | date:'shortDate' }} 
+        <b>Due:</b> {{ assignment.due | date:'shortDate' }}
       </div>
     </div>
   </div>
@@ -45,14 +45,20 @@
       </div> <!-- /.row -->
     </div>
   </div>
-  <div auth="instructor">
+  <div auth="instructor" class="instructor-assignment-submissions">
     <h6>Student Submissions</h6>
-    <div class="row well" ng-repeat="studentSubmission in submissions">
-      <h3>{{studentSubmission.studentName}}</h3><br> 
-      Collaborators:{{studentSubmission.collaborators}}<br>
-      {{studentSubmission.description}}
-      <div ng-repeat="attachment in studentSubmission.attachments" class="col-lg-4">
-        {{attachment.name}}
+    <div class="row well" ng-repeat="studentSubmission in submissions | orderBy:'-posted'">
+      <div class="col-lg-3">
+        <b>{{studentSubmission.studentName}}</b> 
+      </div>
+      <div class="col-lg-3 instructor-assignment-submissions-collaborators">
+        {{studentSubmission.collaborators}}<br>
+      </div>
+      <div class="col-lg-3 instructor-assignment-submissions-description">
+        {{studentSubmission.description}}
+      </div>
+      <div ng-repeat="attachment in studentSubmission.attachments" class="col-lg-3 instructor-assignment-submissions-attachments">
+        <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
       </div>
     </div>
   </div>
