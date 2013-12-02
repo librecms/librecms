@@ -8,7 +8,7 @@ angular.module('librecmsApp')
   var Course = Restangular.one('courses',courseId);
 
   //Get userId
-  var userId = UserService.getUser();
+  var userId = UserService.getUser()._id;
  
   //Get Grades for the course
   if ($scope.course && $scope.course.grades) {
@@ -28,42 +28,39 @@ angular.module('librecmsApp')
   // Change Tabs to Scroll Select on Mobile/Small Views
   if(window.innerWidth <= 768){
     $scope.gradeTabMobile = true;
-    $scope.$apply();
   }
   else if (window.innerWidth >768){
     $scope.gradeTabMobile = false;
-    $scope.$apply();
   }
   window.onresize = function(){
     if(window.innerWidth <= 768){
       $scope.gradeTabMobile = true;
-      $scope.$apply();
     }
     else{
       $scope.gradeTabMobile = false;
-      $scope.$apply();
     }
-  }
+  };
 
+  $scope.userGradeList = $scope.userGradeList || {};
   //Sort Grade List
-  for (var i = 0; i < userGradeList.length; i++) {
-    if (userGradeList[i].type === "homework") {
-      homework.push(userGradeList[i]);
+  for (var i = 0; i < $scope.userGradeList.length; i++) {
+    if ($scope.userGradeList[i].type === 'homework') {
+      homework.push($scope.userGradeList[i]);
     }
-    else if (userGradeList[i].type === "attendance") {
-      attendance.push(userGradeList[i]);
+    else if ($scope.userGradeList[i].type === 'attendance') {
+      attendance.push($scope.userGradeList[i]);
     }
-    else if (userGradeList[i].type === "quiz") {
-      quizzes.push(userGradeList[i]);
+    else if ($scope.userGradeList[i].type === 'quiz') {
+      quizzes.push($scope.userGradeList[i]);
     }
-    else if (userGradeList[i].type === "exam") {
-      exams.push(userGradeList[i]);
+    else if ($scope.userGradeList[i].type === 'exam') {
+      exams.push($scope.userGradeList[i]);
     }
     else {
-      other.push(userGradeList[i]);
+      other.push($scope.userGradeList[i]);
     }
   }
-  var all = userGradeList;
+  var all = $scope.userGradeList;
   
   //Static grades
   /*var attendance = [
@@ -121,47 +118,47 @@ angular.module('librecmsApp')
   for (var i = 0; i < homework.length; i++) {
     hwAvg = (hwAvg + parseInt(homework[i].score)) / (i+1);
   }
-  $scope.homeworkAverage = hwAvg + "%";
+  $scope.homeworkAverage = hwAvg + '%';
 
   // Calculate Quiz Average
   var quizAvg = 0;
   for (var i = 0; i < quizzes.length; i++) {
     quizAvg = (quizAvg + parseInt(quizzes[i].score)) / (i+1);
   }
-  $scope.quizAverage = quizAvg + "%";
+  $scope.quizAverage = quizAvg + '%';
 
   // Calculate Quiz Average
   var examAvg = 0;
   for (var i = 0; i < exams.length; i++) {
-    examAvg = (examAvg + parseInt(exams[i].score)) / (i+1);
+    examAvg = (examAvg + parseInt(exams[i].score, 10)) / (i+1);
   }
-  $scope.examAverage = examAvg + "%";
+  $scope.examAverage = examAvg + '%';
 
   //Function to display tab changes in scope
   $scope.changeTab = function(filter) {
     $scope.activeTab = filter;
-    if(filter ==="all") {
+    if(filter ==='all') {
       $scope.gradeList = all;
     }
-    else if(filter ==="attendance") {
+    else if(filter ==='attendance') {
       $scope.gradeList = attendance;
     }
-    else if(filter === "exams") {
+    else if(filter === 'exams') {
       $scope.gradeList = exams;
     }
-    else if(filter === "homework") {
+    else if(filter === 'homework') {
       $scope.gradeList = homework;
     }
-    else if(filter === "quizzes") {
+    else if(filter === 'quizzes') {
       $scope.gradeList = quizzes;
     }
-    else if(filter === "other") {
+    else if(filter === 'other') {
       $scope.gradeList = other;
     }
     else {
-      console.log("Error sumtin is a wrong up in heehr.");
+      console.log('Error sumtin is a wrong up in heehr.');
     }
-  }
+  };
 
   $scope.changeTab('all');
 });
