@@ -39,4 +39,18 @@ angular.module('librecmsApp')
       CourseService.createPost(newPost);
     };
 
+    $scope.addPostByCourseId = function(courseId) {
+      if(courseId){
+        console.log('adding post by course id')
+
+        var newPost = {
+          date: (new Date()).getTime(),
+          text: $scope.announcement,
+          generated: false
+        };
+
+        CourseService.createPostByCourseId(newPost, courseId);
+      }
+    };
+
   });

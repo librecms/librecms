@@ -80,12 +80,12 @@ angular.module('librecmsApp')
           !UserService.getUser()._id) {
         $log.error('attempting to submit to invalid user');
       }
-      console.log("studentName: " + UserService.getUser().firstName);
+
       var newSubmission = {
         studentName: UserService.getUser().firstName + ' ' + UserService.getUser().lastName,
         description: $scope.submissionDescription,
         attachments: $scope.submissionAttachments,
-        collaborators: $scope.submissionCollaborators
+        collaborators: $scope.submissionCollaborators,
       };
       Assignment.post('submit', newSubmission)
         .then(function(submission) {
@@ -101,8 +101,10 @@ angular.module('librecmsApp')
         $scope.upload = $upload.upload({
           url: '/api/uploads',
           file: $file
-        }).success(function(data) {
-          $log.info('upload success data = ' + JSON.stringify(data));
+        }).success(function(newFile) {
+          $scope.submissionAttachments = $scope.submissionAttachments || [];
+          $scope.submissionAttachments = $scope.submissionAttachments.concat(newFile);
+          $log.info('upload success data = ' + JSON.stringify(newFile));
         }).error(function(data) {
           $log.info('upload error data = ' + JSON.stringify(data));
         });
