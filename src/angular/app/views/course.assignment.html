@@ -3,8 +3,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <h3>{{ assignment.title }}</h3>
       <div>
-        Posted: {{ assignment.posted | date:'shortDate' }} 
-        Due: {{ assignment.due | date:'shortDate' }}
+        <b>Posted:</b> {{ assignment.posted | date:'shortDate' }} 
+        <b>Due:</b> {{ assignment.due | date:'shortDate' }}
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
         </small>
       </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
       <div id="assignment-submission-dropbox" class="row" auth="student">
         DROPBOX
         <div id="assignment-submission-widget" class="well">
@@ -26,7 +26,7 @@
           <div>
             <ul class="list-unstyled">
               <li ng-repeat="submission in assignment.submissions | orderBy:'posted':true">
-                <a>{{ submission._id | characters:10 }}</a>
+              <a>{{ submission._id | characters:10 }}</a>
               </li>
             </ul>
           </div>
@@ -38,21 +38,43 @@
         <div id="assignment-attachments-widget" class="well">
           <ul class="list-unstyled">
             <li data-ng-repeat="attachment in assignment.attachments">
-            <a>{{ attachment.filename }}</a>
+            <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
             </li>
           </ul>
         </div>
       </div> <!-- /.row -->
     </div>
   </div>
-  <div auth="instructor">
+  <div auth="instructor" class="instructor-assignment-submissions">
     <h6>Student Submissions</h6>
-    <div class="row well" ng-repeat="studentSubmission in submissions">
-      <h3>{{studentSubmission.studentName}}</h3><br> 
-      Collaborators:{{studentSubmission.collaborators}}<br>
-      {{studentSubmission.description}}
-      <div ng-repeat="attachment in studentSubmission.attachments" class="col-lg-4">
-        {{attachment.name}}
+    <div class="row">
+      <div class="col-lg-3 instructor-assignment-submissions-header">
+        Student Name
+      </div>
+      <div class="col-lg-3 instructor-assignment-submissions-header">
+        Collaborators
+      </div>
+      <div class="col-lg-3 instructor-assignment-submissions-header">
+        Description
+      </div>
+      <div class="col-lg-3 instructor-assignment-submissions-header">
+        Attachments
+      </div>
+    </div>
+    <div class="row well" ng-repeat="studentSubmission in submissions | orderBy:'-posted'">
+      <div class="col-lg-3">
+        <b>{{studentSubmission.studentName}}</b> 
+      </div>
+      <div class="col-lg-3 instructor-assignment-submissions-collaborators">
+        {{studentSubmission.collaborators}}<br>
+      </div>
+      <div class="col-lg-3 instructor-assignment-submissions-description">
+        {{studentSubmission.description}}
+      </div>
+      <div class="col-lg-3">
+        <div ng-repeat="attachment in studentSubmission.attachments" class="instructor-assignment-submissions-attachments">
+          <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
+        </div>
       </div>
     </div>
   </div>
@@ -75,7 +97,7 @@
             <div id="submission-attachments" class="row col-sm-12 col-xs-12">
               <ul id="submission-attachment-list" class="list-unstyled">
                 <li class="submission-attachment-box" ng-repeat="attachment in submissionAttachments">
-                <span class="submission-attachment-box-left col-xs-12"><small>{{ attachment.filename}}</small></span>
+                <span class="submission-attachment-box-left col-xs-12"><small>{{ attachment.basename }}</small></span>
                 <i role="button" class="submission-attachment-box-right fa fa-times"></i>
                 </li>
               </ul>
@@ -109,7 +131,9 @@
           <button type="button" class="btn btn-large btn-primary col-lg-3 col-md-3 col-sm-4 col-xs-12" ng-click="submit()">Submit</button>
           <div title="Add Attachment" class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button">
             <span><i class="fa fa-paperclip fa-lg"></i></span>
-            <input type="file" ng-file-select="onFileSelect($files)" multiple/>
+            <input type="file" 
+            ng-file-select="uploadFiles($files)"
+            multiple/>
           </div>
           <button class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button" id="submission-collaborator-icon" title="Add Collaborator" ng-click="toggleCollabs()"><i class="fa fa-user fa-lg"></i></button>
           <button class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button lg-float-right" id="submission-discard-icon" data-dismiss="modal" aria-hidden="true" ng-click="discardSubmission()"><i class="fa fa-trash-o fa-lg"></i></button>

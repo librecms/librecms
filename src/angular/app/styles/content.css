@@ -185,3 +185,28 @@
  margin: 1px 5px 1px 5px;
  background-color: lightgray;
 }
+
+/* Instructor Assignment Submissions */
+.instructor-assignment-submissions {
+  overflow-x:none;
+  overflow-y:auto;
+  max-height:1500px;
+}
+
+.instructor-assignment-submissions-collaborators {
+  overflow-x:none;
+  overflow-y:auto;
+  max-height:50px;
+}
+
+.instructor-assignment-submissions-description {
+  overflow-x:none;
+  overflow-y:auto;
+  max-height:50px;
+}
+
+.instructor-assignment-submissions-attachments {
+  overflow-x:none;
+  overflow-y:auto;
+  max-height:50px;
+}

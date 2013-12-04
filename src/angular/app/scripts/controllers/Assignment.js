@@ -2,7 +2,8 @@
 
 angular.module('librecmsApp')
   .controller('AssignmentCtrl',
-    function ($scope, $state, UserService, Restangular, $stateParams, $log, $upload) {
+    function ($scope, $state, UserService, Restangular,
+              $stateParams, $log, UploadService) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
 
@@ -25,8 +26,9 @@ angular.module('librecmsApp')
         });
       });
 
+    $scope.hideCollabs = true;
     $scope.toggleCollabs = function() {
-      $scope.hideCollabs = $scope.hideCollabs === false ? true : false;
+      $scope.hideCollabs = $scope.hideCollabs == false ? true : false;
     };
 
         
@@ -80,12 +82,12 @@ angular.module('librecmsApp')
           !UserService.getUser()._id) {
         $log.error('attempting to submit to invalid user');
       }
-      console.log("studentName: " + UserService.getUser().firstName);
+
       var newSubmission = {
         studentName: UserService.getUser().firstName + ' ' + UserService.getUser().lastName,
         description: $scope.submissionDescription,
         attachments: $scope.submissionAttachments,
-        collaborators: $scope.submissionCollaborators
+        collaborators: $scope.submissionCollaborators,
       };
       Assignment.post('submit', newSubmission)
         .then(function(submission) {
@@ -96,16 +98,14 @@ angular.module('librecmsApp')
     };
 
     // Borrowed from https://github.com/danialfarid/angular-file-upload, more or less
-    $scope.onFileSelect = function($files) {
-      $files.forEach(function($file) {
-        $scope.upload = $upload.upload({
-          url: '/api/uploads',
-          file: $file
-        }).success(function(data) {
-          $log.info('upload success data = ' + JSON.stringify(data));
-        }).error(function(data) {
-          $log.info('upload error data = ' + JSON.stringify(data));
-        });
-      });
+    function addAttachments(newFiles) {
+      $scope.submissionAttachments =
+        $scope.submissionAttachments || [];
+      $scope.submissionAttachments =
+        $scope.submissionAttachments.concat(newFiles);
+    }
+
+    $scope.uploadFiles = function(files) {
+      UploadService.upload(files, addAttachments);
     };
   });

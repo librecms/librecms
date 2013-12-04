@@ -9,8 +9,8 @@
       <div class="alert alert-info">
         <input type="checkbox" ng-click='toggleEventStatus(e._id)' ng-model="strike"></input>
         <div class="col-xs-3 col-sm-3 col-md-2">
-          <h6 class="upcoming-event-day">{{e.start | date:"dd" }}</h6>
-          <h6 class="upcoming-event-month">{{e.start | date:"EEE" }}<h6>
+          <h6 class="upcoming-event-day">{{e.due | date:"dd" }}</h6>
+          <h6 class="upcoming-event-month">{{e.due | date:"EEE" }}<h6>
         </div>
         <div ng-class="{strike:strike}" class="col-xs-9 col-sm-9 col-md-10">
           {{e.title}}

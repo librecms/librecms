@@ -5,8 +5,15 @@
         <input type="text" value placeholder="Create new announcement" class="form-control new-post-input" ng-model="announcement">
       </div>
       <div class="col-xs-4">
-        <button type="button" class="btn btn-block btn-info" ng-click="addPost()">Post</button>
+        <div ng-show="$state.is('main.user.home')">
+          <button type="button" class="btn btn-block btn-info col-xs-12" ng-click="addPostByCourseId(courseList._id)">Post</button>
+          <select class="col-xs-12"ng-model="courseList" 
+            ng-options="course as course.name for course in user.courses">
+          </select>
+        </div>
+        <button type="button" class="btn btn-block btn-info" ng-show="!$state.is('main.user.home')" ng-click="addPost()">Post</button>
       </div>
+      
     </div>
   </div>
   <div class="timeline" infinite-scroll="loadMorePosts()" inifinite-scroll-distance="2">
