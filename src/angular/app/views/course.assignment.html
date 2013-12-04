@@ -47,6 +47,20 @@
   </div>
   <div auth="instructor" class="instructor-assignment-submissions">
     <h6>Student Submissions</h6>
+    <div class="row">
+      <div class="col-lg-3 instructor-assignment-submissions-header">
+        Student Name
+      </div>
+      <div class="col-lg-3 instructor-assignment-submissions-header">
+         Collaborators
+      </div>
+      <div class="col-lg-3 instructor-assignment-submissions-header">
+        Description
+      </div>
+      <div class="col-lg-3 instructor-assignment-submissions-header">
+        Attachments
+      </div>
+    </div>
     <div class="row well" ng-repeat="studentSubmission in submissions | orderBy:'-posted'">
       <div class="col-lg-3">
         <b>{{studentSubmission.studentName}}</b> 
@@ -57,8 +71,10 @@
       <div class="col-lg-3 instructor-assignment-submissions-description">
         {{studentSubmission.description}}
       </div>
-      <div ng-repeat="attachment in studentSubmission.attachments" class="col-lg-3 instructor-assignment-submissions-attachments">
-        <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
+      <div class="col-lg-3">
+        <div ng-repeat="attachment in studentSubmission.attachments" class="instructor-assignment-submissions-attachments">
+          <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
+        </div>
       </div>
     </div>
   </div>

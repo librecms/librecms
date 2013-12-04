@@ -40,7 +40,7 @@
     </div>
   </div>
 <!-- Grades Mobile View: Select --> 
-  <div ng-show="gradeTabMobile">  
+  <div class="visible-xs">  
     <select multiple class="form-control" >
       <option ng-click="changeTab('all')">
         All</option>
@@ -58,7 +58,7 @@
   </div>
 
  <!-- Grades Large View: Tabs --> 
-  <div class="row grade-selection-tabs" ng-hide="gradeTabMobile">
+  <div class="row grade-selection-tabs visible-lg visible-md visible-sm">
     <div ng-class="{active: activeTab=='all'}" class="grade-tab col-lg-2 col-sm-2 col-xs-2" ng-click="changeTab('all')">
       All
     </div>
