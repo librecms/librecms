@@ -25,8 +25,9 @@ angular.module('librecmsApp')
         });
       });
 
+    $scope.hideCollabs = true;
     $scope.toggleCollabs = function() {
-      $scope.hideCollabs = $scope.hideCollabs === false ? true : false;
+      $scope.hideCollabs = $scope.hideCollabs == false ? true : false;
     };
 
         
