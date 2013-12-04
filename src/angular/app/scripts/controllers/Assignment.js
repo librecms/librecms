@@ -111,4 +111,20 @@ angular.module('librecmsApp')
         });
       });
     };
+
+    //Set student submission being graded
+    $scope.gradeStudent = function(studentSubmission) {
+      console.log("selected submission: " + JSON.stringify(studentSubmission));
+      $scope.gradedStudent = studentSubmission;
+    };
+
+    // Submit grade for submission
+    $scope.submitGrade = function() {
+
+    Course.one('assignments', assignmentId)
+     .getList('grades').then(function(grades) {
+       console.log(JSON.stringify(grades));    
+     });
+    };
+
   });

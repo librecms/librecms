@@ -20,7 +20,7 @@ angular.module('librecmsApp')
     });
   
   var attendance = [];
-  var homework = [];
+  var assignments = [];
   var quizzes = [];
   var exams = [];
   var other = [];
@@ -28,8 +28,8 @@ angular.module('librecmsApp')
   $scope.userGradeList = $scope.userGradeList || {};
   //Sort Grade List
   for (var i = 0; i < $scope.userGradeList.length; i++) {
-    if ($scope.userGradeList[i].type === 'homework') {
-      homework.push($scope.userGradeList[i]);
+    if ($scope.userGradeList[i].type === 'assignments') {
+      assignments.push($scope.userGradeList[i]);
     }
     else if ($scope.userGradeList[i].type === 'attendance') {
       attendance.push($scope.userGradeList[i]);
@@ -46,12 +46,12 @@ angular.module('librecmsApp')
   }
   var all = $scope.userGradeList;
   
-  // Calculate Homework Average
+  // Calculate Assignments Average
   var hwAvg = 0;
-  for (var i = 0; i < homework.length; i++) {
-    hwAvg = (hwAvg + parseInt(homework[i].score)) / (i+1);
+  for (var i = 0; i < assignments.length; i++) {
+    hwAvg = (hwAvg + parseInt(assignments[i].score)) / (i+1);
   }
-  $scope.homeworkAverage = hwAvg + '%';
+  $scope.assignmentsAverage = hwAvg + '%';
 
   // Calculate Quiz Average
   var quizAvg = 0;
@@ -79,8 +79,8 @@ angular.module('librecmsApp')
     else if(filter === 'exams') {
       $scope.gradeList = exams;
     }
-    else if(filter === 'homework') {
-      $scope.gradeList = homework;
+    else if(filter === 'assignments') {
+      $scope.gradeList = assignments;
     }
     else if(filter === 'quizzes') {
       $scope.gradeList = quizzes;

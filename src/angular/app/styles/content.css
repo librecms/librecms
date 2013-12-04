@@ -210,3 +210,7 @@
   overflow-y:auto;
   max-height:50px;
 }
+
+.grade-submission-btn {
+  padding:5px;
+}

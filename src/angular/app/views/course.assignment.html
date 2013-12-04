@@ -55,9 +55,6 @@
          Collaborators
       </div>
       <div class="col-lg-3 instructor-assignment-submissions-header">
-        Description
-      </div>
-      <div class="col-lg-3 instructor-assignment-submissions-header">
         Attachments
       </div>
     </div>
@@ -68,12 +65,17 @@
       <div class="col-lg-3 instructor-assignment-submissions-collaborators">
         {{studentSubmission.collaborators}}<br>
       </div>
-      <div class="col-lg-3 instructor-assignment-submissions-description">
-        {{studentSubmission.description}}
-      </div>
-      <div class="col-lg-3">
-        <div ng-repeat="attachment in studentSubmission.attachments" class="instructor-assignment-submissions-attachments">
+      <div class="col-lg-3 instructor-assignment-submissions-attachments">
+        <div ng-repeat="attachment in studentSubmission.attachments" class="instructor-assignment-submissions-attachment">
           <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
+        </div>
+      </div>
+      <div class="col-lg-3 grade-submission-btn">
+        <button data-toggle="modal" data-target="#grade-modal" class="btn btn-block btn-sm btn-inverse" ng-click="gradeStudent(studentSubmission)">Grade</button>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 instructor-assignment-submissions-description">
+          {{studentSubmission.description}}
         </div>
       </div>
     </div>
@@ -139,6 +141,50 @@
 
       </div> <!-- /.modal-body -->
 
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Grade Submission Modal -->
+<div class="modal fade" id="grade-modal" tabindex="-1" role="dialog" aria-labelledby="submit-modal" aria-hidden="true" auth="instructor">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Submit Student Grade</h4>
+      </div><!-- /.modal/header-->
+      <div class="modal-body">
+        <div class="row">
+          <div class="row">
+            <div class="col-lg-3">
+              Assignment:
+            </div>
+            <div class="col-lg-3">
+              {{assignment.title}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              Student:
+            </div>
+            <div class="col-lg-3">
+              {{gradedStudent.studentName}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              Assign Grade: 
+            </div>
+            <input type="text" ng-model="assignedGrade"/>
+          </div>
+        </div>
+
+        <div id="submission-submit-container" class="row ">
+          <button type="button" class="btn btn-large btn-primary col-lg-3 col-md-3 col-sm-4 col-xs-12" ng-click="submitGrade()">Submit</button>
+          <button class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button lg-float-right" id="submission-discard-icon" data-dismiss="modal" aria-hidden="true" ng-click="discardSubmission()"><i class="fa fa-trash-o fa-lg"></i></button>
+        </div>
+
+      </div> <!-- /.modal-body -->
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
