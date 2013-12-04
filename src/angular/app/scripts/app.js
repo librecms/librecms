@@ -123,22 +123,22 @@ angular.module('librecmsApp', dependencies).config(
     };
     states.push(courseHomeState);
 
-    var calendarState = {
-      name: 'main.calendar',
-      parent: mainState,
+    var courseCalendarState = {
+      name: 'main.course.calendar',
+      parent: courseState,
       url: '/calendar',
       views: {
-        '@main': {
+        '@main.course': {
           controller: 'CalendarCtrl',
           templateUrl: 'views/calendar.html'
         },
-        '@main.calendar': {
+        'upcoming@main.course.calendar': {
           templateUrl: 'views/widgets/eventbar.html',
           controller: 'EventbarCtrl'
         }
       }
     };
-    states.push(calendarState);
+    states.push(courseCalendarState);
 
     var courseAssignmentsState = {
       name: 'main.course.assignments',

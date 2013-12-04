@@ -2,7 +2,7 @@
 
 angular.module('librecmsApp')
 .controller('CalendarCtrl', function($scope, Restangular) {
-
+/*
   function getUserEvents() {
     var startOfThisMonth = moment(new Date()).startOf('month').toDate().getTime();
     Restangular.one('users', $scope.user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
@@ -17,7 +17,7 @@ angular.module('librecmsApp')
     });
     console.log(JSON.stringify($scope.eventSources));
   }
-
+*/
   function getCourseAssignments() {
     Restangular.one('courses', $scope.course._id).getList('assignments').then(function(assignments) {
       // Gather assignments from API and reformat their
@@ -36,15 +36,11 @@ angular.module('librecmsApp')
   $scope.events = [];
   $scope.eventSources = $scope.events;
 
-  if ($scope.user && $scope.user._id) {
-    getUserEvents();
-  }
-
-  if ($scope.course){
+  if ($scope.course || ($scope.user && $scope.user._id) ){
     getCourseAssignments();
   }
 
-  $scope.$on('UserService.update', getUserEvents);
+  $scope.$on('UserService.update', getCourseAssignments);
 
   /* Change View */
   $scope.changeView = function(view,calendar) {

@@ -70,7 +70,7 @@
                 <a ui-sref="main.course.grades({courseId: course._id})">Grades</a>
               </li>
               <li ng-class="{ active: $state.is('main.calendar') }">
-                <a ui-sref="main.calendar()">Calendar</a>
+                <a ui-sref="main.course.calendar()">Calendar</a>
               </li>
               <li ng-class="{ active: $state.is('main.course.assignments') || $state.is('main.course.assignment') }">
                 <a ui-sref="main.course.assignments({courseId: course._id})">Assignments</a>

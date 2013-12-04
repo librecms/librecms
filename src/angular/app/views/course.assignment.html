@@ -17,7 +17,7 @@
         </small>
       </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
       <div id="assignment-submission-dropbox" class="row" auth="student">
         DROPBOX
         <div id="assignment-submission-widget" class="well">
@@ -26,7 +26,7 @@
           <div>
             <ul class="list-unstyled">
               <li ng-repeat="submission in assignment.submissions | orderBy:'posted':true">
-                <a>{{ submission._id | characters:10 }}</a>
+              <a>{{ submission._id | characters:10 }}</a>
               </li>
             </ul>
           </div>
@@ -38,7 +38,7 @@
         <div id="assignment-attachments-widget" class="well">
           <ul class="list-unstyled">
             <li data-ng-repeat="attachment in assignment.attachments">
-            <a>{{ attachment.filename }}</a>
+            <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
             </li>
           </ul>
         </div>
@@ -52,7 +52,7 @@
         Student Name
       </div>
       <div class="col-lg-3 instructor-assignment-submissions-header">
-         Collaborators
+        Collaborators
       </div>
       <div class="col-lg-3 instructor-assignment-submissions-header">
         Attachments
@@ -133,7 +133,9 @@
           <button type="button" class="btn btn-large btn-primary col-lg-3 col-md-3 col-sm-4 col-xs-12" ng-click="submit()">Submit</button>
           <div title="Add Attachment" class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button">
             <span><i class="fa fa-paperclip fa-lg"></i></span>
-            <input type="file" ng-file-select="onFileSelect($files)" multiple/>
+            <input type="file" 
+            ng-file-select="uploadFiles($files)"
+            multiple/>
           </div>
           <button class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button" id="submission-collaborator-icon" title="Add Collaborator" ng-click="toggleCollabs()"><i class="fa fa-user fa-lg"></i></button>
           <button class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button lg-float-right" id="submission-discard-icon" data-dismiss="modal" aria-hidden="true" ng-click="discardSubmission()"><i class="fa fa-trash-o fa-lg"></i></button>
