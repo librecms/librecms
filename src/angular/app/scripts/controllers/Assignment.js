@@ -2,7 +2,8 @@
 
 angular.module('librecmsApp')
   .controller('AssignmentCtrl',
-    function ($scope, $state, UserService, Restangular, $stateParams, $log, $upload) {
+    function ($scope, $state, UserService, Restangular,
+              $stateParams, $log, UploadService) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
 
@@ -97,18 +98,14 @@ angular.module('librecmsApp')
     };
 
     // Borrowed from https://github.com/danialfarid/angular-file-upload, more or less
-    $scope.onFileSelect = function($files) {
-      $files.forEach(function($file) {
-        $scope.upload = $upload.upload({
-          url: '/api/uploads',
-          file: $file
-        }).success(function(newFile) {
-          $scope.submissionAttachments = $scope.submissionAttachments || [];
-          $scope.submissionAttachments = $scope.submissionAttachments.concat(newFile);
-          $log.info('upload success data = ' + JSON.stringify(newFile));
-        }).error(function(data) {
-          $log.info('upload error data = ' + JSON.stringify(data));
-        });
-      });
+    function addAttachments(newFiles) {
+      $scope.submissionAttachments =
+        $scope.submissionAttachments || [];
+      $scope.submissionAttachments =
+        $scope.submissionAttachments.concat(newFiles);
+    }
+
+    $scope.uploadFiles = function(files) {
+      UploadService.upload(files, addAttachments);
     };
   });

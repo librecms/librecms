@@ -17,7 +17,7 @@
         </small>
       </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
       <div id="assignment-submission-dropbox" class="row" auth="student">
         DROPBOX
         <div id="assignment-submission-widget" class="well">
@@ -26,7 +26,7 @@
           <div>
             <ul class="list-unstyled">
               <li ng-repeat="submission in assignment.submissions | orderBy:'posted':true">
-                <a>{{ submission._id | characters:10 }}</a>
+              <a>{{ submission._id | characters:10 }}</a>
               </li>
             </ul>
           </div>
@@ -38,7 +38,7 @@
         <div id="assignment-attachments-widget" class="well">
           <ul class="list-unstyled">
             <li data-ng-repeat="attachment in assignment.attachments">
-              <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
+            <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
             </li>
           </ul>
         </div>
@@ -52,7 +52,7 @@
         Student Name
       </div>
       <div class="col-lg-3 instructor-assignment-submissions-header">
-         Collaborators
+        Collaborators
       </div>
       <div class="col-lg-3 instructor-assignment-submissions-header">
         Description
