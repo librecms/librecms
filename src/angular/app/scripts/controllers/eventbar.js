@@ -3,56 +3,56 @@
 angular.module('librecmsApp')
 .controller('EventbarCtrl', function($scope, UserService, Restangular) {
 
-  function getUserEvents() {
+  $scope.events = [];
+  $scope.months = [];
+
+  function getUserAssignments() {
     var user = UserService.getUser();
     if(user) {
-      var startOfThisMonth = moment(new Date()).startOf('month').toDate().getTime();
+
+      var startOfThisMonth = new Date().getTime();
       Restangular.one('users', user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
-        // Gather events from API and reformat their
+     
+        // Gather assignments from API and reformat their
         // start and end components into Javascript Date objects
-        $scope.events = events;
-        $scope.events.map(function(event) {
-          event.start = new Date(event.start);
-          event.end = new Date(event.end);
+        var now = new Date();
+
+        events.forEach(function(assignment) {
+          if(assignment.due >= now) {
+            assignment.posted = new Date(assignment.posted);
+            assignment.due = new Date(assignment.due);
+            assignment.month = assignment.due.getMonth();
+            $scope.events.push(assignment);
+
+            var monthExists = -1;
+            $scope.months.forEach(function(month) {
+              if(month.month == assignment.due.getMonth()) {
+                monthExists = 0;
+              }
+            });
+
+            if(monthExists == -1) {
+              $scope.months.push({date:assignment.due, month:assignment.due.getMonth()});
+            }
+          }
         });
       });
-    } 
+    }
   }
 
   $scope.toggleEventStatus = function(param) {
-    var Event = Restangular.one('users', $scope.user._id).one('events', param).get()
-        .then(function(event) {
-        console.log(JSON.stringify(event));
-        if(event.completed == false) {
-          console.log("YES");
-        }
-        });
+    var Event = Restangular.one('users', $scope.user._id).one('events', param).post();
   }
 
   if ($scope.user || $scope.user === undefined) {
-    getUserEvents();
+    getUserAssignments();
   }
 
-  $scope.$on('UserService.update', getUserEvents);
+  $scope.$on('UserService.update', getUserAssignments);
 
-  $scope.predicate = 'start';
+  /* event sources array */
+  $scope.test = [$scope.events];
   $scope.quantity = 5;
 
 });
 
-/*
-
-angular.module('librecmsApp').filter('upcoming', function() {
-  return function(e) {
-    var date = new Date();
-    var returnArray = new Array();
-    for(var i = 0; i < e.length; i++) {
-      if(date.toISOString() <= e[i].start.toISOString()) {
-        returnArray.push(e[i]);
-      }
-    }
-    return returnArray;
-  }
-});
-
-*/
