@@ -35,13 +35,12 @@ angular.module('librecmsApp')
 
   $scope.$on('UserService.update', getUserEvents);
 
-  /* event sources array */
-  $scope.test = [$scope.events];
-
   $scope.predicate = 'start';
   $scope.quantity = 5;
 
 });
+
+/*
 
 angular.module('librecmsApp').filter('upcoming', function() {
   return function(e) {
@@ -55,3 +54,5 @@ angular.module('librecmsApp').filter('upcoming', function() {
     return returnArray;
   }
 });
+
+*/
