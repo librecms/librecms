@@ -3,7 +3,7 @@
 angular.module('librecmsApp')
   .controller('MainCtrl',
     function ($scope, UserService, CourseService,
-              $stateParams, $state, $rootScope, AuthService) {
+              $stateParams, $state, $rootScope, AuthService, $log) {
 
     $scope.logout = AuthService.logout;
     $rootScope.$state = $state;
@@ -16,21 +16,22 @@ angular.module('librecmsApp')
     // Listen to changes to the course object
     $scope.$on('CourseService.courseUpdated', function() {
       $scope.course = CourseService.getCourse();
+      $scope.courseSelected = true;
     });
     
     // Gather course ID from the state (/course/{courseId}) 
     var courseId = $stateParams.courseId;
     CourseService.setCourseById(courseId);
     
-    
     // NavBar Visibility: Hidden when course isn't selected
-    $scope.courseSelected = false;
     $scope.resetNavBar = function() {
-      $scope.courseSelected = false;
-      $scope.course.name = '';
+        $scope.courseSelected = false;
+        $log.info('ResetNavBar');
     };
     $scope.courseSelect = function() {
-      $scope.courseSelected = true;
+   	  $scope.courseSelected = true;
+      $log.info('CourseSelected');
+
     }; 
-    
+
   });
