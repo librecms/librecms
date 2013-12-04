@@ -3,7 +3,7 @@
 angular.module('librecmsApp')
   .controller('AssignmentListCtrl',
     function($scope, $stateParams, UserService,
-             Restangular, $log, CourseService) {
+             Restangular, $log, CourseService, UploadService ) {
 
     //Get courseId
     var courseId = $stateParams.courseId;
@@ -13,8 +13,7 @@ angular.module('librecmsApp')
     if(courseId) {
       Restangular.one('courses', courseId).get().then(function(newAssignment) {
         $scope.newAssignment = newAssignment;
-      });
-    }
+      }); }
 
     //Set itemType
     $scope.itemType = "assignment";
@@ -47,7 +46,7 @@ angular.module('librecmsApp')
         title: $scope.newMaterialTitle,
         due : $scope.newMaterialDueDate.getTime(),
         description : $scope.newMaterialDescription,
-        attachments : $scope.newMaterialAttachments
+        attachments : $scope.attachments
       };
 
       // @TODO what happens on 401 or 404 or 500 or 502?
@@ -107,4 +106,14 @@ angular.module('librecmsApp')
         });
     };
 
+    function addAttachments(newFiles) {
+      $scope.attachments =
+        $scope.attachments || [];
+      $scope.attachments =
+        $scope.attachments.concat(newFiles);
+    };
+
+    $scope.addNewAssignmentAttachments = function(files) {
+      UploadService.upload(files, addAttachments);
+    };
   });

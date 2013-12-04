@@ -29,21 +29,23 @@ angular.module('librecmsApp')
   }
 
   $scope.$on('UserService.update', getUserEvents);
-  
+
   $scope.predicate = 'start';
   $scope.quantity = 5;
 
 });
 
-// angular.module('librecmsApp').filter('upcoming', function() {
-//   return function(a) {
-//     console.log(typeof(a));
-//     var returnArray = new Array();
-//     for(var i = 0; i < a.length; i++) {
-//       if(Date.now() - a[i].start.getTime() < 0) {
-//         returnArray.push(a[i]);
-//       }
-//     }
-//     return returnArray;
-//   }
-// });
+/*
+
+angular.module('librecmsApp').filter('upcoming', function() {
+  return function(e) {
+    var date = new Date();
+    var returnArray = new Array();
+    for(var i = 0; i < e.length; i++) {
+      if(date.toISOString() <= e[i].start.toISOString()) {
+        returnArray.push(e[i]);
+      }
+    }
+    return returnArray;
+  }
+});
