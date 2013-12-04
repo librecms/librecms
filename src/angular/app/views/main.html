@@ -66,7 +66,7 @@
               <li ng-class="{ active: $state.is('main.course.home') }">
                 <a ui-sref="main.course.home({courseId: course._id})">Home</a>
               </li>
-              <li ng-class="{ active: $state.is('main.course.grades') }">
+              <li ng-class="{ active: $state.is('main.course.grades') }" auth="student">
                 <a ui-sref="main.course.grades({courseId: course._id})">Grades</a>
               </li>
               <li ng-class="{ active: $state.is('main.calendar') }">

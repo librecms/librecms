@@ -33,7 +33,8 @@ angular.module('librecmsApp')
     $scope.gradeTabMobile = false;
   }
   window.onresize = function(){
-    if(window.innerWidth <= 768){
+   $log.info('Resized Window');
+    if(window.width <= 768){
       $scope.gradeTabMobile = true;
     }
     else{
