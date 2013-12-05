@@ -116,4 +116,13 @@ angular.module('librecmsApp')
     $scope.addNewAssignmentAttachments = function(files) {
       UploadService.upload(files, addAttachments);
     };
+
+    $scope.removeAttachment = function(attachment) {
+      for (var i = 0; i < $scope.attachments.length; i++) {
+        if ($scope.attachments[i].basename === attachment.basename) {
+          $scope.attachments.splice(i, 1);
+          return;
+        }
+      }
+    };
   });

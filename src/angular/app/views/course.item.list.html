@@ -83,7 +83,7 @@
             <ul id="submission-attachment-list" class="list-unstyled">
               <li class="submission-attachment-box" ng-repeat="attachment in attachments">
               <span class="submission-attachment-box-left col-xs-12"><small>{{ attachment.basename }}</small></span>
-              <i role="button" class="submission-attachment-box-right fa fa-times"></i>
+              <i role="button" class="submission-attachment-box-right fa fa-times" ng-click="removeAttachment(attachment)"></i>
               </li>
             </ul>
           </div>

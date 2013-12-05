@@ -6,8 +6,7 @@ angular.module('librecmsApp')
               $stateParams, $log, UploadService) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
-
-    var Course = Restangular.one('courses', courseId);
+var Course = Restangular.one('courses', courseId);
     var Assignment = Course.one('assignments', assignmentId);
 
     if (courseId && assignmentId) {
@@ -122,6 +121,15 @@ angular.module('librecmsApp')
      .getList('grades').then(function(grades) {
        console.log(JSON.stringify(grades));    
      });
+    };
+
+    $scope.removeAttachment = function(attachment) {
+      for (var i = 0; i < $scope.submissionAttachments.length; i++) {
+        if ($scope.submissionAttachments[i].basename === attachment.basename) {
+          $scope.submissionAttachments.splice(i, 1);
+          return;
+        }
+      }
     };
 
   });
