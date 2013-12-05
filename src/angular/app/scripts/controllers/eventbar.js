@@ -22,6 +22,7 @@ angular.module('librecmsApp')
             assignment.posted = new Date(assignment.posted);
             assignment.due = new Date(assignment.due);
             assignment.month = assignment.due.getMonth();
+            assignment.yearMonth = {'year': assignment.due.getYear(), 'Month': assignment.month};
             $scope.events.push(assignment);
 
             var monthExists = -1;

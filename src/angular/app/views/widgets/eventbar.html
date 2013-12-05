@@ -3,7 +3,7 @@
   <div ng-show="!events.length" class="alert alert-danger">
     No Upcoming Events
   </div>
-  <div ng-show="events.length" class="upcoming-events-container" ng-repeat="m in months">
+  <div ng-show="events.length" class="upcoming-events-container" ng-repeat="m in months | orderBy:predicate = ['year', 'Month']">
     <h5 class="upcoming-events-month">{{ m.date | date:"MMMM" }}</h5>
     <div ng-repeat="e in events | orderBy:predicate = 'due' | limitTo:quantity | filter:{ month:m.month }" class="row upcoming-event">
       <div class="alert alert-info">
