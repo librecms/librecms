@@ -36,7 +36,14 @@ angular.module('librecmsApp')
     var Users = Restangular.all('users');
 
     // Get user from cookie or fall back to 'unknown' user
-    var user = $cookieStore.get('user') || clearedUser;
+    var user = $cookieStore.get('user');
+    if (user) {
+      Users.get(user._id).then(function(newUser) {
+        user = newUser;
+      });
+    } else {
+      user = clearedUser;
+    }
 
     // Public API here
     return {
