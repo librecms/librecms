@@ -3,9 +3,9 @@
   <div ng-show="!events.length" class="alert alert-danger">
     No Upcoming Events
   </div>
-  <div ng-show="events.length" class="upcoming-events-container" ng-repeat="m in months | orderBy:predicate = 'month'">
+  <div ng-show="events.length" class="upcoming-events-container" ng-repeat="m in months">
     <h5 class="upcoming-events-month">{{ m.date | date:"MMMM" }}</h5>
-    <div ng-repeat="e in events | orderBy:predicate = 'start' | limitTo:quantity | filter:{ month:m.month }" class="row upcoming-event">
+    <div ng-repeat="e in events | orderBy:predicate = 'due' | limitTo:quantity | filter:{ month:m.month }" class="row upcoming-event">
       <div class="alert alert-info">
         <input type="checkbox" ng-click='toggleEventStatus(e._id)' ng-model="strike"></input>
         <div class="col-xs-3 col-sm-3 col-md-2">
