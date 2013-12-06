@@ -6,15 +6,25 @@ angular.module('librecmsApp')
               $stateParams, $log, UploadService) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
-var Course = Restangular.one('courses', courseId);
+    var Course = Restangular.one('courses', courseId);
     var Assignment = Course.one('assignments', assignmentId);
 
+    //Getting list of grades for the assignment
+    var gradesList = Restangular.one('courses', courseId).one('assignments', assignmentId).getList('grades');
+
+    //Get Assignment and Submissions
     if (courseId && assignmentId) {
       Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(function(assignment) {
         $scope.assignment = assignment;
         // Get all Student Submissions for assignment
         $scope.submissions = $scope.assignment.submissions;
       });
+    }
+
+    //Remove old student submissions
+    for (var i = 0; i < $scope.submissions.length; i++) {
+      
+
     }
 
     Course.getList('students')
@@ -114,13 +124,21 @@ var Course = Restangular.one('courses', courseId);
       $scope.gradedStudent = studentSubmission;
     };
 
+    //Grade Button filter to submit new grade or edit grade
+    $scope.gradeButton = true;
+
     // Submit grade for submission
     $scope.submitGrade = function() {
-
-    Course.one('assignments', assignmentId)
-     .getList('grades').then(function(grades) {
-       console.log(JSON.stringify(grades));    
-     });
+      Course.one('assignments', assignmentId)
+       .getList('grades').then(function(grades) {
+         console.log(JSON.stringify(grades));    
+       });
+    };
+    
+    //Update grade for submission
+    $scope.updateGrade = function() {
+      Course.one('assignments', assignmentId)
+        .getList('grades').put();
     };
 
     $scope.removeAttachment = function(attachment) {
