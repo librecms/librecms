@@ -54,7 +54,7 @@ angular.module('librecmsApp')
                 $scope.studentByStudentId = studentByStudentId;
 
                 // Get grades for each submission Id
-                var gradesBySubmissionId = {}
+                var gradesBySubmissionId = {};
                 grades.forEach(function(grade) {
                   gradesBySubmissionId[grade.submissionId] = grade;
                 });

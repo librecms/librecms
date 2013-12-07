@@ -49,7 +49,7 @@ angular.module('librecmsApp')
       }
       e.completed.push($scope.user._id);
     });
-  }
+  };
 
   $scope.applyStrikeClass = function(completed) {
     for(var i = 0; i<completed.length; i++) {
@@ -58,7 +58,7 @@ angular.module('librecmsApp')
       }
     }
     return "";
-  }
+  };
 
   if ($scope.user || $scope.user === undefined) {
     getUserAssignments();
