@@ -117,7 +117,7 @@ angular.module('librecmsApp', dependencies).config(
         },
         'upcoming@main.course.home': {
           templateUrl: 'views/widgets/eventbar.html',
-          controller: 'EventbarCtrl'
+          controller: 'CourseEventbarCtrl'
         }
       }
     };
