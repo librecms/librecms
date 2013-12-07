@@ -30,22 +30,16 @@ angular.module('librecmsApp')
     });
 
     //Temporary: Set static due time
-    $scope.newMaterialTime = new Date(0,0,0,8,4,2);
-    $scope.newMaterialDueDate = new Date();
+    $scope.editMaterial = {};
+    $scope.editMaterial.due = new Date();
     //POST new content
-    $scope.Submit = function() {
-      //Concatenate time due object onto due date object
-      moment($scope.newMaterialDueDate).add('hours', $scope.newMaterialTime.getHours());
-      moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
-      moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
-      console.log("Date is : " + $scope.newMaterialDueDate);
-
+    $scope.createAssignment = function() {
       //Make API call
       var newAssignment = {
-        userId : UserService.getUser(),
-        title: $scope.newMaterialTitle,
-        due : $scope.newMaterialDueDate.getTime(),
-        description : $scope.newMaterialDescription,
+        title: $scope.editMaterialTitle,
+        due : $scope.editMaterial.due.getTime(),
+        description : $scope.editMaterial.description,
+        points: $scope.editMaterial.points,
         attachments : $scope.attachments
       };
 
@@ -59,39 +53,38 @@ angular.module('librecmsApp')
     };
 
     //Save content for editing when selected for modal use
-    $scope.editModal = function(editContent) {
+    $scope.prepareForEditAssignment = function(editContent) {
       $scope.editMaterial = editContent;
+      $scope.submitFn = $scope.updateContent;
+      $scope.modalTitle = "Edit Assignment";
     };
 
     //Update Content Being edited
-    $scope.updateContent = function(assignmentId) {
-      //Concatenate time due object onto due date object
-      moment($scope.newMaterialDueDate).add('hours', $scope.newMaterialTime.getHours());
-      moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
-      moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
-
+    $scope.updateContent = function() {
       //Get Assignment Route
       var assignment = Course.one('assignments', $scope.editMaterial._id);  
 
       //Set new information from edit
-      var updateAssignment = {
-        userId : UserService.getUser(),
-        title: $scope.editMaterial.title,
-        due: $scope.editMaterial.due,
-        attachments: $scope.editMaterial.attachments,
-        description: $scope.editMaterial.description
-      };
-      
+      assignment.title = $scope.editMaterial.title;
+      assignment.due = $scope.editMaterial.due.getTime();
+      assignment.attachments = $scope.editMaterial.attachments;
+      assignment.description = $scope.editMaterial.description;
+
       //Make API call to update
-      assignment.put('assignments', updateAssignment)
-        .then(function(assignment) {
+      assignment.put().then(function(assignment) {
+          console.log("assignment promise: " + JSON.stringify(assignment));
           $('#edit-assignment-modal').modal('hide');
         });
     };
 
+    $scope.prepareForNewAssignment = function() {
+      $scope.submitFn = $scope.createAssignment;
+      $scope.editMaterial = {};
+      $scope.modalTitle = "Create New Assignment";
+    };
+
     //Remove Content
     $scope.removeContent = function() {
-      $log.info(JSON.stringify($scope.editMaterial, null, 4));
       if (!$scope.editMaterial || !$scope.editMaterial._id) {
         $log.error('attempt to edit material without setting editMaterial');
         return;
@@ -125,4 +118,6 @@ angular.module('librecmsApp')
         }
       }
     };
+
+    $scope.submitFn = $scope.createAssignment;
   });

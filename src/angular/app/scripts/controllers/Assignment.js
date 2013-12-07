@@ -3,12 +3,13 @@
 angular.module('librecmsApp')
   .controller('AssignmentCtrl',
     function ($scope, $state, UserService, Restangular,
-              $stateParams, $log, UploadService, AuthService) {
+              $stateParams, $log, UploadService, AuthService, $timeout) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
     var Course = Restangular.one('courses', courseId);
     var Assignment = Course.one('assignments', assignmentId);
 
+    $scope.hasSuccess = $scope.hasWarning = {};
 
     function initAssignment(assignment) {
       // Get all Student Submissions for assignment
@@ -88,7 +89,11 @@ angular.module('librecmsApp')
     $scope.toggleCollabs = function() {
       $scope.hideCollabs = $scope.hideCollabs == false ? true : false;
     };
-
+     
+     $scope.searchCollab='';
+     $scope.query = function(item){
+       return item.name.toUpperCase().contains($scope.searchCollab.toUpperCase());
+     };  
         
     // Cancel/Discard Submission
     $scope.discardSubmission = function(){
@@ -168,7 +173,8 @@ angular.module('librecmsApp')
     };
 
     // Submit grade for submission
-    $scope.submitGrade = function(submission, value) {
+    $scope.submitGrade = function(submission) {
+      submission.status = 'warning';
       if (!submission.grade) {
         $log.error('trying to make submission without grade');
         return;
@@ -181,9 +187,20 @@ angular.module('librecmsApp')
         submissionId: submission._id,
         assignmentId: assignmentId,
         gradeId: submission.grade._id,
-        value: value
+        value: submission.grade.value
       };
-      Assignment.post('grades', grade);
+      Assignment.post('grades', grade)
+        .then(
+          function() {
+            submission.status = 'success';
+            $timeout(function() {
+              submission.status = 'none';
+            }, 800);
+          },
+          function(response) {
+            submission.status = 'error';
+          }
+        );
     };
 
     $scope.getCollaborators = function(collabIds) {

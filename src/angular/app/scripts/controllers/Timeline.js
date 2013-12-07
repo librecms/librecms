@@ -1,22 +1,43 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('TimelineCtrl', function ($scope, CourseService) {
-    console.log('TimelineCtrl');
+  .controller('TimelineCtrl', function($scope, CourseService, Restangular) {
 
+    $scope.posts = [];
 
     function initializeCourse() {
-        $scope.courseName = $scope.course.name;
 
-        // Get first 20 posts
-        $scope.visiblePosts = $scope.course.posts.slice(-2);
+      var course = CourseService.getCourse();
 
-        if(!$scope.loadMorePosts) {
-          $scope.loadMorePosts = function() {
-            $scope.visiblePosts = $scope.course.posts.slice(-1*($scope.visiblePosts.length + 2));
-          };
-        }
-      };
+      //console.log(course);
+
+      if(course) {
+        Restangular.one('courses', course._id).getList('posts').then(function(posts) {
+          $scope.posts = [];
+          // Gather posts from API and reformat their
+          // date components into Javascript Date objects
+          posts.forEach(function(post) {
+            post.date = new Date(post.date);
+            $scope.posts.push(post);
+          });
+
+          $scope.visiblePosts = $scope.posts.slice(0,2)
+        });
+      }
+
+
+
+      $scope.courseName = $scope.course.name;
+
+      // Get first 20 posts
+      //$scope.visiblePosts = $scope.posts.slice(0,2);
+
+      if(!$scope.loadMorePosts) {
+        $scope.loadMorePosts = function() {
+          $scope.visiblePosts = $scope.posts.slice(0,$scope.visiblePosts.length + 2);
+        };
+      }
+    };
 
     if($scope.course) {
       initializeCourse();
