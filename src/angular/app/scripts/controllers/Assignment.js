@@ -40,14 +40,32 @@ angular.module('librecmsApp')
           .one('assignments', assignmentId)
           .getList('grades', { submissions: submissionIds })
           .then(function(grades) {
-            var gradesBySubmissionId = {}
-            grades.forEach(function(grade) {
-              gradesBySubmissionId[grade.submissionId] = grade;
-            });
-            $scope.assignment.submissions = $scope.assignment.submissions.map(
-              function(submission) {
-                submission.grade = gradesBySubmissionId[submission._id];
-                return submission;
+            Course.getList('students')
+              .then(function(students) {
+
+                // map of student object by student Id 
+                var studentByStudentId = {};
+                $scope.roster = students.map(function(student) {
+                  student.name = student.lastName + ' ' + student.firstName;
+                  studentByStudentId[student._id] = student;
+                  return student;
+                });
+                $scope.studentByStudentId = studentByStudentId;
+
+                // Get grades for each submission Id
+                var gradesBySubmissionId = {}
+                grades.forEach(function(grade) {
+                  gradesBySubmissionId[grade.submissionId] = grade;
+                });
+                
+                // Massage submissions by appending grade and student id to submission
+                $scope.assignment.submissions = $scope.assignment.submissions.map(
+                function(submission) {
+                  submission.grade = gradesBySubmissionId[submission._id];
+                  // Append student object to submission object
+                  submission.student = studentByStudentId[submission.studentId];
+                  return submission;
+                });
               });
           });
       }
@@ -56,14 +74,15 @@ angular.module('librecmsApp')
     if (courseId && assignmentId) {
       Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(initAssignment);
     }
-
-    Course.getList('students')
-      .then(function(students) {
-        $scope.roster = students.map(function(student) {
-          student.name = student.firstName + ' ' + student.lastName;
-          return student;
+    if (AuthService.authorize(UserService.getUser().role, 'student')) {
+      Course.getList('students')
+        .then(function(students) {
+          $scope.roster = students.map(function(student) {
+            student.name = student.lastName + ' ' + student.firstName;
+            return student;
+          });
         });
-      });
+    }
 
     $scope.hideCollabs = true;
     $scope.toggleCollabs = function() {
@@ -167,6 +186,15 @@ angular.module('librecmsApp')
       Assignment.post('grades', grade);
     };
 
+    $scope.getCollaborators = function(collabIds) {
+      if (!$scope.studentByStudentId) return;
+      return collabIds.map(function(collaborator) {
+        return UserService.getNameByUser(
+          $scope.studentByStudentId[collaborator]
+        );
+      });
+    };
+
     $scope.removeAttachment = function(attachment) {
       for (var i = 0; i < $scope.submissionAttachments.length; i++) {
         if ($scope.submissionAttachments[i].basename === attachment.basename) {
@@ -175,5 +203,7 @@ angular.module('librecmsApp')
         }
       }
     };
+
+    $scope.getNameByUser = UserService.getNameByUser;
 
   });

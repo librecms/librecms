@@ -2,6 +2,7 @@
 
 angular.module('librecmsApp')
   .controller('TimelineCtrl', function ($scope, CourseService) {
+    console.log('TimelineCtrl');
 
 
     function initializeCourse() {

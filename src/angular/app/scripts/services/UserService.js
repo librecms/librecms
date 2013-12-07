@@ -9,7 +9,14 @@ angular.module('librecmsApp')
     };
 
     function getName() {
-      return user.firstName + ' ' + user.lastName;
+      return getNameByUser(user);
+    }
+
+    function getNameByUser(u) {
+      if (!u || !u.lastName || !u.firstName) {
+        return "A Student";
+      }
+      return u.lastName + ', ' + u.firstName;
     }
 
     function setUser(newUser) {
@@ -56,6 +63,7 @@ angular.module('librecmsApp')
       setUser: setUser,
       setUserById: setUserById,
       clearUser: clearUser,
-      getName: getName
+      getName: getName,
+      getNameByUser: getNameByUser
     };
   });
