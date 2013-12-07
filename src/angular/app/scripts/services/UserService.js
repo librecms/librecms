@@ -8,6 +8,17 @@ angular.module('librecmsApp')
       initialized: false
     };
 
+    function getName() {
+      return getNameByUser(user);
+    }
+
+    function getNameByUser(u) {
+      if (!u || !u.lastName || !u.firstName) {
+        return "A Student";
+      }
+      return u.lastName + ', ' + u.firstName;
+    }
+
     function setUser(newUser) {
       user = newUser;
       $rootScope.$broadcast('UserService.update');
@@ -51,6 +62,8 @@ angular.module('librecmsApp')
       getRole: getRole,
       setUser: setUser,
       setUserById: setUserById,
-      clearUser: clearUser
+      clearUser: clearUser,
+      getName: getName,
+      getNameByUser: getNameByUser
     };
   });

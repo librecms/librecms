@@ -3,33 +3,97 @@
 angular.module('librecmsApp')
   .controller('AssignmentCtrl',
     function ($scope, $state, UserService, Restangular,
-              $stateParams, $log, UploadService) {
+              $stateParams, $log, UploadService, AuthService, $timeout) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
-var Course = Restangular.one('courses', courseId);
+    var Course = Restangular.one('courses', courseId);
     var Assignment = Course.one('assignments', assignmentId);
 
-    if (courseId && assignmentId) {
-      Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(function(assignment) {
-        $scope.assignment = assignment;
-        // Get all Student Submissions for assignment
-        $scope.submissions = $scope.assignment.submissions;
-      });
-    }
+    $scope.hasSuccess = $scope.hasWarning = {};
 
-    Course.getList('students')
-      .then(function(students) {
-        $scope.roster = students.map(function(student) {
-          student.name = student.firstName + ' ' + student.lastName;
-          return student;
-        });
+    function initAssignment(assignment) {
+      // Get all Student Submissions for assignment
+      var submissionsByStudentId = {};
+      assignment.submissions.forEach(function(submission) {
+        if (submissionsByStudentId.hasOwnProperty(submission.studentId)) {
+          if (submission.posted > submissionsByStudentId[submission.studentId].posted) {
+            submissionsByStudentId[submission.studentId] = submission;
+          }
+        } else {
+          submissionsByStudentId[submission.studentId] = submission;
+        }
       });
+
+      var submissions = [];
+      Object.keys(submissionsByStudentId).forEach(function(key) {
+        submissions.push(submissionsByStudentId[key]);
+      });
+
+      assignment.submissions = submissions;
+      $scope.assignment = assignment;
+
+      var submissionIds = assignment.submissions.map(function(submission) {
+        return submission._id;
+      });
+      //Getting list of grades for the assignment
+      if (AuthService.authorize(UserService.getUser().role, 'instructor')) {
+        Restangular.one('courses', courseId)
+          .one('assignments', assignmentId)
+          .getList('grades', { submissions: submissionIds })
+          .then(function(grades) {
+            Course.getList('students')
+              .then(function(students) {
+
+                // map of student object by student Id 
+                var studentByStudentId = {};
+                $scope.roster = students.map(function(student) {
+                  student.name = student.lastName + ' ' + student.firstName;
+                  studentByStudentId[student._id] = student;
+                  return student;
+                });
+                $scope.studentByStudentId = studentByStudentId;
+
+                // Get grades for each submission Id
+                var gradesBySubmissionId = {}
+                grades.forEach(function(grade) {
+                  gradesBySubmissionId[grade.submissionId] = grade;
+                });
+                
+                // Massage submissions by appending grade and student id to submission
+                $scope.assignment.submissions = $scope.assignment.submissions.map(
+                function(submission) {
+                  submission.grade = gradesBySubmissionId[submission._id];
+                  // Append student object to submission object
+                  submission.student = studentByStudentId[submission.studentId];
+                  return submission;
+                });
+              });
+          });
+      }
+    }
+    //Get Assignment and Submissions
+    if (courseId && assignmentId) {
+      Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(initAssignment);
+    }
+    if (AuthService.authorize(UserService.getUser().role, 'student')) {
+      Course.getList('students')
+        .then(function(students) {
+          $scope.roster = students.map(function(student) {
+            student.name = student.lastName + ' ' + student.firstName;
+            return student;
+          });
+        });
+    }
 
     $scope.hideCollabs = true;
     $scope.toggleCollabs = function() {
       $scope.hideCollabs = $scope.hideCollabs == false ? true : false;
     };
-
+     
+     $scope.searchCollab='';
+     $scope.query = function(item){
+       return item.name.toUpperCase().contains($scope.searchCollab.toUpperCase());
+     };  
         
     // Cancel/Discard Submission
     $scope.discardSubmission = function(){
@@ -108,19 +172,44 @@ var Course = Restangular.one('courses', courseId);
       UploadService.upload(files, addAttachments);
     };
 
-    //Set student submission being graded
-    $scope.gradeStudent = function(studentSubmission) {
-      console.log("selected submission: " + JSON.stringify(studentSubmission));
-      $scope.gradedStudent = studentSubmission;
+    // Submit grade for submission
+    $scope.submitGrade = function(submission) {
+      submission.status = 'warning';
+      if (!submission.grade) {
+        $log.error('trying to make submission without grade');
+        return;
+      }
+
+      var grade = {
+        studentId: submission.studentId,
+        studentName: submission.studentName,
+        courseId: courseId,
+        submissionId: submission._id,
+        assignmentId: assignmentId,
+        gradeId: submission.grade._id,
+        value: submission.grade.value
+      };
+      Assignment.post('grades', grade)
+        .then(
+          function() {
+            submission.status = 'success';
+            $timeout(function() {
+              submission.status = 'none';
+            }, 800);
+          },
+          function(response) {
+            submission.status = 'error';
+          }
+        );
     };
 
-    // Submit grade for submission
-    $scope.submitGrade = function() {
-
-    Course.one('assignments', assignmentId)
-     .getList('grades').then(function(grades) {
-       console.log(JSON.stringify(grades));    
-     });
+    $scope.getCollaborators = function(collabIds) {
+      if (!$scope.studentByStudentId) return;
+      return collabIds.map(function(collaborator) {
+        return UserService.getNameByUser(
+          $scope.studentByStudentId[collaborator]
+        );
+      });
     };
 
     $scope.removeAttachment = function(attachment) {
@@ -131,5 +220,7 @@ var Course = Restangular.one('courses', courseId);
         }
       }
     };
+
+    $scope.getNameByUser = UserService.getNameByUser;
 
   });
