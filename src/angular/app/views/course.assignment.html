@@ -47,6 +47,7 @@
   </div>
   <div auth="instructor" class="instructor-assignment-submissions">
     <!--<div class="row well" ng-repeat="studentSubmission in assignment.submissions | orderBy:'-posted'"> -->
+      <h3>Submissions <span class="badge"> {{ assignment.submissions.length }} / {{ roster.length }}</span></h3>
       <table class="table table-hover table-striped">
         <thead>
           <tr>
@@ -64,19 +65,35 @@
               {{ getNameByUser(submission.student) }}
             </td>
             <td> <!-- Collaborators -->
-              <ul class="list-unstyled">
-                <li ng-repeat="collaborator in getCollaborators(submission.collaborators)">{{ collaborator }}</li>
-              </ul>
+              <div ng-show="submission.collaborators.length">
+                <ul class="list-unstyled">
+                  <li ng-repeat="collaborator in getCollaborators(submission.collaborators)">{{ collaborator }}</li>
+                </ul>
+              </div>
+              <div ng-hide="submission.collaborators.length">
+                -
+              </div>
             </td>
             <td> <!-- Submitted Date -->
               {{ submission.posted | date:'shortDate' }}
             </td>
             <td> <!-- Attachments -->
               <ul class="list-unstyled">
-                <li data-ng-repeat="attachment in assignment.attachments">
-                  <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
+                <li data-ng-repeat="attachment in submission.attachments">
+                  <a tabindex="-1" href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename | characters:10}}</a><br>
                 </li>
               </ul>
+            </td>
+            <td> <!-- Grade -->
+              {{ getGrade(submision) }}
+            </td>
+            <td> <!-- Edit Grade -->
+              <form ng-submit="submitGrade(submission)">
+                <div class="input-group input-group-sm input-group-slim" ng-class="{ 'has-success': submission.status === 'success', 'has-warning': submission.status === 'warning', 'has-error': submission.status === 'error' }">
+                  <input tabindex="$index" class="form-control" ng-model="submission.grade.value" value="submissionValue" placeholder="pts" ng-change="submission.status = 'warning'" required>
+                  <span class="input-group-addon">/ 10</span>
+                </div>
+              </form>
             </td>
           </tr>
         </tbody>
