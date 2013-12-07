@@ -73,15 +73,10 @@
         </div>
       </div>
       <div class="col-lg-3 input-group grade-submission-input">
-        <input type="text" ng-model="studentSubmission.submissionGrade">
-        <span class="input-group-btn" ng-show="gradeButton">
-          <button type="button" class="" ng-click="submitGrade(studentSubmission)">
+        <input type="text" ng-model="gradesBySubmissionId[studentSubmission._id].value">
+        <span class="input-group-btn">
+          <button type="button" class="" ng-click="submitGrade(studentSubmission, gradesBySubmissionId[studentSubmission._id].value)">
             Submit
-          </button>
-        </span>
-        <span class="input-group-btn" ng-hide="gradeButton">
-          <button type="button" class="" ng-click="updateGrade(studentSubmission)">
-            <i class="fa fa-pencil"></i>
           </button>
         </span>
       </div>

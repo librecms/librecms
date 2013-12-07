@@ -9,10 +9,6 @@ angular.module('librecmsApp')
     var Course = Restangular.one('courses', courseId);
     var Assignment = Course.one('assignments', assignmentId);
 
-    //Getting list of grades for the assignment
-    if (AuthService.authorize(UserService.getUser().role, 'instructor')) {
-      $scope.gradesList = Restangular.one('courses', courseId).one('assignments', assignmentId).getList('grades');
-    }
 
     function initAssignment(assignment) {
       // Get all Student Submissions for assignment
@@ -34,6 +30,22 @@ angular.module('librecmsApp')
 
       assignment.submissions = submissions;
       $scope.assignment = assignment;
+
+      var submissionIds = assignment.submissions.map(function(submission) {
+        return submission._id;
+      });
+      //Getting list of grades for the assignment
+      if (AuthService.authorize(UserService.getUser().role, 'instructor')) {
+        Restangular.one('courses', courseId)
+          .one('assignments', assignmentId)
+          .getList('grades', { submissions: submissionIds })
+          .then(function(grades) {
+            $scope.gradesBySubmissionId = {}
+            grades.forEach(function(grade) {
+              $scope.gradesBySubmissionId[grade.submissionId] = grade;
+            });
+          });
+      }
     }
     //Get Assignment and Submissions
     if (courseId && assignmentId) {
@@ -131,23 +143,22 @@ angular.module('librecmsApp')
       UploadService.upload(files, addAttachments);
     };
 
-    //Set student submission being graded
-    $scope.gradeStudent = function(studentSubmission) {
-      console.log("selected submission: " + JSON.stringify(studentSubmission));
-      $scope.gradedStudent = studentSubmission;
-    };
-
-    //Grade Button filter to submit new grade or edit grade
-    $scope.gradeButton = true;
-
     // Submit grade for submission
     $scope.submitGrade = function(submission, value) {
-    };
-    
-    //Update grade for submission
-    $scope.updateGrade = function() {
-      Course.one('assignments', assignmentId)
-        .getList('grades').put();
+      var gradeId;
+      if (gradesBySubmissionId[submission._id]) {
+        gradeId = gradesBySubmissionId[submission._id]._id;
+      }
+      var grade = {
+        studentId: submission.studentId,
+        studentName: submission.studentName,
+        courseId: courseId,
+        submissionId: submission._id,
+        assignmentId: assignmentId,
+        gradeId: gradeId,
+        value: value
+      };
+      Assignment.post('grades', grade);
     };
 
     $scope.removeAttachment = function(attachment) {
