@@ -76,7 +76,7 @@ angular.module('librecmsApp', dependencies).config(
       views: {
         'timeline@main.user.home': {
           templateUrl: 'views/widgets/timeline.html',
-          controller: 'TimelineCtrl' // have to create different controller for this view
+          controller: 'TimelineHomepageCtrl' // have to create different controller for this view
         },
         '@main.user': {
           templateUrl: 'views/user.home.html'

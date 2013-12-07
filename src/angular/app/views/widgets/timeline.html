@@ -6,6 +6,22 @@
       </div>
       <div class="col-xs-4">
         <div ng-show="$state.is('main.user.home')">
+          <!--
+          <div class="btn-group">
+            <button type="button" class="btn">Action</button>
+            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Action</a></li>
+              <li><a href="#">Another action</a></li>
+              <li><a href="#">Something else here</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+          </div>
+          -->
           <button type="button" class="btn btn-block btn-info col-xs-12" ng-click="addPostByCourseId(courseList._id)">Post</button>
           <select class="col-xs-12"ng-model="courseList" 
             ng-options="course as course.name for course in user.courses">
