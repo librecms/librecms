@@ -35,7 +35,7 @@
       </select>
     </div>
     <div id="create-material-button" class="col-lg-7 ">
-      <button data-toggle="modal" data-target="#new-assignment-submit-modal" class="btn btn-xs btn-primary">New</button>
+      <button data-toggle="modal" data-target="#edit-assignment-modal" class="btn btn-xs btn-primary">New</button>
     </div>
   </div>
   <div class="row">
@@ -48,8 +48,8 @@
   </div>
 </div>
 
-<!-- New Material Modal -->
-<div class="modal fade" id="new-assignment-submit-modal" tabindex="-1" role="dialog" aria-labelledby="new-assignment-submit-modal" aria-hidden="true">
+<!-- New/Edit Material Modal -->
+<div class="modal fade" id="edit-assignment-modal" tabindex="-1" role="dialog" aria-labelledby="new-assignment-submit-modal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -61,7 +61,7 @@
           <div class="form-group">
             <label for="assignmentTitle" class="col-sm-2 control-label">Title</label>
             <div class="col-sm-10">
-              <input id="assignmentTitle" class="form-control" type="text" name="title" ng-model="newMaterialTitle" required placeholder="Assignment Title">
+              <input id="assignmentTitle" class="form-control" type="text" name="title" ng-model="editMaterial.title" required placeholder="Assignment Title">
             </div>
           </div>
 
@@ -69,7 +69,7 @@
             <label for="assignmentDue" class="col-sm-2 control-label">Due</label>
             <div class="col-sm-10">
               <div class="input-group">
-                <input id="assignmentDue" class="form-control" type="text" ui-date="dateOptions" name="due" ng-model="newMaterialDueDate" required placeholder="Due">
+                <input id="assignmentDue" class="form-control" type="text" ui-date="dateOptions" name="due" ng-model="editMaterial.due" required placeholder="Due">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
               </div>
             </div>
@@ -78,14 +78,14 @@
           <div class="form-group">
             <label for="assignmentDue" class="col-sm-2 control-label">Description</label>
             <div class="col-sm-10">
-              <textarea class="form-control" rows="5" role="textbox" contenteditable="true" ng-model="newMaterialDescription" placeholder="Enter description here" tabindex="1" required></textarea>
+              <textarea class="form-control" rows="5" role="textbox" contenteditable="true" ng-model="editMaterial.description" placeholder="Enter description here" tabindex="1" required></textarea>
             </div>
           </div>
 
           <div class="form-group">
             <label for="assignmentPoints" class="col-sm-2 control-label">Points</label>
             <div class="col-sm-10">
-              <input eequied id="assignmentPoints" class="form-control" type="text" name="points" ng-model="newMaterialPoints" required placeholder="Max Points">
+              <input eequied id="assignmentPoints" class="form-control" type="text" name="points" ng-model="editMaterial.points" required placeholder="Max Points">
             </div>
           </div>
         <div class="modal-footer">
@@ -100,49 +100,6 @@
         </div>
         </form>
       </div><!-- /.modal-body -->
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!-- Edit Modal -->
-<div class="modal fade" id="edit-assignment-modal" tabindex="-1" role="dialog" aria-labelledby="new-assignment-submit-modal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Edit Content</h4>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-lg-3">Name:</div>
-          <div class="col-lg-6">
-            <input type="text" name="title" ng-model="editMaterial.title" ng-required="true">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-3">Due Date:</div>
-          <div class="col-lg-6">
-            <input ui-date="dateOptions"  placeholder="{{editMaterial.due | date:'shortDate'}}" ng-model="editMaterial.due" name="due">
-          </div>
-        </div>
-        <div class="row">
-          <textarea class="material-description" ng-model="editMaterial.description" role="textbox" contenteditable="true" tabindex="1"></textarea>
-        </div>
-        <div class="row">
-          <ul class="list-unstyled">
-            <li class="attachment-box" ng-repeat="attachment in editMaterial.attachments">
-            </li>
-          </ul>
-        </div>
-      </div><!-- /.modal-body -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <div title="Add Attachment" class="btn col-lg-1 col-md-2 col-sm-2 col-xs-12 submission-button">
-          <span><i class="fa fa-paperclip fa-lg"></i></span>
-          <input type="file"/>
-        </div>
-        <button type="button" class="btn btn-primary" ng-click="updateContent()">Submit</button>
-      </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
