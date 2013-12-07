@@ -123,5 +123,14 @@ ul.nav > li.active > a, ul.nav li.active > a:hover {
 
 @media (max-width :767px) {
   #main > div {
-  min-height: initial;
+    min-height: initial;
+  }
+}
+
+.input-group-slim {
+  width: 110px;
+}
+
+h3 .badge {
+  vertical-align: middle;
 }

@@ -38,7 +38,6 @@ angular.module('librecmsApp')
       moment($scope.newMaterialDueDate).add('hours', $scope.newMaterialTime.getHours());
       moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
       moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
-      console.log("Date is : " + $scope.newMaterialDueDate);
 
       //Make API call
       var newAssignment = {
@@ -46,6 +45,7 @@ angular.module('librecmsApp')
         title: $scope.newMaterialTitle,
         due : $scope.newMaterialDueDate.getTime(),
         description : $scope.newMaterialDescription,
+        points: $scope.newMaterialPoints,
         attachments : $scope.attachments
       };
 
@@ -91,7 +91,6 @@ angular.module('librecmsApp')
 
     //Remove Content
     $scope.removeContent = function() {
-      $log.info(JSON.stringify($scope.editMaterial, null, 4));
       if (!$scope.editMaterial || !$scope.editMaterial._id) {
         $log.error('attempt to edit material without setting editMaterial');
         return;
