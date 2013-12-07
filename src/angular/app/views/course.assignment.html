@@ -38,7 +38,7 @@
         <div id="assignment-attachments-widget" class="well">
           <ul class="list-unstyled">
             <li data-ng-repeat="attachment in assignment.attachments">
-            <a href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
+            <a target="_blank" href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename}}</a><br>
             </li>
           </ul>
         </div>
@@ -80,7 +80,7 @@
             <td> <!-- Attachments -->
               <ul class="list-unstyled">
                 <li data-ng-repeat="attachment in submission.attachments">
-                  <a tabindex="-1" href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename | characters:10}}</a><br>
+                  <a tabindex="-1" target="_blank" href="/api/{{attachment.uploadPath}}/{{attachment.path}}/{{attachment.basename}}">{{attachment.basename | characters:10}}</a><br>
                 </li>
               </ul>
             </td>
