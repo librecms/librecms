@@ -15,34 +15,49 @@ angular.module('librecmsApp')
      
         // Gather assignments from API and reformat their
         // start and end components into Javascript Date objects
-        var now = new Date();
-
         events.forEach(function(assignment) {
-          if(assignment.due >= now) {
-            assignment.posted = new Date(assignment.posted);
-            assignment.due = new Date(assignment.due);
-            assignment.month = assignment.due.getMonth();
-            assignment.yearMonth = {'year': assignment.due.getYear(), 'Month': assignment.month};
-            $scope.events.push(assignment);
+          assignment.posted = new Date(assignment.posted);
+          assignment.due = new Date(assignment.due);
+          assignment.month = assignment.due.getMonth();
+          assignment.yearMonth = {'year': assignment.due.getYear(), 'Month': assignment.month};
+          $scope.events.push(assignment);
 
-            var monthExists = -1;
-            $scope.months.forEach(function(month) {
-              if(month.month == assignment.due.getMonth()) {
-                monthExists = 0;
-              }
-            });
-
-            if(monthExists == -1) {
-              $scope.months.push({date:assignment.due, month:assignment.due.getMonth()});
+          var monthExists = -1;
+          $scope.months.forEach(function(month) {
+            if(month.month == assignment.due.getMonth()) {
+              monthExists = 0;
             }
+          });
+
+          if(monthExists == -1) {
+            $scope.months.push({date:assignment.due, month:assignment.due.getMonth()});
           }
         });
       });
     }
   }
 
-  $scope.toggleEventStatus = function(param) {
-    var Event = Restangular.one('users', $scope.user._id).one('events', param).post();
+  $scope.toggleEventStatus = function(e) {
+    Restangular.one('users', $scope.user._id).one('events', e._id).post()
+    .then(function() {
+      // Not Google quality!
+      for(var i = 0; i<e.completed.length; i++) {
+          if ($scope.user._id === e.completed[i]) {
+            e.completed.splice(i,1);
+            return;
+          }
+      }
+      e.completed.push($scope.user._id);
+    });
+  }
+
+  $scope.applyStrikeClass = function(completed) {
+    for(var i = 0; i<completed.length; i++) {
+      if($scope.user._id === completed[i]) {
+        return "strike";
+      }
+    }
+    return "";
   }
 
   if ($scope.user || $scope.user === undefined) {
