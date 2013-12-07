@@ -73,9 +73,9 @@
         </div>
       </div>
       <div class="col-lg-3 input-group grade-submission-input">
-        <input type="text" ng-model="gradesBySubmissionId[studentSubmission._id].value">
+        <input type="text" ng-model="studentSubmission.grade.value">
         <span class="input-group-btn">
-          <button type="button" class="" ng-click="submitGrade(studentSubmission, gradesBySubmissionId[studentSubmission._id].value)">
+          <button type="button" class="" ng-click="submitGrade(studentSubmission, studentSubmission.grade.value)">
             Submit
           </button>
         </span>

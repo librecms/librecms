@@ -40,10 +40,15 @@ angular.module('librecmsApp')
           .one('assignments', assignmentId)
           .getList('grades', { submissions: submissionIds })
           .then(function(grades) {
-            $scope.gradesBySubmissionId = {}
+            var gradesBySubmissionId = {}
             grades.forEach(function(grade) {
-              $scope.gradesBySubmissionId[grade.submissionId] = grade;
+              gradesBySubmissionId[grade.submissionId] = grade;
             });
+            $scope.assignment.submissions = $scope.assignment.submissions.map(
+              function(submission) {
+                submission.grade = gradesBySubmissionId[submission._id];
+                return submission;
+              });
           });
       }
     }
@@ -145,17 +150,18 @@ angular.module('librecmsApp')
 
     // Submit grade for submission
     $scope.submitGrade = function(submission, value) {
-      var gradeId;
-      if (gradesBySubmissionId[submission._id]) {
-        gradeId = gradesBySubmissionId[submission._id]._id;
+      if (!submission.grade) {
+        $log.error('trying to make submission without grade');
+        return;
       }
+
       var grade = {
         studentId: submission.studentId,
         studentName: submission.studentName,
         courseId: courseId,
         submissionId: submission._id,
         assignmentId: assignmentId,
-        gradeId: gradeId,
+        gradeId: submission.grade._id,
         value: value
       };
       Assignment.post('grades', grade);
