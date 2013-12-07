@@ -35,15 +35,15 @@
       </select>
     </div>
     <div id="create-material-button" class="col-lg-7 ">
-      <button data-toggle="modal" data-target="#edit-assignment-modal" class="btn btn-xs btn-primary">New</button>
+      <button data-toggle="modal" data-target="#edit-assignment-modal" class="btn btn-xs btn-primary" ng-click="prepareForNewAssignment()">New</button>
     </div>
   </div>
   <div class="row">
     <div id="" class="content-item col-lg-4 col-md-4 col-sm-4 col-xs-12  well" ng-repeat="content in contentList | orderBy:contentSort">
       <h6><a href="/#/course/{{ course._id }}/{{ itemType }}/{{ content._id }}" class="content-list-name">{{ content.title }}</a></h6>
       <b>Posted:</b> {{content.posted | date:'shortDate'}} <b>Due:</b> {{content.due | date:'shortDate'}}<br>
-      <a data-toggle="modal" data-target="#edit-assignment-modal" class="col-lg-2 material-instructor-links" ng-click="editModal({{content}})"><small>Edit</small></a>
-      <a data-toggle="modal" data-target="#remove-modal" class="col-lg-2 material-instructor-links" ng-click="editModal({{content}})"><small>Remove</small></a>
+      <a data-toggle="modal" data-target="#edit-assignment-modal" class="col-lg-2 material-instructor-links" ng-click="prepareForEditAssignment({{content}})"><small>Edit</small></a>
+      <a data-toggle="modal" data-target="#remove-modal" class="col-lg-2 material-instructor-links" ng-click="prepareForEditAssignment({{content}})"><small>Remove</small></a>
     </div>
   </div>
 </div>
@@ -54,7 +54,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Create New {{itemType}}</h4>
+        <h4 class="modal-title">{{ modalTitle }}</h4>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" role="form" ng-submit="Submit()">
