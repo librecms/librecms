@@ -45,6 +45,7 @@ angular.module('librecmsApp')
         title: $scope.newMaterialTitle,
         due : $scope.newMaterialDueDate.getTime(),
         description : $scope.newMaterialDescription,
+        points: $scope.newMaterialPoints,
         attachments : $scope.attachments
       };
 
@@ -88,7 +89,6 @@ angular.module('librecmsApp')
 
     //Remove Content
     $scope.removeContent = function() {
-      $log.info(JSON.stringify($scope.editMaterial, null, 4));
       if (!$scope.editMaterial || !$scope.editMaterial._id) {
         $log.error('attempt to edit material without setting editMaterial');
         return;
