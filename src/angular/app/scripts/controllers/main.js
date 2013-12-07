@@ -26,12 +26,9 @@ angular.module('librecmsApp')
     // NavBar Visibility: Hidden when course isn't selected
     $scope.resetNavBar = function() {
         $scope.courseSelected = false;
-        $log.info('ResetNavBar');
     };
     $scope.courseSelect = function() {
    	  $scope.courseSelected = true;
-      $log.info('CourseSelected');
-
     }; 
 
   });
