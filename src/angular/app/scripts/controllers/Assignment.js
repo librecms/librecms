@@ -89,7 +89,11 @@ angular.module('librecmsApp')
     $scope.toggleCollabs = function() {
       $scope.hideCollabs = $scope.hideCollabs == false ? true : false;
     };
-
+     
+     $scope.searchCollab='';
+     $scope.query = function(item){
+       return item.name.toUpperCase().contains($scope.searchCollab.toUpperCase());
+     };  
         
     // Cancel/Discard Submission
     $scope.discardSubmission = function(){
