@@ -32,17 +32,16 @@ angular.module('librecmsApp')
     //Temporary: Set static due time
     $scope.newMaterialTime = new Date(0,0,0,8,4,2);
     $scope.newMaterialDueDate = new Date();
+
     //POST new content
     $scope.Submit = function() {
       //Concatenate time due object onto due date object
       moment($scope.newMaterialDueDate).add('hours', $scope.newMaterialTime.getHours());
       moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
       moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
-      console.log("Date is : " + $scope.newMaterialDueDate);
 
       //Make API call
       var newAssignment = {
-        userId : UserService.getUser(),
         title: $scope.newMaterialTitle,
         due : $scope.newMaterialDueDate.getTime(),
         description : $scope.newMaterialDescription,
@@ -61,30 +60,28 @@ angular.module('librecmsApp')
     //Save content for editing when selected for modal use
     $scope.editModal = function(editContent) {
       $scope.editMaterial = editContent;
+      console.log("Setting assignment as: " + JSON.stringify($scope.editMaterial));
     };
 
     //Update Content Being edited
-    $scope.updateContent = function(assignmentId) {
+    $scope.updateContent = function() {
       //Concatenate time due object onto due date object
-      moment($scope.newMaterialDueDate).add('hours', $scope.newMaterialTime.getHours());
-      moment($scope.newMaterialDueDate).add('minutes', $scope.newMaterialTime.getMinutes());
-      moment($scope.newMaterialDueDate).add('seconds', $scope.newMaterialTime.getSeconds());
+      moment($scope.editMaterial.due).add('hours', $scope.newMaterialTime.getHours());
+      moment($scope.editMaterial.due).add('minutes', $scope.newMaterialTime.getMinutes());
+      moment($scope.editMaterial.due).add('seconds', $scope.newMaterialTime.getSeconds());
 
       //Get Assignment Route
       var assignment = Course.one('assignments', $scope.editMaterial._id);  
 
       //Set new information from edit
-      var updateAssignment = {
-        userId : UserService.getUser(),
-        title: $scope.editMaterial.title,
-        due: $scope.editMaterial.due,
-        attachments: $scope.editMaterial.attachments,
-        description: $scope.editMaterial.description
-      };
-      
+      assignment.title = $scope.editMaterial.title;
+      assignment.due = $scope.editMaterial.due.getTime();
+      assignment.attachments = $scope.editMaterial.attachments;
+      assignment.description = $scope.editMaterial.description;
+
       //Make API call to update
-      assignment.put('assignments', updateAssignment)
-        .then(function(assignment) {
+      assignment.put().then(function(assignment) {
+          console.log("assignment promise: " + JSON.stringify(assignment));
           $('#edit-assignment-modal').modal('hide');
         });
     };
