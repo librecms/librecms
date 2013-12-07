@@ -58,7 +58,7 @@
         Attachments
       </div>
     </div>
-    <div class="row well" ng-repeat="studentSubmission in submissions | orderBy:'-posted'">
+    <div class="row well" ng-repeat="studentSubmission in assignment.submissions | orderBy:'-posted'">
       <div class="col-lg-3">
         <b>{{studentSubmission.studentName}}</b> 
       </div>

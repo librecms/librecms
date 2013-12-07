@@ -3,28 +3,41 @@
 angular.module('librecmsApp')
   .controller('AssignmentCtrl',
     function ($scope, $state, UserService, Restangular,
-              $stateParams, $log, UploadService) {
+              $stateParams, $log, UploadService, AuthService) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
     var Course = Restangular.one('courses', courseId);
     var Assignment = Course.one('assignments', assignmentId);
 
     //Getting list of grades for the assignment
-    var gradesList = Restangular.one('courses', courseId).one('assignments', assignmentId).getList('grades');
-
-    //Get Assignment and Submissions
-    if (courseId && assignmentId) {
-      Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(function(assignment) {
-        $scope.assignment = assignment;
-        // Get all Student Submissions for assignment
-        $scope.submissions = $scope.assignment.submissions;
-      });
+    if (AuthService.authorize(UserService.getUser().role, 'instructor')) {
+      $scope.gradesList = Restangular.one('courses', courseId).one('assignments', assignmentId).getList('grades');
     }
 
-    //Remove old student submissions
-    for (var i = 0; i < $scope.submissions.length; i++) {
-      
+    function initAssignment(assignment) {
+      // Get all Student Submissions for assignment
+      var submissionsByStudentId = {};
+      assignment.submissions.forEach(function(submission) {
+        if (submissionsByStudentId.hasOwnProperty(submission.studentId)) {
+          if (submission.posted > submissionsByStudentId[submission.studentId].posted) {
+            submissionsByStudentId[submission.studentId] = submission;
+          }
+        } else {
+          submissionsByStudentId[submission.studentId] = submission;
+        }
+      });
 
+      var submissions = [];
+      Object.keys(submissionsByStudentId).forEach(function(key) {
+        submissions.push(submissionsByStudentId[key]);
+      });
+
+      assignment.submissions = submissions;
+      $scope.assignment = assignment;
+    }
+    //Get Assignment and Submissions
+    if (courseId && assignmentId) {
+      Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(initAssignment);
     }
 
     Course.getList('students')
@@ -128,11 +141,7 @@ angular.module('librecmsApp')
     $scope.gradeButton = true;
 
     // Submit grade for submission
-    $scope.submitGrade = function() {
-      Course.one('assignments', assignmentId)
-       .getList('grades').then(function(grades) {
-         console.log(JSON.stringify(grades));    
-       });
+    $scope.submitGrade = function(submission, value) {
     };
     
     //Update grade for submission
