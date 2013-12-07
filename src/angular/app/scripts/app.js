@@ -242,7 +242,7 @@ angular.module('librecmsApp', dependencies).config(
   /* Intercept state changes to determine if the current user is 
    *   authorized to transisition to requested state */
   .run(function($rootScope, $state, $log, UserService, AuthService,
-                ngProgressLite) {
+                ngProgressLite, Restangular) {
     $rootScope.$on('$stateChangeStart',
       function(event, toState) {
         toState.data = toState.data || { };
@@ -265,9 +265,14 @@ angular.module('librecmsApp', dependencies).config(
     });
 
     // Progress bar event listeners 
-    $rootScope.$on('$stateChangeStart', function() { ngProgressLite.start(); } );
-    $rootScope.$on('$stateChangeSuccess', function() {
+    Restangular.setRequestInterceptor(function(element) {
+      ngProgressLite.start()
+      return element;
+    });
+
+    Restangular.setResponseInterceptor(function(element) {
       ngProgressLite.done();
+      return element;
     });
   });
 
