@@ -203,7 +203,7 @@ angular.module('librecmsApp')
             submission.status = 'success';
             $timeout(function() {
               submission.status = 'none';
-            }, 800);
+            }, 1200);
           },
           function(response) {
             submission.status = 'error';

@@ -33,7 +33,7 @@
                     <span>{{ submission.posted | date: 'shortDate' }}</span>
                   </td>
                   <td ng-show="submission.studentId === user._id">
-                    <span>{{ submission.grade.value || '-' }}</span>
+                    <span>{{ 100*submission.grade.value/assignment.points | number: 0 }} %
                   </td>
                 </tr>
               </tbody>
