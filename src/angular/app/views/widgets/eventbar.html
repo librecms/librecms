@@ -7,7 +7,7 @@
     <h5 class="upcoming-events-month">{{ m.date | date:"MMMM" }}</h5>
     <div ng-repeat="e in events | orderBy:predicate = 'due' | limitTo:quantity | filter:{ month:m.month }" class="row upcoming-event">
       <div class="alert alert-info">
-        <input type="checkbox" ng-click='toggleEventStatus(e)'></input>
+        <input type="checkbox" ng-click='toggleEventStatus(e)' ng-checked='applyChecboxTick(e.completed)'></input>
         <div class="col-xs-3 col-sm-3 col-md-2">
           <h6 class="upcoming-event-day">{{e.due | date:"dd" }}</h6>
           <h6 class="upcoming-event-month">{{e.due | date:"EEE" }}<h6>

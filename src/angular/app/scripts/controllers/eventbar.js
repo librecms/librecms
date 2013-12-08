@@ -51,14 +51,29 @@ angular.module('librecmsApp')
     });
   };
 
-  $scope.applyStrikeClass = function(completed) {
+  // determine if user is in passed assignment.completed array
+  function interate(completed) {
     for(var i = 0; i<completed.length; i++) {
       if($scope.user._id === completed[i]) {
+        return true;
+      }
+      return false;
+    }
+  }
+
+  $scope.applyStrikeClass = function(completed) {
+    if(interate(completed)) {
         return "strike";
       }
-    }
     return "";
-  };
+  }
+  
+  $scope.applyChecboxTick = function(completed) {
+    if(interate(completed)) {
+        return true;
+      }
+    return false;
+  }
 
   if ($scope.user || $scope.user === undefined) {
     getUserAssignments();
