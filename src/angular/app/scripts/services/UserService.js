@@ -48,12 +48,10 @@ angular.module('librecmsApp')
 
     // Get user from cookie or fall back to 'unknown' user
     var user = $cookieStore.get('user');
-    if (user) {
-      Users.get(user._id).then(function(newUser) {
-        user = newUser;
-      });
+    if (user && user._id) {
+      setUserById(user._id);
     } else {
-      user = clearedUser;
+      setUser(clearedUser);
     }
 
     // Public API here

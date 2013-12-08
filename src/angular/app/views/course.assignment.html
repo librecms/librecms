@@ -19,18 +19,32 @@
     </div>
     <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
       <div id="assignment-submission-dropbox" class="row" auth="student">
-        DROPBOX
+        SUBMISSIONS
         <div id="assignment-submission-widget" class="well">
-          <!-- Button trigger modal -->
-          <button data-toggle="modal" data-target="#submit-modal" class="btn btn-block btn-sm btn-info">Submit</button>
           <div>
-            <ul class="list-unstyled">
-              <li ng-repeat="submission in assignment.submissions | orderBy:'posted':true">
-              <a>{{ submission._id | characters:10 }}</a>
-              </li>
-            </ul>
+            <table class="table">
+              <thead>
+                <th>Date Submitted</th>
+                <th>Grade</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="submission in assignment.submissions | orderBy:'posted':true | limitTo: 3">
+                  <td ng-show="submission.studentId === user._id">
+                    <span>{{ submission.posted | date: 'shortDate' }}</span>
+                  </td>
+                  <td ng-show="submission.studentId === user._id">
+                    <span>{{ submission.grade.value || '-' }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
+        <!-- Button trigger modal -->
+        <button ng-class="{'btn-danger': assignment.due <= currentDate}" ng-disabled="assignment.due < currentDate" data-toggle="modal" data-target="#submit-modal" class="btn btn-block btn-sm btn-info">
+          <span ng-show="assignment.due > currentDate">New Submission</span>
+          <span ng-show="assignment.due <= currentDate">Submissions Disabled</span>
+        </button>
       </div>
 
       <div id="assignment-submission-attachment" class="row" ng-show="assignment.attachments">
@@ -60,7 +74,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="submission in assignment.submissions | orderBy:'submission.student.lastName'">
+          <tr ng-class="{danger: (submission.posted > assignment.due) }" ng-repeat="submission in assignment.submissions | orderBy:'submission.student.lastName'">
             <td> <!-- Student Name -->
               {{ getNameByUser(submission.student) }}
             </td>
@@ -85,13 +99,13 @@
               </ul>
             </td>
             <td> <!-- Grade -->
-              {{ getGrade(submision) }}
+              {{ 100*submission.grade.value/assignment.points | number: 0 }} %
             </td>
             <td> <!-- Edit Grade -->
               <form ng-submit="submitGrade(submission)">
                 <div class="input-group input-group-sm input-group-slim" ng-class="{ 'has-success': submission.status === 'success', 'has-warning': submission.status === 'warning', 'has-error': submission.status === 'error' }">
                   <input tabindex="$index" class="form-control" ng-model="submission.grade.value" value="submissionValue" placeholder="pts" ng-change="submission.status = 'warning'" required>
-                  <span class="input-group-addon">/ 10</span>
+                  <span class="input-group-addon">/ {{assignment.points}}</span>
                 </div>
               </form>
             </td>

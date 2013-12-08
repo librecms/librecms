@@ -36,8 +36,8 @@ angular.module('librecmsApp')
     $scope.createAssignment = function() {
       //Make API call
       var newAssignment = {
-        title: $scope.editMaterialTitle,
-        due : $scope.editMaterial.due.getTime(),
+        title: $scope.editMaterial.title,
+        due : (new Date($scope.editMaterial.due)).getTime(),
         description : $scope.editMaterial.description,
         points: $scope.editMaterial.points,
         attachments : $scope.attachments
@@ -48,7 +48,9 @@ angular.module('librecmsApp')
         .post('assignments', newAssignment)
         .then(function(assignment) {
           $scope.contentList.push(assignment);
-          $('#new-assignment-submit-modal').modal('hide');
+          $('#edit-assignment-modal').modal('hide');
+        }, function() {
+          $('#edit-assignment-modal').modal('hide');
         });
     };
 
@@ -78,8 +80,8 @@ angular.module('librecmsApp')
     };
 
     $scope.prepareForNewAssignment = function() {
-      $scope.submitFn = $scope.createAssignment;
       $scope.editMaterial = {};
+      $scope.submitFn = $scope.createAssignment;
       $scope.modalTitle = "Create New Assignment";
     };
 
