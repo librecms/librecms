@@ -1,7 +1,81 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-  <div class="row">
+  <div class="panel-body">
+    <!-- Grades Mobile View: Select -->
+    <div class="visible-xs">  
+      <select multiple class="form-control" >
+        <option ng-click="changeTab('all')">
+          All</option>
+        <option ng-click="changeTab('assignments')">
+          Assignments</option>
+        <option ng-click="changeTab('attendance')">
+          Attendance</option>
+        <option ng-click="changeTab('exams')">
+          Exams</option>
+        <option ng-click="changeTab('quizzes')">
+          Quizzes</option>
+        <option ng-click="changeTab('other')">
+          Other</option>
+      </select>
+    </div>
+
+    <!-- Grades Large View: Tabs -->
+    <div class="row grade-selection-tabs visible-lg visible-md visible-sm">
+      <div ng-class="{active: activeTab=='all'}" class="grade-tab-all col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('all')">
+        <h1>A-</h1>
+      </div>
+      <div ng-class="{active: activeTab=='assignments'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('assignments')">
+        <h6>Assignments</h6>
+        <p>99%</p>
+      </div>
+      <div ng-class="{active: activeTab=='attendance'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('attendance')">
+        <h6>Attendance</h6>
+        <p>99%</p>
+      </div>
+      <div ng-class="{active: activeTab=='exams'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('exams')">
+        <h6>Exams</h6>
+        <p>99%</p>
+      </div>
+      <div ng-class="{active: activeTab=='quizzes'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('quizzes')">
+        <h6>Quizzes</h6>
+        <p>99%</p>
+      </div>
+      <div ng-class="{active: activeTab=='other'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('other')">
+        <h6>Other</h6>
+        <p>99%</p>
+      </div>
+    </div> 
+    
+    <div class="row grade-selection-container col-lg-12">
+      <div class="row">
+        <div class="col-lg-4 col-sm-4 col-xs-4 grade-selection-container-header">
+          Title
+        </div>
+        <div class="col-lg-4 col-sm-4 col-xs-4 grade-selection-container-header">
+          Grade
+        </div>
+        <div class="col-lg-4 col-sm-4 col-xs-4 grade-selection-container-header">
+          Average
+        </div>
+      </div>
+      <div class="row well" ng-repeat="grade in gradeList">
+         <div class="col-lg-6 col-sm-4 col-xs-4 grade-selection-container-title">
+           {{grade.title}}
+         </div>
+         <div class="col-lg-3 col-sm-4 col-xs-4 grade-selection-container-item">
+           {{grade.score}}
+         </div>
+         <div class="col-lg-3 col-sm-4 col-xs-4 grade-selection-container-item">
+           {{grade.average}}
+         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <!-- <div class="row">
     <div class="col-lg-6">
-      <h6>Course Grade:</h6>
+      <h4 id="course-grade-title">Course Grade:</h4>
       {{courseGrade}}
     </div>
     <div class="col-lg-6">
@@ -38,69 +112,5 @@
         </div>
       </div>
     </div>
-  </div>
-<!-- Grades Mobile View: Select --> 
-  <div class="visible-xs">  
-    <select multiple class="form-control" >
-      <option ng-click="changeTab('all')">
-        All</option>
-      <option ng-click="changeTab('assignments')">
-        Assignments</option>
-      <option ng-click="changeTab('attendance')">
-        Attendance</option>
-      <option ng-click="changeTab('exams')">
-        Exams</option>
-      <option ng-click="changeTab('quizzes')">
-        Quizzes</option>
-      <option ng-click="changeTab('other')">
-        Other</option>
-    </select>
-  </div>
-
- <!-- Grades Large View: Tabs --> 
-  <div class="row grade-selection-tabs visible-lg visible-md visible-sm">
-    <div ng-class="{active: activeTab=='all'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('all')">
-      All
-    </div>
-    <div ng-class="{active: activeTab=='assignments'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('assignments')">
-      Assignments
-    </div>
-    <div ng-class="{active: activeTab=='attendance'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('attendance')">
-      Attendance
-    </div>
-    <div ng-class="{active: activeTab=='exams'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('exams')">
-      Exams
-    </div>
-    <div ng-class="{active: activeTab=='quizzes'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('quizzes')">
-      Quizzes
-    </div>
-    <div ng-class="{active: activeTab=='other'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('other')">
-      Other
-    </div>
   </div> 
-  
-  <div class="row grade-selection-container col-lg-12">
-    <div class="row">
-      <div class="col-lg-4 col-sm-4 col-xs-4 grade-selection-container-header">
-        Title
-      </div>
-      <div class="col-lg-4 col-sm-4 col-xs-4 grade-selection-container-header">
-        Grade
-      </div>
-      <div class="col-lg-4 col-sm-4 col-xs-4 grade-selection-container-header">
-        Average
-      </div>
-    </div>
-    <div class="row well" ng-repeat="grade in gradeList">
-       <div class="col-lg-6 col-sm-4 col-xs-4 grade-selection-container-title">
-         {{grade.title}}
-       </div>
-       <div class="col-lg-3 col-sm-4 col-xs-4 grade-selection-container-item">
-         {{grade.score}}
-       </div>
-       <div class="col-lg-3 col-sm-4 col-xs-4 grade-selection-container-item">
-         {{grade.average}}
-       </div>
-    </div>
-  </div>
-</div>
+

@@ -1,24 +1,38 @@
+
+
 .categories-overall-averages {
   padding:2px;
   margin:1px;
 }
 
-.grade-tab {
+
+.grade-tab, .grade-tab-all {
    cursor:pointer;
-   border-top-left-radius:1em;
-   border-top-right-radius:1em;
    text-align:center;
-   color:white;
-   background-color:#7f8c8d;
-   height:20px;
+   background-color:#555;
+   color: #fff;
 }
 
-.grade-tab.active {
-  background-color:#3498db;
+.grade-tab {
+  padding-bottom: 1px;
+}
+
+.grade-tab-all h1, .grade-tab h6 {
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: 300;
+}
+
+.grade-tab p {
+  color: #aaa;
+}
+
+.grade-tab.active, .grade-tab-all.active {
+  background-color:#fff;
+  color: #3498DB;
  }
 
 .grade-selection-container {
-  border: 1px solid black;
+  background-color: #fff;
   height:400px;
   max-height:400px;
   overflow-y:auto;
@@ -26,10 +40,11 @@
 }
 
 .grade-selection-container-header {
+  color: #3498DB;
   text-align:center;
-  border-bottom:1px solid black;
-  border-right:1px solid black;
+  border-bottom:1px dashed #ccc;
   font-weight:bold;
+  padding: 20px 0;
 }
 
 .grade-selection-container-title {
@@ -44,4 +59,14 @@
   overflow-y:auto;
   overflow-x:none;
   padding-top:5px;
+}
+
+@media (max-width: 991px) {
+  #grades-list li {
+  margin: 0;
+  border-right: none;
+  border-bottom: 1px dashed #ddd;
+  float: none;
+  text-align: center;
+}
 }
