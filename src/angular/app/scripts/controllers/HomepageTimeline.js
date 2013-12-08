@@ -8,7 +8,7 @@ angular.module('librecmsApp')
     function initializeCourse() {
 
       var user = UserService.getUser();
-
+      $scope.visiblePosts = [];
       if(user) {
         Restangular.one('users', user._id).getList('posts').then(function(posts) {
           $scope.posts = [];
