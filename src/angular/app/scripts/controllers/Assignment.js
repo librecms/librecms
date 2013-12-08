@@ -3,12 +3,20 @@
 angular.module('librecmsApp')
   .controller('AssignmentCtrl',
     function ($scope, $state, UserService, Restangular,
-              $stateParams, $log, UploadService, AuthService) {
+              $stateParams, $log, UploadService, AuthService, $timeout) {
     var courseId = $stateParams.courseId;
     var assignmentId = $stateParams.assignmentId;
     var Course = Restangular.one('courses', courseId);
     var Assignment = Course.one('assignments', assignmentId);
 
+    $scope.currentDate = (new Date()).getTime();
+
+    $scope.user = UserService.getUser();
+    $scope.$on('UserService.update', function() {
+      $scope.user = UserService.getUser();
+    });
+
+    $scope.hasSuccess = $scope.hasWarning = {};
 
     function initAssignment(assignment) {
       // Get all Student Submissions for assignment
@@ -35,41 +43,65 @@ angular.module('librecmsApp')
         return submission._id;
       });
       //Getting list of grades for the assignment
-      if (AuthService.authorize(UserService.getUser().role, 'instructor')) {
-        Restangular.one('courses', courseId)
-          .one('assignments', assignmentId)
-          .getList('grades', { submissions: submissionIds })
-          .then(function(grades) {
-            var gradesBySubmissionId = {}
-            grades.forEach(function(grade) {
-              gradesBySubmissionId[grade.submissionId] = grade;
-            });
-            $scope.assignment.submissions = $scope.assignment.submissions.map(
+      Restangular.one('courses', courseId)
+        .one('assignments', assignmentId)
+        .getList('grades', { submissions: submissionIds })
+        .then(function(grades) {
+          Course.getList('students')
+            .then(function(students) {
+
+              // map of student object by student Id 
+              var studentByStudentId = {};
+              $scope.roster = students.map(function(student) {
+                student.name = student.lastName + ' ' + student.firstName;
+                studentByStudentId[student._id] = student;
+                return student;
+              });
+              $scope.studentByStudentId = studentByStudentId;
+
+              // Get grades for each submission Id
+              var gradesBySubmissionId = {};
+              grades.forEach(function(grade) {
+                gradesBySubmissionId[grade.submissionId] = grade;
+              });
+              
+              // Massage submissions by appending grade and student id to submission
+              $scope.assignment.submissions = $scope.assignment.submissions.map(
               function(submission) {
                 submission.grade = gradesBySubmissionId[submission._id];
+                // Append student object to submission object
+                submission.student = studentByStudentId[submission.studentId];
                 return submission;
               });
-          });
-      }
+            });
+        });
     }
     //Get Assignment and Submissions
     if (courseId && assignmentId) {
       Restangular.one('courses', courseId).one('assignments', assignmentId).get().then(initAssignment);
     }
-
-    Course.getList('students')
-      .then(function(students) {
-        $scope.roster = students.map(function(student) {
-          student.name = student.firstName + ' ' + student.lastName;
-          return student;
+    if (AuthService.authorize(UserService.getUser().role, 'student')) {
+      Course.getList('students')
+        .then(function(students) {
+          $scope.roster = students.map(function(student) {
+            student.name = student.lastName + ' ' + student.firstName;
+            return student;
+          });
         });
-      });
+    }
 
     $scope.hideCollabs = true;
     $scope.toggleCollabs = function() {
       $scope.hideCollabs = $scope.hideCollabs == false ? true : false;
     };
-
+     
+     $scope.searchCollab='';
+     $scope.query = function(item){
+       // @TODO broken, so I'm commenting out. See https://github.com/librecms/librecms/issues/129
+       /*
+       return item.name.toUpperCase().contains($scope.searchCollab.toUpperCase());
+       */
+     };  
         
     // Cancel/Discard Submission
     $scope.discardSubmission = function(){
@@ -149,7 +181,8 @@ angular.module('librecmsApp')
     };
 
     // Submit grade for submission
-    $scope.submitGrade = function(submission, value) {
+    $scope.submitGrade = function(submission) {
+      submission.status = 'warning';
       if (!submission.grade) {
         $log.error('trying to make submission without grade');
         return;
@@ -162,9 +195,29 @@ angular.module('librecmsApp')
         submissionId: submission._id,
         assignmentId: assignmentId,
         gradeId: submission.grade._id,
-        value: value
+        value: submission.grade.value
       };
-      Assignment.post('grades', grade);
+      Assignment.post('grades', grade)
+        .then(
+          function() {
+            submission.status = 'success';
+            $timeout(function() {
+              submission.status = 'none';
+            }, 1200);
+          },
+          function(response) {
+            submission.status = 'error';
+          }
+        );
+    };
+
+    $scope.getCollaborators = function(collabIds) {
+      if (!$scope.studentByStudentId) return;
+      return collabIds.map(function(collaborator) {
+        return UserService.getNameByUser(
+          $scope.studentByStudentId[collaborator]
+        );
+      });
     };
 
     $scope.removeAttachment = function(attachment) {
@@ -175,5 +228,7 @@ angular.module('librecmsApp')
         }
       }
     };
+
+    $scope.getNameByUser = UserService.getNameByUser;
 
   });

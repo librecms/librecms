@@ -9,7 +9,14 @@ angular.module('librecmsApp')
     };
 
     function getName() {
-      return user.firstName + ' ' + user.lastName;
+      return getNameByUser(user);
+    }
+
+    function getNameByUser(u) {
+      if (!u || !u.lastName || !u.firstName) {
+        return "A Student";
+      }
+      return u.lastName + ', ' + u.firstName;
     }
 
     function setUser(newUser) {
@@ -41,12 +48,10 @@ angular.module('librecmsApp')
 
     // Get user from cookie or fall back to 'unknown' user
     var user = $cookieStore.get('user');
-    if (user) {
-      Users.get(user._id).then(function(newUser) {
-        user = newUser;
-      });
+    if (user && user._id) {
+      setUserById(user._id);
     } else {
-      user = clearedUser;
+      setUser(clearedUser);
     }
 
     // Public API here
@@ -56,6 +61,7 @@ angular.module('librecmsApp')
       setUser: setUser,
       setUserById: setUserById,
       clearUser: clearUser,
-      getName: getName
+      getName: getName,
+      getNameByUser: getNameByUser
     };
   });

@@ -1,18 +1,16 @@
 'use strict';
 
 angular.module('librecmsApp')
-  .controller('TimelineCtrl', function($scope, CourseService, Restangular) {
+  .controller('TimelineHomepageCtrl', function($scope, UserService, CourseService, Restangular) {
 
     $scope.posts = [];
 
     function initializeCourse() {
 
-      var course = CourseService.getCourse();
-
-      //console.log(course);
-
-      if(course) {
-        Restangular.one('courses', course._id).getList('posts').then(function(posts) {
+      var user = UserService.getUser();
+      $scope.visiblePosts = [];
+      if(user) {
+        Restangular.one('users', user._id).getList('posts').then(function(posts) {
           $scope.posts = [];
           // Gather posts from API and reformat their
           // date components into Javascript Date objects
@@ -24,13 +22,6 @@ angular.module('librecmsApp')
           $scope.visiblePosts = $scope.posts.slice(0,2)
         });
       }
-
-
-
-      $scope.courseName = $scope.course.name;
-
-      // Get first 20 posts
-      //$scope.visiblePosts = $scope.posts.slice(0,2);
 
       if(!$scope.loadMorePosts) {
         $scope.loadMorePosts = function() {
@@ -44,7 +35,11 @@ angular.module('librecmsApp')
     }
 
     // Listen to changes to the course object
-    $scope.$on('CourseService.courseUpdated', initializeCourse);
+    $scope.$on('UserService.update', initializeCourse);
+
+    if ($scope.user || $scope.user === undefined) {
+	  initializeCourse();
+	}
 
     $scope.addPost = function() {
       // This should *eventually* make an HTTP POST and wait for

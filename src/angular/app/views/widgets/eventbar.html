@@ -7,15 +7,17 @@
     <h5 class="upcoming-events-month">{{ m.date | date:"MMMM" }}</h5>
     <div ng-repeat="e in events | orderBy:predicate = 'due' | limitTo:quantity | filter:{ month:m.month }" class="row upcoming-event">
       <div class="alert alert-info">
-        <input type="checkbox" ng-click='toggleEventStatus(e._id)' ng-model="strike"></input>
+        <input type="checkbox" ng-click='toggleEventStatus(e)' ng-checked='applyChecboxTick(e.completed)'></input>
         <div class="col-xs-3 col-sm-3 col-md-2">
           <h6 class="upcoming-event-day">{{e.due | date:"dd" }}</h6>
           <h6 class="upcoming-event-month">{{e.due | date:"EEE" }}<h6>
         </div>
-        <div ng-class="{strike:strike}" class="col-xs-9 col-sm-9 col-md-10">
+        <div ng-class="{strike:applyStrikeClass(e.completed)}" class="col-xs-9 col-sm-9 col-md-10">
           {{e.title}}
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!--  ng-model="strike" -->
