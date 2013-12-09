@@ -57,6 +57,7 @@ angular.module('librecmsApp')
     //Save content for editing when selected for modal use
     $scope.prepareForEditAssignment = function(editContent) {
       $scope.editMaterial = editContent;
+      console.log(JSON.stringify($scope.editMaterial));
       $scope.submitFn = $scope.updateContent;
       $scope.modalTitle = "Edit Assignment";
     };
@@ -71,6 +72,7 @@ angular.module('librecmsApp')
       assignment.due = $scope.editMaterial.due.getTime();
       assignment.attachments = $scope.editMaterial.attachments;
       assignment.description = $scope.editMaterial.description;
+      assignment.points = $scope.editMaterial.points;
 
       //Make API call to update
       assignment.put().then(function(assignment) {
