@@ -1,5 +1,11 @@
 /************************ Timeline Style *********************/
 
+.announcements-title {
+  color: #3498DB;
+  text-align: center;
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: 300;
+}
 
 /****** New Timeline Post ******/
 .new-post-container {
