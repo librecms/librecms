@@ -10,6 +10,9 @@ angular.module('librecmsApp')
     var user = UserService.getUser();
     if(user) {
 
+      $scope.events.splice(0, $scope.events.length);
+      $scope.months.splice(0, $scope.months.length);
+
       var startOfThisMonth = new Date().getTime();
       Restangular.one('users', user._id).getList('events', {start: startOfThisMonth}).then(function(events) {
      
