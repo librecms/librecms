@@ -60,8 +60,6 @@ angular.module('librecmsApp')
     getCourseAssignments();
   });
 
-  /* event sources array */
-  $scope.test = [$scope.events];
   $scope.quantity = 5;
 
 });

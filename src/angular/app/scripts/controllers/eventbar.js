@@ -8,8 +8,6 @@ angular.module('librecmsApp')
 
 
   function getUserAssignments() {
-      console.log('eyo');
-
     var user = UserService.getUser();
     if(user) {
 
