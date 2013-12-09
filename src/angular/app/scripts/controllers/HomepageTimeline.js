@@ -38,8 +38,8 @@ angular.module('librecmsApp')
     $scope.$on('UserService.update', initializeCourse);
 
     if ($scope.user || $scope.user === undefined) {
-	  initializeCourse();
-	}
+	    initializeCourse();
+	  }
 
     $scope.addPost = function() {
       // This should *eventually* make an HTTP POST and wait for
