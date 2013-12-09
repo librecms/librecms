@@ -56,13 +56,15 @@ angular.module('librecmsApp')
       return _authorize(role, masks);
     }
 
-    function login(parameters) {
+    function login(parameters, error) {
+      error = error || angular.noop;
       Restangular.all('auth').all('login').post(parameters)
         .then(function(user) {
           UserService.setUser(user);
           $state.go('main.user.home');
         }, function() {
           $log.error('error logging in');
+          error();
         });
     }
 

@@ -4,12 +4,10 @@ angular.module('librecmsApp')
   .controller('TimelineCtrl', function($scope, CourseService, Restangular) {
 
     $scope.posts = [];
-
+    $scope.visiblePosts = [];
     function initializeCourse() {
 
       var course = CourseService.getCourse();
-
-      //console.log(course);
 
       if(course) {
         Restangular.one('courses', course._id).getList('posts').then(function(posts) {
@@ -25,12 +23,9 @@ angular.module('librecmsApp')
         });
       }
 
-
-
-      $scope.courseName = $scope.course.name;
-
-      // Get first 20 posts
-      //$scope.visiblePosts = $scope.posts.slice(0,2);
+      if($scope.course){
+        $scope.courseName = $scope.course.name;
+      }
 
       if(!$scope.loadMorePosts) {
         $scope.loadMorePosts = function() {
@@ -45,6 +40,10 @@ angular.module('librecmsApp')
 
     // Listen to changes to the course object
     $scope.$on('CourseService.courseUpdated', initializeCourse);
+
+    if ($scope.user || $scope.user === undefined) {
+      initializeCourse();
+    }
 
     $scope.addPost = function() {
       // This should *eventually* make an HTTP POST and wait for

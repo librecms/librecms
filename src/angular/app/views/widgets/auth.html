@@ -12,7 +12,7 @@
       <div class="auth-password input-group">
         <input type="password" class="form-control" placeholder="Password" name="password" required ng-model="password">
         <span class="input-group-btn">
-          <button class="btn btn-info" type="submit">Log In</button>
+          <button ng-class="{'btn-info': !loginFailed, 'btn-danger': loginFailed}" class="btn" type="submit">Log In</button>
         </span>
       </div>
     </div>

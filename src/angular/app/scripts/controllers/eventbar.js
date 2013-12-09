@@ -6,6 +6,7 @@ angular.module('librecmsApp')
   $scope.events = [];
   $scope.months = [];
 
+
   function getUserAssignments() {
     var user = UserService.getUser();
     if(user) {
@@ -82,10 +83,6 @@ angular.module('librecmsApp')
     getUserAssignments();
   }
 
-  $scope.$on('UserService.update', getUserAssignments);
-
-  /* event sources array */
-  $scope.test = [$scope.events];
   $scope.quantity = 5;
 
 });

@@ -15,7 +15,6 @@ angular.module('librecmsApp')
 
     var startOfThisMonth = new Date().getTime();
     Restangular.one('courses', $scope.course._id).getList('assignments').then(function(assignments) {
-
       // Clear events and months array 
       $scope.events.splice(0, $scope.events.length);
       $scope.months.splice(0, $scope.months.length);
@@ -47,8 +46,42 @@ angular.module('librecmsApp')
     });
   }
 
-  $scope.toggleEventStatus = function(param) {
-    var Event = Restangular.one('users', $scope.user._id).one('events', param).post();
+  $scope.toggleEventStatus = function(e) {
+    Restangular.one('users', UserService.getUser()._id).one('events', e._id).post()
+    .then(function() {
+      // Not Google quality!
+      for(var i = 0; i<e.completed.length; i++) {
+          if (UserService.getUser()._id === e.completed[i]) {
+            e.completed.splice(i,1);
+            return;
+          }
+      }
+      e.completed.push(UserService.getUser()._id);
+    });
+  };
+
+  // determine if user is in passed assignment.completed array
+  function interate(completed) {
+    for(var i = 0; i<completed.length; i++) {
+      if(UserService.getUser()._id === completed[i]) {
+        return true;
+      }
+      return false;
+    }
+  }
+
+  $scope.applyStrikeClass = function(completed) {
+    if(interate(completed)) {
+        return "strike";
+      }
+    return "";
+  }
+  
+  $scope.applyChecboxTick = function(completed) {
+    if(interate(completed)) {
+        return true;
+      }
+    return false;
   }
 
   
