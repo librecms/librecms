@@ -5,15 +5,15 @@
       <select multiple class="form-control" >
         <option ng-click="changeTab('all')">
           All</option>
-        <option ng-click="changeTab('assignments')">
+        <option>
           Assignments</option>
-        <option ng-click="changeTab('attendance')">
+        <option>
           Attendance</option>
-        <option ng-click="changeTab('exams')">
+        <option>
           Exams</option>
-        <option ng-click="changeTab('quizzes')">
+        <option>
           Quizzes</option>
-        <option ng-click="changeTab('other')">
+        <option>
           Other</option>
       </select>
     </div>
@@ -21,96 +21,52 @@
     <!-- Grades Large View: Tabs -->
     <div class="row grade-selection-tabs visible-lg visible-md visible-sm">
       <div ng-class="{active: activeTab=='all'}" class="grade-tab-all col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('all')">
-        <h1>A-</h1>
+        <h1>{{ letterGrade || '?' }}</h1>
       </div>
       <div ng-class="{active: activeTab=='assignments'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('assignments')">
         <h6>Assignments</h6>
-        <p>99%</p>
+        <p>{{ assignmentsAverage }} %</p>
       </div>
       <div ng-class="{active: activeTab=='attendance'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('attendance')">
         <h6>Attendance</h6>
-        <p>99%</p>
+        <p>0%</p>
       </div>
       <div ng-class="{active: activeTab=='exams'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('exams')">
         <h6>Exams</h6>
-        <p>99%</p>
+        <p>0%</p>
       </div>
       <div ng-class="{active: activeTab=='quizzes'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('quizzes')">
         <h6>Quizzes</h6>
-        <p>99%</p>
+        <p>0%</p>
       </div>
       <div ng-class="{active: activeTab=='other'}" class="grade-tab col-lg-2 col-sm-2 col-xs-12" ng-click="changeTab('other')">
         <h6>Other</h6>
-        <p>99%</p>
+        <p>0%</p>
       </div>
     </div> 
     
-    <div class="row grade-selection-container col-lg-12">
-      <div class="row">
-        <div class="col-lg-4 col-sm-4 col-xs-4 grade-selection-container-header">
-          Title
-        </div>
-        <div class="col-lg-4 col-sm-4 col-xs-4 grade-selection-container-header">
-          Grade
-        </div>
-        <div class="col-lg-4 col-sm-4 col-xs-4 grade-selection-container-header">
-          Average
-        </div>
-      </div>
-      <div class="row well" ng-repeat="grade in gradeList">
-         <div class="col-lg-6 col-sm-4 col-xs-4 grade-selection-container-title">
-           {{grade.title}}
-         </div>
-         <div class="col-lg-3 col-sm-4 col-xs-4 grade-selection-container-item">
-           {{grade.score}}
-         </div>
-         <div class="col-lg-3 col-sm-4 col-xs-4 grade-selection-container-item">
-           {{grade.average}}
-         </div>
-      </div>
+    <div class="row col-lg-12">
+      <table class="table table-hover table-striped table-bordered">
+        <thead>
+          <th>Title</th>
+          <th>Grade</th>
+          <th>Average</th>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="assignment in assignmentGrades | orderBy: 'due'">
+            <td>{{ assignment.title }}</td>
+            <td>
+              <strong>{{ assignment.grade.value }}</strong>
+              <small>/ {{ assignment.points }}</small>
+            </td>
+            <td>
+              <strong>{{ assignment.average }}</strong>
+              <small>/ {{ assignment.points }} </small>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
-
-
- <!-- <div class="row">
-    <div class="col-lg-6">
-      <h4 id="course-grade-title">Course Grade:</h4>
-      {{courseGrade}}
-    </div>
-    <div class="col-lg-6">
-      <div class="row">
-        <div class="categories-overall-averages col-lg-2">
-          <b>Assignments</b>
-        </div>
-        <div class="col-lg-1">
-          {{assignmentsAverage}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="categories-overall-averages col-lg-2">
-          <b>Quizzes</b>
-        </div>
-        <div class="col-lg-1">
-          {{quizAverage}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="categories-overall-averages col-lg-2">
-          <b>Exams</b>
-        </div>
-        <div class="col-lg-1">
-          {{examAverage}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="categories-overall-averages col-lg-2">
-          <b>Other</b>
-        </div>
-        <div class="col-lg-1">
-          {{grades.other}}
-        </div>
-      </div>
-    </div>
-  </div> 
-

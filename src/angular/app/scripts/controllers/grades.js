@@ -7,18 +7,7 @@ angular.module('librecmsApp')
   var courseId = $stateParams.courseId;
   var Course = Restangular.one('courses',courseId);
 
-  //Get userId
-  var userId = UserService.getUser()._id;
- 
   //Get Grades for the course
-  if ($scope.course && $scope.course.grades) {
-    $scope.userGradelist = $scope.course.grades;
-  }
-  Course.one('users', userId).getList('grades')
-    .then(function(grades) {
-       $scope.userGradeList = grades;
-    });
-  
   var attendance = [];
   var assignments = [];
   var quizzes = [];
@@ -94,4 +83,16 @@ angular.module('librecmsApp')
   };
 
   $scope.changeTab('all');
+
+  Course.getList('grades').then(function(assignmentGradeInfo) {
+    $scope.assignmentsAverage = assignmentGradeInfo.assignmentsAverage;
+    $scope.assignmentGrades = assignmentGradeInfo.assignments;
+    var a = $scope.assignmentsAverage;
+    if (a >= 90 && a <= 100) $scope.letterGrade = 'A';
+    if (a >= 80 && a < 90) $scope.letterGrade = 'B';
+    if (a >= 70 && a < 80) $scope.letterGrade = 'C';
+    if (a >= 60 && a < 70) $scope.letterGrade = 'D';
+    if (a >= 0 && a < 60) $scope.letterGrade = 'F';
+  });
+  
 });
