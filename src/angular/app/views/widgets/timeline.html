@@ -46,7 +46,7 @@
           <div class="user-posting col-xs-12">
             <div class="arrow-left"></div>
             <div class="user-content">
-              <div class="user-content-inner">
+              <div class="user-content-inner" ng-class="{'generated-post': post.generated}">
                 <h4 class="class-name">{{ post.name }}</h4> <!-- note: courseName not implemented yet -->
                 <p class="time">{{ post.date | date:'shortTime' }}</p>
                 <h6 class="user-name">{{ post.author }}</h6> <!-- note: author not implemented yet -->

@@ -113,7 +113,7 @@
 .user-content-toolbar {
   position: relative;
   height: 50px;
-  background-color: #E74C3C;
+  background-color: #2ECC71;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
@@ -124,7 +124,7 @@
 }
 
 .class-name {
-  color: #E74C3C;
+  color: #2ECC71;
 }
 
 .user-text {
@@ -135,6 +135,15 @@
   position: absolute;
   right: 20px;
   top: 20px;
+}
+
+.generated-post {
+  background-color: #27AE60;
+}
+
+.generated-post h4, .generated-post h6, .generated-post p {
+  color: #fff;
+
 }
 
 /********** Palettes ********/
