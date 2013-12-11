@@ -16,6 +16,10 @@
   border-color: #3498DB;
 }
 
+.post-button {
+  margin-top: 60px;
+}
+
 /****** Timeline Events ******/
 .timeline {
   position: relative;
