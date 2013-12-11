@@ -26,6 +26,23 @@
   color: #aaa;
 }
 
+.grades-table-container {
+  background-color: #fff;
+}
+
+.grades-table {
+  margin: 20px;
+}
+
+.grades-table-header th{
+  color: #3498DB;
+  text-align: center;
+}
+
+.grades-table-header {
+  background-color: #fff;
+}
+
 .grade-tab.active, .grade-tab-all.active {
   background-color:#fff;
   color: #3498DB;

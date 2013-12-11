@@ -45,28 +45,30 @@
       </div>
     </div> 
     
-    <div class="row col-lg-12">
-      <table class="table table-hover table-striped table-bordered">
-        <thead>
-          <th>Title</th>
-          <th>Grade</th>
-          <th>Average</th>
-        </thead>
+    <div class="grades-table-container row col-lg-12">
+      <div class="grades-table">
+        <table class="table table-hover table-striped table-bordered">
+          <thead class="grades-table-header">
+            <th>Title</th>
+            <th>Grade</th>
+            <th>Average</th>
+          </thead>
 
-        <tbody>
-          <tr ng-repeat="assignment in assignmentGrades | orderBy: 'due'">
-            <td>{{ assignment.title }}</td>
-            <td>
-              <strong>{{ assignment.grade.value }}</strong>
-              <small>/ {{ assignment.points }}</small>
-            </td>
-            <td>
-              <strong>{{ assignment.average }}</strong>
-              <small>/ {{ assignment.points }} </small>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <tr ng-repeat="assignment in assignmentGrades | orderBy: 'due'">
+              <td>{{ assignment.title }}</td>
+              <td>
+                <strong>{{ assignment.grade.value }}</strong>
+                <small>/ {{ assignment.points }}</small>
+              </td>
+              <td>
+                <strong>{{ assignment.average }}</strong>
+                <small>/ {{ assignment.points }} </small>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
