@@ -2,13 +2,19 @@
 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" auth="student">
   <div class="row">
     <div class="col-lg-5">
-      Sort By: 
-      <select ng-model="contentSort" ng-init="contentSort='-posted'" class="select-block">
-        <option value="-posted">Posted (descending)</option>
-        <option value="posted">Posted (ascending)</option>
-        <option value="-due">Due date (descending)</option>
-        <option value="due">Due Date (ascending)</option>
-      </select>
+      <form class="form form-horizontal" role="form">
+        <div class="form-group">
+          <label class="col-sm-3 control-label" for="content-sort">Sort By</label>
+          <div class="col-sm-6">
+            <select id="content-sort" ng-model="contentSort" ng-init="contentSort='-posted'" class="form-control">
+              <option value="-posted">Posted (descending)</option>
+              <option value="posted">Posted (ascending)</option>
+              <option value="-due">Due date (descending)</option>
+              <option value="due">Due Date (ascending)</option>
+            </select>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
   <div class="col-xs-12">
