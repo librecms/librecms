@@ -46,11 +46,26 @@
     </div>
   </div>
   <div class="row">
-    <div id="" class="content-item col-lg-4 col-md-4 col-sm-4 col-xs-12  well" ng-repeat="content in contentList | orderBy:contentSort">
-      <h6><a href="/#/course/{{ course._id }}/{{ itemType }}/{{ content._id }}" class="content-list-name">{{ content.title }}</a></h6>
-      <b>Posted:</b> {{content.posted | date:'shortDate'}} <b>Due:</b> {{content.due | date:'shortDate'}}<br>
-      <a data-toggle="modal" data-target="#edit-assignment-modal" class="col-lg-2 material-instructor-links" ng-click="prepareForEditAssignment({{content}})"><small>Edit</small></a>
-      <a data-toggle="modal" data-target="#remove-modal" class="col-lg-2 material-instructor-links" ng-click="prepareForEditAssignment({{content}})"><small>Remove</small></a>
+    <div id="" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" ng-repeat="content in contentList | orderBy:contentSort">
+      <div class="content-item well">
+        <h4><a href="/#/course/{{ course._id }}/{{ itemType }}/{{ content._id }}" class="content-list-name">{{ content.title }}</a></h4>
+        <div class="row due-posted-dates">
+          <div class="col-xs-6">
+            <i class="fa fa-pencil-square-o fa-2x col-xs-12"></i> {{ content.posted | date:'shortDate' }} 
+          </div>
+          <div class="col-xs-6">
+            <i class="fa fa-calendar-o fa-2x col-xs-12"></i> {{ content.due | date:'shortDate'}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <a data-toggle="modal" data-target="#edit-assignment-modal" class="btn btn-block btn-sm btn-success" ng-click="prepareForEditAssignment({{content}})"><small>Edit</small></a>
+          </div>
+          <div class="col-xs-6">
+            <a data-toggle="modal" data-target="#remove-modal" class="btn btn-block btn-sm btn-success" ng-click="prepareForEditAssignment({{content}})"><small>Remove</small></a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
