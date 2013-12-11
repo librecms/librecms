@@ -3,8 +3,32 @@
     float:right;
   }
 }
+
 .content-item {
   min-height: 128px;
+  background-color: #fff;
+  text-align: center;
+  overflow: hidden;
+  margin: 10px;
+}
+
+.content-item .btn-success {
+  background-color: #555;
+}
+
+.content-item .btn-success:hover {
+  background-color: #aaa;
+}
+
+.content-item h4 {
+  font-family: 'Advent Pro', sans-serif;
+  font-weight: 300;
+  text-align: center;
+  color: #3498DB;
+}
+
+.due-posted-dates {
+  margin: 20px 0;
 }
 
 .material-description {
