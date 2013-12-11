@@ -11,8 +11,10 @@ angular.module('librecmsApp')
 
     //Get API route for posting new assignment
     if(courseId) {
-      Restangular.one('courses', courseId).get().then(function(newAssignment) {
-        $scope.newAssignment = newAssignment;
+      Restangular.one('courses', courseId).get()
+        .then(function(course) {
+          if (!course) return;
+          $scope.contentList = course.assignments;
       }); }
 
     //Set itemType
