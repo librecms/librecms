@@ -1,4 +1,4 @@
-<div class="">
+<div auth="student">
 	<div class="currentgrades">
 		<div class="row">
 			<div class="col-xs-12">
@@ -6,22 +6,14 @@
 			</div>
 		</div>
 		<ul class="grades-list">
-			<li class="course-grade-item">
+			<li class="course-grade-item" ng-repeat="gradeInfo in gradesInfo">
 				<div class="row">
-					<div class="course-name col-xs-9 col-sm-9 col-md-8 col-lg-9">BSKTW 505</div>
-					<div class="grade col-xs-3 col-sm-3 col-md-4 col-lg-3">B+</div>
-				</div>
-			</li>
-			<li class="course-grade-item">
-				<div class="row">
-					<div class="course-name col-xs-9 col-sm-9 col-md-8 col-lg-9">CMPSC 483W</div>
-					<div class="grade col-xs-3 col-sm-3 col-md-4 col-lg-3">A-</div>
-				</div>
-			</li>
-			<li class="course-grade-item">
-				<div class="row">
-					<div class="course-name col-xs-9 col-sm-9 col-md-8 col-lg-9">MATH 485</div>
-					<div class="grade col-xs-3 col-sm-3 col-md-4 col-lg-3">C+</div>
+          <div class="course-name col-xs-9 col-sm-9 col-md-8 col-lg-9">
+            {{ gradeInfo.courseName }}
+          </div>
+          <div class="grade col-xs-3 col-sm-3 col-md-4 col-lg-3">
+            {{ gradeInfo.letterGrade }}
+          </div>
 				</div>
 			</li>
 		</ul>
