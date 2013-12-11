@@ -78,7 +78,7 @@ angular.module('librecmsApp')
       $scope.gradeList = other;
     }
     else {
-      console.log('Error sumtin is a wrong up in heehr.');
+      $log.error('error in gradeList');
     }
   };
 
