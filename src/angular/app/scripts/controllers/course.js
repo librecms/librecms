@@ -2,10 +2,11 @@
 
 angular.module('librecmsApp')
   .controller('CourseCtrl', function ($scope, UserService,
-                                      CourseService, $stateParams, $log) {
+                                      CourseService, $stateParams) {
     // Listen to changes to the course object
     $scope.$on('CourseService.courseUpdated', function() {
       $scope.course = CourseService.getCourse();
+      $scope.courseSelected = true;
     });
 
     // Gather course ID from the state (/course/{courseId}) 

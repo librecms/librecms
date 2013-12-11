@@ -79,7 +79,8 @@ angular.module('librecmsApp', dependencies).config(
           controller: 'TimelineHomepageCtrl' // have to create different controller for this view
         },
         '@main.user': {
-          templateUrl: 'views/user.home.html'
+          templateUrl: 'views/user.home.html',
+          controller: 'UserHomeCtrl'
         },
         'upcoming@main.user.home': {
           templateUrl: 'views/widgets/eventbar.html',
@@ -266,7 +267,7 @@ angular.module('librecmsApp', dependencies).config(
 
     // Progress bar event listeners 
     Restangular.setRequestInterceptor(function(element) {
-      ngProgressLite.start()
+      ngProgressLite.start();
       return element;
     });
 
